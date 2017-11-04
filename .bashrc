@@ -121,3 +121,6 @@ export EDITOR=vim
 
 # added by Anaconda3 installer
 export PATH="/home/fishe/anaconda3/bin:$PATH:/mnt/c/Windows/System32"
+
+export DISPLAY=:0
+export BROWSER=/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe
