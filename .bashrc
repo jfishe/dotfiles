@@ -120,7 +120,10 @@ set -o vi
 export EDITOR=vim
 
 # added by Anaconda3 installer
-export PATH="/home/fishe/anaconda3/bin:$PATH:/mnt/c/Windows/System32"
+# export PATH="/home/fishe/anaconda3/bin:$PATH:/mnt/c/Windows/System32"
+export PATH="$PATH:/mnt/c/Windows/System32"
+. ~/anaconda3/etc/profile.d/conda.sh
+conda activate base
 
 export DISPLAY=:0
 export BROWSER=/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe
