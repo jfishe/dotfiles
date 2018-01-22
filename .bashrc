@@ -92,6 +92,8 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
+alias tree='tree -C'
+
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -123,7 +125,6 @@ export EDITOR=vim
 # export PATH="/home/fishe/anaconda3/bin:$PATH:/mnt/c/Windows/System32"
 export PATH="$PATH:/mnt/c/Windows/System32"
 . ~/anaconda3/etc/profile.d/conda.sh
-conda activate base
 
 export DISPLAY=:0
 export BROWSER=/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe
