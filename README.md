@@ -25,8 +25,10 @@ export USERPROFILE="`cmd.exe /c echo %USERPROFILE% | wslpath -f -`"
 
 ```
 ln -s $USERPROFILE/.gitconfig ~/.gitconfig
-
+ln -s $USERPROFILE/.gitmessage.txt ~/.gitmessage.txt
+ln -s $USERPROFILE/.gitattributes_global ~/.gitattributes_global
 ```
+
 ## Colorscheme
 
 .bashrc uses ~/.dircolors if it exists.
