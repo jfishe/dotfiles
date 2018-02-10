@@ -128,3 +128,7 @@ export PATH="$PATH:/mnt/c/Windows/System32"
 
 export DISPLAY=:0
 export BROWSER=/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe
+
+# KeeAgent
+export SSH_AUTH_SOCK="/tmp/.ssh-auth-sock"
+~/bin/msysgit2unix-socket.py /mnt/c/Users/fishe/keeagent_msysGit.socket:$SSH_AUTH_SOCK
