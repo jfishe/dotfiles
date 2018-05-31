@@ -4,10 +4,18 @@ Setup Windows Subsystem for Linux to use the Windows vimfiles, git and
 dircolors-solarized.
 
 ## Setup gitconfig
+For a new installation of Ubuntu Bash, which does not include git by default:
+
+``` bash
+sudo apt-get update
+sudo apt-get dist-upgrade
+sudo apt-get install git
+```
+
 Path needs to reflect %USERPROFILE%, so we'll use an environment variable and
 wslpath to figure it out, assuming System32 is in `PATH` per `.bashrc`.
 
-```
+``` bash
 DIRECTORY=~/Git
 if [ ! -d "$DIRECTORY" ]; then
   mkdir $DIRECTORY
