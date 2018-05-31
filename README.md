@@ -3,35 +3,47 @@
 Setup Windows Subsystem for Linux to use the Windows vimfiles, git and
 dircolors-solarized.
 
-## Setup gitconfig
-For a new installation of Ubuntu Bash, which does not include git by default:
+## Setup Ubuntu Bash
+For a new installation of Ubuntu Bash, which does not include git by default, open Ubuntu Bash console:
 
 ``` bash
-sudo apt-get update
-sudo apt-get dist-upgrade
+sudo apt-get update         # Update package database
+sudo apt-get dist-upgrade   # Upgrade to latest distribution
+sudo apt-get update         # Update package database
 sudo apt-get install git
+sudo apt-get autoremove     # Remove unused packages
 ```
 
+## Setup gitconfig
 Path needs to reflect %USERPROFILE%, so we'll use an environment variable and
 wslpath to figure it out, assuming System32 is in `PATH` per `.bashrc`.
 
 ``` bash
 DIRECTORY=~/Git
 if [ ! -d "$DIRECTORY" ]; then
-  mkdir $DIRECTORY
+  mkdir -p $DIRECTORY
 fi
 git clone  https://github.com/Milly/wslpath.git ~/Git/wslpath
+```
 
+If `.local/bin` is not in `$PATH`:
+
+``` bash
+export PATH=~/.local/bin:$PATH
+```
+
+``` bash
 DIRECTORY=~/.local/bin
 if [ ! -d "$DIRECTORY" ]; then
-  mkdir $DIRECTORY
+  mkdir -p $DIRECTORY
 fi
 
 ln -s ~/Git/wslpath/wslpath ~/.local/bin/wslpath
 export USERPROFILE="`cmd.exe /c echo %USERPROFILE% | wslpath -f -`"
 ```
 
-```
+
+``` bash
 ln -s $USERPROFILE/.gitconfig ~/.gitconfig
 ln -s $USERPROFILE/.gitmessage.txt ~/.gitmessage.txt
 ln -s $USERPROFILE/.gitattributes_global ~/.gitattributes_global
@@ -53,6 +65,7 @@ any new defaults.
 ```
 git clone https://github.com/jfishe/dotfiles.git ~/Git/dotfiles
 ln -s ~/Git/dotfiles/.!(|.)* ~
+ln -s ~/Git/dotfiles/bin/* ~/.local/bin
 ```
 ## Anaconda3 and Vim
 Install Anaconda3 before starting Vim. WSL Ubuntu defaults python to v2.7 instead of
@@ -66,11 +79,11 @@ Vim 8 and Silver Searcher are not required but Ag is much faster. VWS will use
 Ag if installed.
 
 ```
-sudo apt-get install silversearcher-ag
 sudo add-apt-repository ppa:jonathonf/vim
 sudo apt update
+sudo apt-get install silversearcher-ag
 sudo apt install vim
-sudo apt install exubertant-ctags
+sudo apt install exuberant-ctags
 ```
 ```
 wslpath `cmd.exe /c echo %USERPROFILE%`
