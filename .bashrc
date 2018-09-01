@@ -122,7 +122,7 @@ set -o vi
 export EDITOR=vim
 
 # added by Anaconda3 installer
-# export PATH="/home/fishe/anaconda3/bin:$PATH:/mnt/c/Windows/System32"
+export PATH="/home/fishe/anaconda3/bin:$PATH:/mnt/c/Windows/System32"
 export PATH="$PATH:/mnt/c/Windows/System32"
 . ~/anaconda3/etc/profile.d/conda.sh
 
@@ -131,3 +131,4 @@ export BROWSER=/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.e
 
 export SSH_AUTH_SOCK="/tmp/.ssh-auth-sock"
 ~/bin/msysgit2unix-socket.py /mnt/c/Users/fishe/keeagent_msysGit.socket:$SSH_AUTH_SOCK
+
