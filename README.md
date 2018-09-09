@@ -78,14 +78,18 @@ Ctags is needed by Gutentags. Wslpath converts Windows paths to their mount
 point under WSL.
 
 Vim 8 and Silver Searcher are not required but Ag is much faster. VWS will use
-Ag if installed.
+Ag if installed. `TeXLive` is needed for pandoc.
 
 ```bash
+# Add repo for Vim 8 and texlive-2018
 sudo add-apt-repository ppa:jonathonf/vim
-sudo apt update
+sudo add-apt-repository ppa:jonathonf/texlive-2018
+sudo apt-get update
+
 sudo apt-get install silversearcher-ag
 sudo apt install vim
 sudo apt install exuberant-ctags
+sudo apt-get install texlive-full # will take a long time
 
 USERPROFILE=$(wslpath `cmd.exe /c echo %USERPROFILE%`)
 ln -s $USERPROFILE/vimfiles/ ~/.vim
@@ -119,3 +123,11 @@ ln -s $USERPROFILE/Documents/vimwiki ~/vimwiki
 ```
 
 [File System Improvements to the Windows Subsystem for Linux]: https://blogs.msdn.microsoft.com/wsl/2017/04/18/file-system-improvements-to-the-windows-subsystem-for-linux/
+
+## Running Windows gvim.exe from WSL
+
+Within the Windows file system (e.g., `/mnt/c`), the Windows version of gvim can be launched. The `gvim` function will exit quietly if on a WSL path. [lifthrasiir/gvim.sh](https://gist.github.com/lifthrasiir/29c34b879aad9d2e7f564e10c45c1e61) provides a gist, which has been modified for `Vim81`. Adjust the path to `gvim` as needed.
+
+```bash
+source gvim.sh # to create gvim function.
+```

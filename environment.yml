@@ -7,7 +7,6 @@ dependencies:
 - anaconda
 - pandoc>=2.1
 - nodejs
-- distributed
 - pip:
   - cookiecutter
   - editorconfig
