@@ -37,7 +37,7 @@ gvim() {
 		esac
 	done
 	if (($usegvim)); then
-		"/mnt/c/Program Files/Vim/vim81/gvim.exe" "${args[@]}"
+		"/mnt/c/Program Files/Vim/vim81/gvim.exe" "${args[@]}" &
 	else
 		vim "${rawargs[@]}"
 	fi
