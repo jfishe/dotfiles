@@ -90,11 +90,14 @@ sudo apt-get install silversearcher-ag
 sudo apt install vim
 sudo apt install exuberant-ctags
 sudo apt-get install texlive-full # will take a long time
+sudo apt-get golang
 
 USERPROFILE=$(wslpath `cmd.exe /c echo %USERPROFILE%`)
 ln -s $USERPROFILE/vimfiles/ ~/.vim
 ln -s $USERPROFILE/.jupyter/ ~/.jupyter
 ln -s $USERPROFILE/ ~/userprofile
+
+go get -u mvdan.cc/sh/cmd/shfmt # https://github.com/mvdan/sh
 ```
 
 If the `Documents` folder is not located in `$USERPROFILE/Documents`, the actual location can be obtained from the Windows Registry.
