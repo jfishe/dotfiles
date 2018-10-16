@@ -131,4 +131,4 @@ export BROWSER=/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.e
 
 # KeeAgent
 export SSH_AUTH_SOCK="/tmp/.ssh-auth-sock"
-~/bin/msysgit2unix-socket.py /mnt/c/Users/fishe/keeagent_msysGit.socket:$SSH_AUTH_SOCK
+~/.local/bin/msysgit2unix-socket.py /mnt/c/Users/fishe/keeagent_msysGit.socket:$SSH_AUTH_SOCK
