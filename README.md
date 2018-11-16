@@ -4,15 +4,20 @@ Setup Windows Subsystem for Linux to use the Windows vimfiles, git and
 dircolors-solarized.
 
 ## Setup Ubuntu Bash
-For a new installation of Ubuntu Bash, which does not include git by default, open Ubuntu Bash console:
+For a new installation of Ubuntu Bash, which does not include git by default,
+open Ubuntu Bash console:
 
 ```bash
 sudo apt-get update         # Update package database
 sudo apt-get dist-upgrade   # Upgrade to latest distribution
 sudo apt-get update         # Update package database
 sudo apt-get install git
+sudo apt-get install direnv # See man direnv
 sudo apt-get autoremove     # Remove unused packages
 ```
+
+Refer to [the direnv wiki](https://github.com/direnv/direnv/wiki) for
+examples.
 
 ## Setup gitconfig
 Path needs to reflect %USERPROFILE%, so we'll use an environment variable and
