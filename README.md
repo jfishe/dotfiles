@@ -12,12 +12,8 @@ sudo apt-get update         # Update package database
 sudo apt-get dist-upgrade   # Upgrade to latest distribution
 sudo apt-get update         # Update package database
 sudo apt-get install git
-sudo apt-get install direnv # See man direnv
 sudo apt-get autoremove     # Remove unused packages
 ```
-
-Refer to [the direnv wiki](https://github.com/direnv/direnv/wiki) for
-examples.
 
 ## Setup gitconfig
 Path needs to reflect %USERPROFILE%, so we'll use an environment variable and
