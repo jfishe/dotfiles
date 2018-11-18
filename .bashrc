@@ -122,9 +122,9 @@ set -o vi
 export EDITOR=vim
 
 # added by Anaconda3 installer
-export PATH="/home/fishe/anaconda3/bin:$PATH:/mnt/c/Windows/System32"
-export PATH="$PATH:/home/fishe/go/bin:/mnt/c/Windows/System32"
 . ~/anaconda3/etc/profile.d/conda.sh
+
+export PATH="$PATH:/home/fishe/go/bin:/mnt/c/Windows/System32"
 
 # Enable Google Chrome
 export DISPLAY=:0
