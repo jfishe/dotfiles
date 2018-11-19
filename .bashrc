@@ -136,3 +136,6 @@ export SSH_AUTH_SOCK="/tmp/.ssh-auth-sock"
 
 # Enable Gvim on Windows paths, otherwise use vim
 . ~/bin/gvim.sh
+
+# Load ColorTool.exe
+source $HOME/bin/colortool.sh
