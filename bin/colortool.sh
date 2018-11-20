@@ -11,7 +11,7 @@ colortool() {
 
     while (($#)); do
         case "$noopt$1" in
-            -[?cqdbxsv]|--curent|--quiet|--defaults|--both|--xterm|--schemes|--version|--output)
+            -[?cqdbxsv]|--curent|--quiet|--defaults|--both|--xterm|--schemes|--version)
                 args[${#args[@]}]="$1"
                 rawargs[${#args[@]}]="$1"
                 shift
@@ -21,34 +21,34 @@ colortool() {
                 rawargs[${#args[@]}]="$1"
                 shift
                 if (($#)); then
-                    args[${#args[@]}]="$1"
+                    args[${#args[@]}]="$(wslpath -w $(realpath -- "$1"))"
                     shift
                 fi
                 ;;
-            -Dark)
-                args[${#args[@]}]="--xterm $Dark"
+            -D|--Dark)
+                args[${#args[@]}]="--xterm"
+                schemaname="$Dark"
                 rawargs[${#args[@]}]="$1"
                 shift
                 ;;
-            -Light)
-                args[${#args[@]}]="--xterm $Light"
+            -L|--Light)
+                args[${#args[@]}]="--xterm"
+                schemaname="$Light"
                 rawargs[${#args[@]}]="$1"
                 shift
                 ;;
             --help|-*)
                 help=
-                line="    -Dark          : --xterm $Dark\n"
-                line="$line    -Light         : --xterm $Light"
+                line="    -D, --Dark     : --xterm $Dark\n"
+                line="$line    -L, --Light    : --xterm $Light"
                 $COLORTOOLEXE --help | awk -vline="$line" '/output/{print;print line;next}1'
-                rc=1
-                break
+                return 1
                 ;;
             *)
                 if [[ ! -f $1 ]]; then
                     if [[ ! -f "$path/$1" ]]; then
                         echo "Schema $1 not found."
-                        rc=1
-                        break
+                        return 1
                     else
                         schemaname=$(realpath -- "$path/$1")
                     fi
@@ -56,16 +56,10 @@ colortool() {
                     schemaname=$(realpath -- "$1")
                 fi
 
-                args[${#args[@]}]="$(wslpath -m $schemaname)"
                 shift
                 ;;
         esac
     done
 
-    # echo "${args[@]} $schemaname"
-    if (( $rc )); then
-        echo "EXIT" 1
-    else
-        $COLORTOOLEXE "${args[@]}"
-    fi
+    $COLORTOOLEXE ${args[@]} "$schemaname"
 }
