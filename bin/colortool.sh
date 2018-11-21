@@ -11,19 +11,10 @@ colortool() {
 
     while (($#)); do
         case "$noopt$1" in
-            -[?cqdbxsv]|--curent|--quiet|--defaults|--both|--xterm|--schemes|--version)
+            -[?cqdbxv]|--curent|--quiet|--defaults|--both|--xterm|--version)
                 args[${#args[@]}]="$1"
                 rawargs[${#args[@]}]="$1"
                 shift
-                ;;
-            -o|--output)
-                args[${#args[@]}]="$1"
-                rawargs[${#args[@]}]="$1"
-                shift
-                if (($#)); then
-                    args[${#args[@]}]="$(wslpath -w $(realpath -- "$1"))"
-                    shift
-                fi
                 ;;
             -D|--Dark)
                 args[${#args[@]}]="--xterm"
@@ -37,6 +28,23 @@ colortool() {
                 rawargs[${#args[@]}]="$1"
                 shift
                 ;;
+            -s|--schemes)
+                echo 'Schemes found in:'
+                pushd $path | cut -d ' ' -f 1
+                $COLORTOOLEXE --schemes
+                rc=$?
+                # popd > /dev/null
+                return $rc
+                ;;
+            -o|--output)
+                args[${#args[@]}]="$1"
+                rawargs[${#args[@]}]="$1"
+                shift
+                if (($#)); then
+                    args[${#args[@]}]="$(wslpath -w $(realpath -- "$1"))"
+                    shift
+                fi
+                ;;
             --help|-*)
                 help=
                 line="    -D, --Dark     : --xterm $Dark\n"
@@ -45,15 +53,19 @@ colortool() {
                 return 1
                 ;;
             *)
+                # ColorTool looks in current and schemes sub-directory for
+                # schemes.
                 if [[ ! -f $1 ]]; then
-                    if [[ ! -f "$path/$1" ]]; then
+                    if [[ -f "$path/$1" || -f "$path/schemes/$1" ]]; then
+                        schemaname="$1"
+                    else
                         echo "Schema $1 not found."
                         return 1
-                    else
-                        schemaname=$(realpath -- "$path/$1")
                     fi
                 else
-                    schemaname=$(realpath -- "$1")
+                    # Fail gracefully if can't reach file location from
+                    # Windows.
+                    schemaname="$(wslpath -w $(realpath -- "$1"))"
                 fi
 
                 shift
@@ -61,5 +73,10 @@ colortool() {
         esac
     done
 
+    # ColorTool looks in current and schemes sub-directory for schemes.
+    pushd $path > /dev/null
     $COLORTOOLEXE ${args[@]} "$schemaname"
+    rc=$?
+    popd > /dev/null
+    return $?
 }
