@@ -132,7 +132,7 @@ export BROWSER=/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.e
 
 # Enable git authentication using Windows
 export SSH_AUTH_SOCK="/tmp/.ssh-auth-sock"
-~/.local/bin/msysgit2unix-socket.py /mnt/c/Users/fishe/keeagent_msysGit.socket:$SSH_AUTH_SOCK
+~/.local/bin/msysgit2unix-socket.py $HOME/userprofile/keeagent_msysGit.socket:$SSH_AUTH_SOCK
 
 # Enable Gvim on Windows paths, otherwise use vim
 . ~/bin/gvim.sh
