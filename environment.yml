@@ -1,19 +1,18 @@
-# name: C:\Users\jfishe\Anaconda3
 name: base
 channels:
 - defaults
 - conda-forge
 dependencies:
 - anaconda
-- pandoc>=2.1
+- pandoc>=2.2
 - nodejs
 - pip:
+  - black
   - cookiecutter
   - editorconfig
   - jupyter_contrib_nbextensions
-  - nbdime
+  - MarkdownPP
   - mypy
-  - vim-vint
-  - virtualenv
+  - nbdime
   - panflute
-# prefix: C:\Users\fishe\Anaconda3
+  - vim-vint

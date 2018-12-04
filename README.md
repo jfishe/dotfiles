@@ -4,7 +4,8 @@ Setup Windows Subsystem for Linux to use the Windows vimfiles, git and
 dircolors-solarized.
 
 ## Setup Ubuntu Bash
-For a new installation of Ubuntu Bash, which does not include git by default, open Ubuntu Bash console:
+For a new installation of Ubuntu Bash, which does not include git by default,
+open Ubuntu Bash console:
 
 ```bash
 sudo apt-get update         # Update package database

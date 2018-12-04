@@ -122,9 +122,9 @@ set -o vi
 export EDITOR=vim
 
 # added by Anaconda3 installer
-export PATH="/home/fishe/anaconda3/bin:$PATH:/mnt/c/Windows/System32"
-export PATH="$PATH:/home/fishe/go/bin:/mnt/c/Windows/System32"
 . ~/anaconda3/etc/profile.d/conda.sh
+
+export PATH="$PATH:/home/fishe/go/bin:/mnt/c/Windows/System32"
 
 # Enable Google Chrome
 export DISPLAY=:0
@@ -136,3 +136,6 @@ export SSH_AUTH_SOCK="/tmp/.ssh-auth-sock"
 
 # Enable Gvim on Windows paths, otherwise use vim
 . ~/bin/gvim.sh
+
+# Load ColorTool.exe
+alias colortool=colortool.exe
