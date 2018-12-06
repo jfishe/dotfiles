@@ -4,6 +4,7 @@ Setup Windows Subsystem for Linux to use the Windows vimfiles, git and
 dircolors-solarized.
 
 ## Setup Ubuntu Bash
+
 For a new installation of Ubuntu Bash, which does not include git by default,
 open Ubuntu Bash console:
 
@@ -16,6 +17,7 @@ sudo apt-get autoremove     # Remove unused packages
 ```
 
 ## Setup gitconfig
+
 Path needs to reflect %USERPROFILE%, so we'll use an environment variable and
 wslpath to figure it out, assuming System32 is in `PATH` per `.bashrc`.
 
@@ -47,6 +49,15 @@ ln -s $USERPROFILE/.gitmessage.txt ~/.gitmessage.txt
 ln -s $USERPROFILE/.gitattributes_global ~/.gitattributes_global
 ```
 
+To eliminate entering user and password with every push, create
+`~/Git/dotfiles/gitconfig` with path to `git-credential-wincred.exe`, for
+example:
+
+```{contenteditable="true" spellcheck="false" caption="git" .git}
+[credential]
+helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-wincred.exe
+```
+
 ## Color Scheme
 
 .bashrc uses ~/.dircolors if it exists.
@@ -71,9 +82,9 @@ ln -s ~/Git/dotfiles/bin/* ~/.local/bin
 
 ## Anaconda3 and Vim
 
-Install Anaconda3 before starting Vim. WSL Ubuntu defaults python to v2.7 instead of
-python3. Vim-conda uses python -c which will fail if python3 is aliased to
-in vim-conda. The vimrc and gvimrc assumed to be in vimfiles.
+Install Anaconda3 before starting Vim. WSL Ubuntu defaults python to v2.7
+instead of python3. Vim-conda uses python -c which will fail if python3 is
+aliased to in vim-conda. The vimrc and gvimrc assumed to be in vimfiles.
 
 Ctags is needed by Gutentags. Wslpath converts Windows paths to their mount
 point under WSL.
@@ -101,14 +112,23 @@ ln -s $USERPROFILE/ ~/userprofile
 go get -u mvdan.cc/sh/cmd/shfmt # https://github.com/mvdan/sh
 ```
 
-If the `Documents` folder is not located in `$USERPROFILE/Documents`, the actual location can be obtained from the Windows Registry.
+If the `Documents` folder is not located in `$USERPROFILE/Documents`, the
+actual location can be obtained from the Windows Registry.
+
+<!-- markdownlint-disable MD013 -->
 
 ```powershell
 $registryPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders"
 (Get-ItemProperty -Path $registryPath -Name "Personal").Personal
 ```
 
-If a network share is involved, [Microsoft][File System Improvements to the Windows Subsystem for Linux] provides guidance for mounting the URI. Limitations in WSL may prevent auto-mounting network shares. After mounting the network share the first time, copy the `/proc/mounts` entry into `/etc/fstab`. E.g.,
+<!-- markdownlint-enable MD013 -->
+
+If a network share is involved,
+[Microsoft][file system improvements to the windows subsystem for linux]
+provides guidance for mounting the URI. Limitations in WSL may prevent
+auto-mounting network shares. After mounting the network share the first
+time, copy the `/proc/mounts` entry into `/etc/fstab`. E.g.,
 
 ```bash
 sudo mkdir -p /mnt/u
@@ -120,17 +140,23 @@ cat /proc/mounts
 sudo echo 'U: /mnt/u drvfs rw,relatime 0 0' >> /etc/fstab
 ```
 
-If automount doesn't succeed after logout/login, `sudo mount /mnt/u` will restore the mount point. Adjust the following path to reflect the mount point for the `Documents` folder.
+If automount doesn't succeed after logout/login, `sudo mount /mnt/u` will
+restore the mount point. Adjust the following path to reflect the mount point
+for the `Documents` folder.
 
 ```bash
 ln -s $USERPROFILE/Documents/vimwiki ~/vimwiki
 ```
 
-[File System Improvements to the Windows Subsystem for Linux]: https://blogs.msdn.microsoft.com/wsl/2017/04/18/file-system-improvements-to-the-windows-subsystem-for-linux/
+[file system improvements to the windows subsystem for linux]: https://blogs.msdn.microsoft.com/wsl/2017/04/18/file-system-improvements-to-the-windows-subsystem-for-linux/
 
 ## Running Windows gvim.exe from WSL
 
-Within the Windows file system (e.g., `/mnt/c`), the Windows version of gvim can be launched. The `gvim` function will exit quietly if on a WSL path. [lifthrasiir/gvim.sh](https://gist.github.com/lifthrasiir/29c34b879aad9d2e7f564e10c45c1e61) provides a gist, which has been modified for `Vim81`. Adjust the path to `gvim` as needed.
+Within the Windows file system (e.g., `/mnt/c`), the Windows version of gvim
+can be launched. The `gvim` function will exit quietly if on a WSL path.
+[lifthrasiir/gvim.sh](https://gist.github.com/lifthrasiir/29c34b879aad9d2e7f564e10c45c1e61)
+provides a gist, which has been modified for `Vim81`. Adjust the path to `gvim`
+as needed.
 
 ```bash
 source gvim.sh # to create gvim function.
