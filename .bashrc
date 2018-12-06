@@ -138,4 +138,5 @@ export SSH_AUTH_SOCK="/tmp/.ssh-auth-sock"
 . ~/bin/gvim.sh
 
 # Load ColorTool.exe
-alias colortool=colortool.exe
+alias colortool=ColorTool.exe
+. ~/bin/colortool.sh
