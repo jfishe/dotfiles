@@ -71,8 +71,12 @@ ln -s  ~/Git/dircolors-solarized/dircolors.256dark ~/.dircolors
 
 ## Setup dotfiles
 
-Link .bashrc, etc. to local directories. Run diff beforehand to see if WSL has
-any new defaults.
+Link .bashrc, etc. to local directories. Run diff beforehand to see if WSL
+has any new defaults.
+
+[rc file (dotfile) management](https://github.com/thoughtbot/rcm)
+provides rcm to manage dotfiles and installation instructions for rcm. The
+man page is available at [rcm — dotfile management](http://thoughtbot.github.io/rcm/rcm.7.html).
 
 ```bash
 git clone https://github.com/jfishe/dotfiles.git ~/Git/dotfiles
