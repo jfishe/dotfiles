@@ -1,0 +1,2 @@
+EXCLUDES="*.md environment.yml"
+SYMLINK_DIRS="bin"
