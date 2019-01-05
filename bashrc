@@ -119,24 +119,6 @@ if ! shopt -oq posix; then
 fi
 
 set -o vi
-export EDITOR=vim
 
 # added by Anaconda3 installer
 . ~/anaconda3/etc/profile.d/conda.sh
-
-export PATH="$PATH:/home/fishe/go/bin:/mnt/c/Windows/System32"
-
-# Enable Google Chrome
-export DISPLAY=:0
-export BROWSER=/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe
-
-# Enable git authentication using Windows
-export SSH_AUTH_SOCK="/tmp/.ssh-auth-sock"
-~/.local/bin/msysgit2unix-socket.py $HOME/userprofile/keeagent_msysGit.socket:$SSH_AUTH_SOCK
-
-# Enable Gvim on Windows paths, otherwise use vim
-. ~/bin/gvim.sh
-
-# Load ColorTool.exe
-alias colortool=ColorTool.exe
-. ~/bin/colortool.sh
