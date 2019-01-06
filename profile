@@ -18,7 +18,7 @@ fi
 
 # set PATH so it includes user's private bin directories
 PATH="$HOME/.local/bin:$PATH"
-PATH="$PATH:/home/fishe/go/bin"
+PATH="$PATH:$USERPROFILE/bin:/home/fishe/go/bin"
 
 export EDITOR=vim
 
