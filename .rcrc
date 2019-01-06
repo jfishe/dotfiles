@@ -1,2 +1,2 @@
 EXCLUDES="*.md environment.yml"
-SYMLINK_DIRS="bin"
+SYMLINK_DIRS="bin bash_completion.d"

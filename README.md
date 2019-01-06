@@ -79,10 +79,17 @@ provides rcm to manage dotfiles and installation instructions for rcm. The
 man page is available at [rcm — dotfile management](http://thoughtbot.github.io/rcm/rcm.7.html).
 
 ```bash
-git clone https://github.com/jfishe/dotfiles.git ~/Git/dotfiles
-ln -s ~/Git/dotfiles/.!(|.)* ~
-ln -s ~/Git/dotfiles/bin/* ~/.local/bin
+git clone https://github.com/jfishe/dotfiles.git ~/.dotfiles
+RCRC=~/.dotfiles/.rcrc # required if ~/.rcrc does not exist
+lsrc # to list dotfiles that would be changed
+rcup # to copy/link dotfiles as specified in .rcrc
 ```
+
+### User Bash Completion
+
+Put bash completion files in `~/.bash_completion.d`.
+`/usr/share/bash_completion/bash_completion` sources `~/.bash_completion` which
+sources all files in the `.d` directory.
 
 ## Anaconda3 and Vim
 
