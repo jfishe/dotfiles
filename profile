@@ -24,8 +24,7 @@ export EDITOR=vim
 
 # Enable git authentication using Windows
 export SSH_AUTH_SOCK="/tmp/.ssh-auth-sock"
-~/.local/bin/msysgit2unix-socket.py $HOME/userprofile/keeagent_msysGit.socket:$SSH_AUTH_SOCK
-# > /dev/null 2>&
+~/.local/bin/msysgit2unix-socket.py $HOME/userprofile/keeagent_msysGit.socket:$SSH_AUTH_SOCK > /dev/null 2>&
 
 # Enable Google Chrome
 export DISPLAY=:0
