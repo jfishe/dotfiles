@@ -24,7 +24,7 @@ export EDITOR=vim
 
 # Enable git authentication using Windows
 export SSH_AUTH_SOCK="/tmp/.ssh-auth-sock"
-~/.local/bin/msysgit2unix-socket.py $HOME/userprofile/keeagent_msysGit.socket:$SSH_AUTH_SOCK > /dev/null 2>&
+~/.local/bin/msysgit2unix-socket.py $HOME/userprofile/keeagent_msysGit.socket:$SSH_AUTH_SOCK > /dev/null 2>&1
 
 # Enable Google Chrome
 export DISPLAY=:0
@@ -33,4 +33,4 @@ export BROWSER=/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.e
 # rcm dotfile management
 export RCRC="$HOME/.dotfiles/.rcrc"
 
-conda activate base
+# conda activate base
