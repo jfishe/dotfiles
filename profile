@@ -33,4 +33,4 @@ export BROWSER=/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.e
 # rcm dotfile management
 export RCRC="$HOME/.dotfiles/.rcrc"
 
-# conda activate base
+conda activate base
