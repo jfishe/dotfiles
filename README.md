@@ -80,10 +80,12 @@ man page is available at [rcm — dotfile management](http://thoughtbot.github.i
 
 ```bash
 git clone https://github.com/jfishe/dotfiles.git ~/.dotfiles
-RCRC=~/.dotfiles/.rcrc # required if ~/.rcrc does not exist
-lsrc # to list dotfiles that would be changed
-rcup # to copy/link dotfiles as specified in .rcrc
+env RCRC=~/.dotfiles/rcrc lsrc # to list dotfiles that would be changed
+env RCRC=~/.dotfiles/rcrc rcup # to copy/link dotfiles as specified in rcrc
 ```
+
+`env RCRC=~/.dotfiles/rcrc` is not needed after `rcup` above because it will be
+linked to `~/.rcrc`.
 
 ### User Bash Completion
 
