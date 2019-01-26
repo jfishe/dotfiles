@@ -30,7 +30,4 @@ export SSH_AUTH_SOCK="/tmp/.ssh-auth-sock"
 export DISPLAY=:0
 export BROWSER=/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe
 
-# rcm dotfile management
-export RCRC="$HOME/.dotfiles/.rcrc"
-
 conda activate base
