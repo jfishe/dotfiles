@@ -17,8 +17,15 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 
 # set PATH so it includes user's private bin directories
-PATH="$HOME/.local/bin:$PATH"
-PATH="$PATH:$USERPROFILE/bin:/home/fishe/go/bin"
+if [ -d "$HOME/.local/bin" ] ; then
+  PATH="$HOME/.local/bin:$PATH"
+fi
+if [ -d "$HOME/bin" ] ; then
+  PATH="$HOME/bin:$PATH"
+fi
+if [ -d "$USERPROFILE/bin" ] ; then
+  PATH="$PATH:$USERPROFILE/bin:/home/fishe/go/bin"
+fi
 
 export EDITOR=vim
 
