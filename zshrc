@@ -105,3 +105,24 @@ export GDK_SCALE=0.5
 
 umask 022
 # set -o vi
+
+# Initialize conda
+declare -a arr=(
+    "$HOME/anaconda3"
+    "$HOME/miniconda3"
+    )
+for i in "${arr[@]}"; do
+    if [[ -d "$i" ]]; then
+        __conda_setup="$('$i/bin/conda' shell.bash hook 2> /dev/null)"
+        if [ $? -eq 0 ]; then
+            eval "$__conda_setup"
+        else
+            if [ -f "$i/etc/profile.d/conda.sh" ]; then
+                . "$i/etc/profile.d/conda.sh"
+            else
+                export PATH="$i/bin:$PATH"
+            fi
+        fi
+    fi
+done
+unset __conda_setup arr i
