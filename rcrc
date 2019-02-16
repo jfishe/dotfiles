@@ -1,4 +1,4 @@
 EXCLUDES="*.md environment.yml"
-SYMLINK_DIRS="bin bash_completion.d git_template jupyter userprofile vim
+SYMLINK_DIRS="bash_completion.d git_template jupyter userprofile vim
     vimwiki"
 UNDOTTED="userprofile vimwiki"
