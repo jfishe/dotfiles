@@ -27,6 +27,8 @@ man page is available at [rcm — dotfile management](http://thoughtbot.github.i
 
 ```bash
 git clone https://github.com/jfishe/dotfiles.git ~/.dotfiles
+pushd ~/.dotfiles
+git submodule update --init --remote
 env RCRC=~/.dotfiles/rcrc lsrc # to list dotfiles that would be changed
 env RCRC=~/.dotfiles/rcrc rcup # to copy/link dotfiles as specified in rcrc
 ```
@@ -181,8 +183,19 @@ can be launched. The `gvim` function will exit quietly if on a WSL path.
 provides a gist, which has been modified for `Vim81`. Adjust the path to `gvim`
 as needed. See `~/.dotfiles/local/bin/gvim.sh` for details.
 
-To create the gvim function, which is included in `~/.dotfiles/bash_aliases`:
 
 ```bash
-source gvim.sh #
+source ~/.dotfiles/local/bin/gvim.sh
 ```
+
+## Running gvim with X11
+
+To install gvim with clipboard support, run an X11 server, e.g., X410 and
+install `vim-gtk3`. If the clipboard does not appear to be sharing, copy from
+and X client and paste into a Windows application. Then it should work both
+ways.
+
+``` {contenteditable="true" spellcheck="false" caption="bash" .bash}
+sudo apt-get install vim-gtk3
+```
+
