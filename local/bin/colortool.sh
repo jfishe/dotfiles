@@ -1,8 +1,9 @@
-#!/bin/env bash
+#!/usr/bin/env bash
+# Bash & Zsh compatible
 
 # Toggle ColorTool.exe colorschemes.
 # Default to dark.
-# ColorTool.exe should be in PATH.
+# ColorTool.exe should be in PATH
 function yob() {
     local dark light colortoolexe
 
@@ -11,7 +12,7 @@ function yob() {
     colortoolexe="ColorTool.exe"
 
     if command -v "$colortoolexe" > /dev/null 2>&1; then
-        if [ "$COLORSCHEME " == "$dark " ]; then
+        if [[ "$COLORSCHEME " == "$dark " ]]; then
            COLORSCHEME="$light"
         else
            COLORSCHEME="$dark"
