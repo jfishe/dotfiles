@@ -28,7 +28,7 @@ man page is available at [rcm — dotfile management](http://thoughtbot.github.i
 ```bash
 git clone https://github.com/jfishe/dotfiles.git ~/.dotfiles
 pushd ~/.dotfiles
-git submodule update --init --remote
+git submodule update --init --recursive --remote
 env RCRC=~/.dotfiles/rcrc lsrc # to list dotfiles that would be changed
 env RCRC=~/.dotfiles/rcrc rcup # to copy/link dotfiles as specified in rcrc
 ```
