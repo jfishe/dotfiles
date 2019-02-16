@@ -67,8 +67,8 @@ ZSH_THEME="sunrise"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting vi-mode colored-man-pages
-  zsh-dircolors-solarized)
+plugins=(git vi-mode colored-man-pages
+  zsh-dircolors-solarized zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -105,6 +105,21 @@ export GDK_SCALE=0.5
 
 umask 022
 # set -o vi
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/fishe/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/fishe/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/fishe/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/fishe/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 
 # Initialize conda
 declare -a arr=(

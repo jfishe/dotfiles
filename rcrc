@@ -1,4 +1,4 @@
 EXCLUDES="*.md environment.yml"
 SYMLINK_DIRS="bash_completion.d git_template jupyter userprofile vim
-    vimwiki zsh-dircolors-solarized"
+    vimwiki zsh-dircolors-solarized zsh-syntax-highlighting"
 UNDOTTED="userprofile vimwiki"

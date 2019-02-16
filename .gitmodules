@@ -5,3 +5,6 @@
     path = oh-my-zsh/custom/plugins/zsh-dircolors-solarized
     url = git://github.com/joel-porquet/zsh-dircolors-solarized
     ignore = dirty
+[submodule "oh-my-zsh/custom/plugins/zsh-syntax-highlighting"]
+	path = oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
