@@ -37,4 +37,4 @@ export SSH_AUTH_SOCK="/tmp/.ssh-auth-sock"
 export DISPLAY=:0
 export BROWSER=/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe
 
-conda activate base
+conda activate base > /dev/null 2>&1
