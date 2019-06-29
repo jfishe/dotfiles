@@ -199,3 +199,6 @@ ways.
 sudo apt-get install vim-gtk3
 ```
 
+## SSH Configuration
+
+[SSH on WSL](https://www.illuminiastudios.com/dev-diaries/ssh-on-windows-subsystem-for-linux/)
