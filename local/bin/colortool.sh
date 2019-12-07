@@ -7,8 +7,8 @@
 function yob() {
     local dark light colortoolexe
 
-    dark='solarized.dark'
-    light='solarized.light'
+    dark='solarized.dark.itermcolors'
+    light='solarized.light.itermcolors'
     colortoolexe="ColorTool.exe"
 
     if command -v "$colortoolexe" > /dev/null 2>&1; then
