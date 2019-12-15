@@ -203,13 +203,22 @@ sudo apt-get install vim-gtk3
 
 [SSH on WSL](https://www.illuminiastudios.com/dev-diaries/ssh-on-windows-subsystem-for-linux/)
 
-## Nerdfonts
+## Fonts for Gvim
+
+### Nerd Fonts
 
 [Nerd Fonts](https://github.com/buzzkillhardball/nerdfonts) is a project that
 attempts to patch as many developer targeted fonts as possible with a high
 number of additional glyphs (icons). The main goal is to specifically add
 a high number of additional glyphs from popular 'iconic fonts' such as Font
 Awesome, Devicons, Octicons, and others.
+
+### Cascadia-Code Fonts
+
+[Microsoft Cascadia Code Powerline font](https://github.com/microsoft/cascadia-code/releases)
+works well in WSL and Windows.
+
+### Font Installation
 
 Download selected fonts to the directory below and update the font cache. WSL
 should use Windows Compatible fonts.
