@@ -10,9 +10,9 @@ B=$fg_no_bold[blue]
 RESET=$reset_color
 
 if [ "$USER" = "root" ]; then
-    PROMPTCOLOR="%{$R%}" PROMPTPREFIX="-!-";
+    PROMPTCOLOR="%{$R%}" PROMPTPREFIX="${WSL_DISTRO_NAME:+($WSL_DISTRO_NAME)}-!-";
 else
-    PROMPTCOLOR="" PROMPTPREFIX="---";
+    PROMPTCOLOR="" PROMPTPREFIX="${WSL_DISTRO_NAME:+($WSL_DISTRO_NAME)}---";
 fi
 
 local return_code="%(?..%{$R%}%? ↵%{$RESET%})"

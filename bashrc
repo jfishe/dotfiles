@@ -72,6 +72,7 @@ case "$TERM" in
 
 esac
 
+PS1="${WSL_DISTRO_NAME:+($WSL_DISTRO_NAME)}$PS1"
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
