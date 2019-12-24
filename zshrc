@@ -114,7 +114,7 @@ declare -a arr=(
     )
 for i in "${arr[@]}"; do
     if [[ -d "$i" ]]; then
-        __conda_setup="$('$i/bin/conda' shell.bash hook 2> /dev/null)"
+        __conda_setup="$('$i/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
         if [ $? -eq 0 ]; then
             eval "$__conda_setup"
         else
