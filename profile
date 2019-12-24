@@ -37,4 +37,13 @@ export SSH_AUTH_SOCK="/tmp/.ssh-auth-sock"
 export DISPLAY=:0
 export BROWSER=/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe
 
-conda activate base > /dev/null 2>&1
+# True if $1 is an executable in $PATH
+# Works in both {ba,z}sh
+function is_bin_in_path {
+  if [[ -n $ZSH_VERSION ]]; then
+    builtin whence -p "$1" &> /dev/null
+  else  # bash:
+    builtin type -P "$1" &> /dev/null
+  fi
+}
+is_bin_in_path conda && conda activate base > /dev/null 2>&1 || :
