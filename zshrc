@@ -102,6 +102,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+unalias run-help
+autoload run-help
+
 export GDK_SCALE=0.5
 
 umask 022
