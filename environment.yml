@@ -1,18 +1,14 @@
-name: base
+name: python38
 channels:
 - defaults
 - conda-forge
 dependencies:
-- anaconda
-- pandoc>=2.2
+- black
+- pandoc
+- mypy
 - nodejs
+- panflute
+- pydocstyle
+- pip
 - pip:
-  - black
-  - cookiecutter
-  - editorconfig
-  - jupyter_contrib_nbextensions
   - MarkdownPP
-  - mypy
-  - nbdime
-  - panflute
-  - vim-vint
