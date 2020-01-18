@@ -44,11 +44,11 @@ Put bash completion files in `~/.bash_completion.d`, which is linked to
 
 ### Setup gitconfig
 
->  TODO: <26-01-19, JD Fisher> > Fedora doesn't have wslpath; determine whether
->  Milly's version works and rewrite this section. Add section on Windows
->  environment variables that should be shared with WSL. Add instructions for
->  creating/updating ~/.dotfiles/host-xxx, since the links are `%USERPROFILE%`
->  dependent.
+> TODO: <26-01-19, JD Fisher> > Fedora doesn't have wslpath; determine whether
+> Milly's version works and rewrite this section. Add section on Windows
+> environment variables that should be shared with WSL. Add instructions for
+> creating/updating ~/.dotfiles/host-xxx, since the links are `%USERPROFILE%`
+> dependent.
 
 Path needs to reflect %USERPROFILE%, so we'll use an environment variable and
 wslpath to figure it out, assuming System32 is in `PATH` per `.bashrc`.
@@ -103,8 +103,8 @@ Install Anaconda3 before starting Vim. WSL Ubuntu defaults python to v2.7
 instead of python3. Vim-conda uses python -c which will fail if python3 is
 aliased to in vim-conda. The vimrc and gvimrc assumed to be in vimfiles.
 
->  TODO:  <26-01-19, JD Fisher> > Sharing the backup directory with Windows vim
->  may be causing Gutentags to fail. Needs triage.
+> TODO:  <26-01-19, JD Fisher> > Sharing the backup directory with Windows vim
+> may be causing Gutentags to fail. Needs triage.
 
 Ctags is needed by Gutentags. Wslpath converts Windows paths to their mount
 point under WSL.
@@ -183,7 +183,6 @@ can be launched. The `gvim` function will exit quietly if on a WSL path.
 provides a gist, which has been modified for `Vim81`. Adjust the path to `gvim`
 as needed. See `~/.dotfiles/local/bin/gvim.sh` for details.
 
-
 ```bash
 source ~/.dotfiles/local/bin/gvim.sh
 ```
@@ -217,6 +216,13 @@ Awesome, Devicons, Octicons, and others.
 
 [Microsoft Cascadia Code Powerline font](https://github.com/microsoft/cascadia-code/releases)
 works well in WSL and Windows.
+
+### JetBrainsMono
+
+[JetBrainsMono](https://www.jetbrains.com/lp/mono/) has font ligatures but does
+not work on Windows gvim. See
+[Windows 10 doesn't register it as monospace type? #4](https://github.com/JetBrains/JetBrainsMono/issues/4)
+for details.
 
 ### Font Installation
 
