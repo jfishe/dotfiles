@@ -102,3 +102,6 @@ _viminfo
 backups/
 tags*
 .netrwhist
+
+# fc-cache font files
+.uuid
