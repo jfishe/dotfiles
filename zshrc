@@ -103,9 +103,6 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 export LESS="$LESS --ignore-case"
-unalias run-help
-autoload run-help
-
 export GDK_SCALE=0.5
 
 umask 022
