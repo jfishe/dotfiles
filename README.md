@@ -3,6 +3,13 @@
 Setup Windows Subsystem for Linux to use the Windows vimfiles, git and
 dircolors-solarized.
 
+To install download and source the following or perform the steps described
+below.
+
+``` bash
+. ./install.sh
+```
+
 ## Setup Ubuntu Bash
 
 For a new installation of Ubuntu Bash, which does not include git by default,
@@ -10,10 +17,7 @@ open Ubuntu Bash console:
 
 ```bash
 sudo apt-get update         # Update package database
-sudo apt-get dist-upgrade   # Upgrade to latest distribution
-sudo apt-get update         # Update package database
 sudo apt-get install git
-sudo apt-get autoremove     # Remove unused packages
 ```
 
 ## Setup dotfiles
@@ -118,7 +122,7 @@ sudo add-apt-repository ppa:jonathonf/vim
 sudo add-apt-repository ppa:jonathonf/texlive-2018
 sudo apt-get update
 
-sudo apt-get install silversearcher-ag
+sudo apt-get install ripgrep
 sudo apt install vim
 sudo apt install exuberant-ctags
 sudo apt-get install texlive-full # will take a long time
@@ -134,7 +138,8 @@ ln -s $USERPROFILE/vimfiles/ ~/.vim
 ln -s $USERPROFILE/.jupyter/ ~/.jupyter
 ln -s $USERPROFILE/ ~/userprofile
 
-go get -u mvdan.cc/sh/cmd/shfmt # https://github.com/mvdan/sh
+# https://github.com/mvdan/sh
+GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
 ```
 
 If the `Documents` folder is not located in `$USERPROFILE/Documents`, the
