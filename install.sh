@@ -9,7 +9,7 @@ hash ctags || sudo apt install exuberant-ctags # Used by Gutentags in Vim
 hash rg || sudo apt-get install ripgrep
 hash gvim || sudo apt-get install vim-gtk3 # GUI Vim with python3
 
-hash gvim || sudo apt-get install texlive-full
+hash tex || sudo apt-get install texlive-full
 
 # Used by shfmt in ALE fixer for bash
 hash go || sudo apt-get install golang 
