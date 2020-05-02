@@ -117,13 +117,8 @@ Vim 8 and Silver Searcher are not required but Ag is much faster. VWS will use
 Ag if installed. `TeXLive` is needed for pandoc.
 
 ```bash
-# Add repo for Vim 8 and texlive-2018
-sudo add-apt-repository ppa:jonathonf/vim
-sudo add-apt-repository ppa:jonathonf/texlive-2018
-sudo apt-get update
-
 sudo apt-get install ripgrep
-sudo apt install vim
+sudo apt install vim-gtk3
 sudo apt install exuberant-ctags
 sudo apt-get install texlive-full # will take a long time
 sudo apt-get golang
