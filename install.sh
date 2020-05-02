@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+set -o xtrace
 sudo apt-get update         # Update package database
 
 hash git || sudo apt-get install git
@@ -29,3 +30,5 @@ env RCRC=~/.dotfiles/rcrc rcup # to copy/link dotfiles as specified in rcrc
 
 # Update font cache
 fc-cache -vf ~/.local/share/fonts
+
+set +o xtrace
