@@ -1,4 +1,4 @@
-EXCLUDES="*.md environment.yml"
+EXCLUDES="*.md environment.yml install.sh"
 SYMLINK_DIRS="bash_completion.d git_template jupyter userprofile vim
     vimwiki vimwiki_html
     vimwiki_home vimwiki_home_html
