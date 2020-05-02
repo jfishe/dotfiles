@@ -24,7 +24,11 @@ if [ -d "$HOME/bin" ] ; then
   PATH="$HOME/bin:$PATH"
 fi
 if [ -d "$USERPROFILE/bin" ] ; then
-  PATH="$PATH:$USERPROFILE/bin:/home/fishe/go/bin"
+  PATH="$PATH:$USERPROFILE/bin"
+fi
+
+if [ -d "$HOME/go" ] ; then
+  PATH="$PATH:/home/fishe/go/bin"
 fi
 
 export EDITOR=vim
