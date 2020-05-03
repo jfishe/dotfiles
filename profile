@@ -37,8 +37,14 @@ export EDITOR=vim
 export SSH_AUTH_SOCK="/tmp/.ssh-auth-sock"
 ~/.local/bin/msysgit2unix-socket.py $HOME/userprofile/keeagent_msysGit.socket:$SSH_AUTH_SOCK > /dev/null 2>&1
 
+# export DISPLAY=:0
+if [[ ! -z "$WSL_INTEROP" ]] ; then
+  export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
+else
+  export DISPLAY=172.26.0.1:0
+fi
+
 # Enable Google Chrome
-export DISPLAY=:0
 export BROWSER=/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe
 
 # True if $1 is an executable in $PATH
