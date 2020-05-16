@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Color xtrace
-local oldPS4=$PS4
+oldPS4=$PS4
 export PS4=$'+\e[33m $BASH_SOURCE:${BASH_LINENO[0]} \e[0m+  '
 
 set -o xtrace
