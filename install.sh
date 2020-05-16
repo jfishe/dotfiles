@@ -20,27 +20,41 @@ hash gvim || sudo apt-get install vim-gtk3 # GUI Vim with python3
 
 hash tex || sudo apt-get install texlive-full
 
-# Used by shfmt in ALE fixer for bash
+# Used by shfmt and npiperelay
 hash go || sudo apt-get install golang
+
+# Used by ALE fixer for bash
 hash shfmt || GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
 
+# Used to access Windows OpenSSH's ssh-agent.
+hash socat || sudo apt-get install socat
 
-[[ -d ~/.dotfiles/ ]] || git clone https://github.com/jfishe/dotfiles.git ~/.dotfiles
+# Build and install npiperelay to use Windows OpenSSH's ssh-agent.
+if [[ -z "${USERPROFILE}" ]]; then
+  hash npiperelay.exe || go get -d github.com/jstarks/npiperelay && \
+    GOOS=windows go build -o $USERPROFILE/go/bin/npiperelay.exe \
+      github.com/jstarks/npiperelay && \
+    sudo ln -s $USERPROFILE/go/bin/npiperelay.exe \
+      /usr/local/bin/npiperelay.exe
+else
+  echo 'Add USERPROFILE/p to the WSLENV Windows Environment Variable.' 1>&2
+  echo 'Then Re-run install.sh' 1>&2
 
-pushd ~/.dotfiles
+# Setup .dotfiles and run rcup to link configuration files.
+[[ -d $HOME/.dotfiles/ ]] || git clone https://github.com/jfishe/dotfiles.git \
+  $HOME/.dotfiles
+
+pushd $HOME/.dotfiles
 git pull
 git submodule update --init --recursive --remote
 popd
 
-# env RCRC=~/.dotfiles/rcrc lsrc # to list dotfiles that would be changed
-# echo ''
-# echo 'env RCRC=~/.dotfiles/rcrc rcup # to copy/link dotfiles as specified in rcrc'
-env RCRC=~/.dotfiles/rcrc rcup # to copy/link dotfiles as specified in rcrc
-env RCRC=~/.dotfiles/rcrc rcup # to link dotfiles symlinked to dotfiles
+env RCRC=$HOME/.dotfiles/rcrc rcup # to copy/link dotfiles as specified in rcrc
+env RCRC=$HOME/.dotfiles/rcrc rcup # to link dotfiles symlinked to dotfiles
 
 # Update font cache
-fc-cache -vf ~/.local/share/fonts
+fc-cache -vf $HOME/.local/share/fonts
 
 set +o xtrace
-$PS4="$PS4"
+PS4="$oldPS4"
 unlet oldPS4
