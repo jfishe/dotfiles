@@ -43,6 +43,7 @@ if [[ -z "${USERPROFILE}" ]]; then
 else
   echo 'Add USERPROFILE/p to the WSLENV Windows Environment Variable.' 1>&2
   echo 'Then Re-run install.sh' 1>&2
+fi
 
 # Setup .dotfiles and run rcup to link configuration files.
 [[ -d $HOME/.dotfiles/ ]] || git clone https://github.com/jfishe/dotfiles.git \
