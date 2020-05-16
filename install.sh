@@ -62,4 +62,4 @@ fc-cache -vf $HOME/.local/share/fonts
 
 set +o xtrace
 PS4="$oldPS4"
-unlet oldPS4
+unset oldPS4
