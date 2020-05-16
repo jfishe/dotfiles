@@ -5,6 +5,10 @@ local oldPS4=$PS4
 export PS4=$'+\e[33m $BASH_SOURCE:${BASH_LINENO[0]} \e[0m+  '
 
 set -o xtrace
+
+# Avoid broken symlinks for removed files when running git pull on ~/.dotfiles.
+[[ -e $HOME/.rcrc ]] && rcdn # Remove dotfiles managed by rcm
+
 sudo apt-get update         # Update package database
 
 hash git || sudo apt-get install git
