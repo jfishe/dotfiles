@@ -34,12 +34,14 @@ hash shfmt || GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
 hash socat || sudo apt-get install socat
 
 # Build and install npiperelay to use Windows OpenSSH's ssh-agent.
-if [[ -z "${USERPROFILE}" ]]; then
-  hash npiperelay.exe || go get -d github.com/jstarks/npiperelay && \
+if [[ ! -z "${USERPROFILE}" ]]; then
+  hash npiperelay.exe || (
+    GOOS=windows go get -d github.com/jstarks/npiperelay && \
     GOOS=windows go build -o $USERPROFILE/go/bin/npiperelay.exe \
-      github.com/jstarks/npiperelay && \
+        github.com/jstarks/npiperelay && \
     sudo ln -s $USERPROFILE/go/bin/npiperelay.exe \
-      /usr/local/bin/npiperelay.exe
+        /usr/local/bin/npiperelay.exe
+    )
 else
   echo 'Add USERPROFILE/p to the WSLENV Windows Environment Variable.' 1>&2
   echo 'Then Re-run install.sh' 1>&2
