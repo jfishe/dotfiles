@@ -43,8 +43,9 @@ if [[ ! -z "${USERPROFILE}" ]]; then
         /usr/local/bin/npiperelay.exe
     )
 else
-  echo 'Add USERPROFILE/p to the WSLENV Windows Environment Variable.' 1>&2
-  echo 'Then Re-run install.sh' 1>&2
+
+  errmsg='Add USERPROFILE/p to the WSLENV Windows Environment Variable.\nThen Re-run install.sh' 1>&2
+  echo -e "\033[0;31m$errmsg" 1>&2
 fi
 
 
