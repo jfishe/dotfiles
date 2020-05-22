@@ -49,32 +49,6 @@ else
 fi
 
 
-# Start sshd automatically using scripts developed by Pengwin.
-profile_d_start_ssh='/etc/profile.d/start-ssh.sh'
-if [[ ! -f ${profile_d_start_ssh} ]] ; then
-  sudo tee -a ${profile_d_start_ssh} > /dev/null <<EOT
-#!/bin/bash
-
-sshd_status=\$(service ssh status)
-if [[ \${sshd_status} = *"is not running"* ]]; then
-  service ssh --full-restart > /dev/null 2>&1
-fi
-EOT
-  sudo chmod 644 ${profile_d_start_ssh}
-  sudo chown root.root ${profile_d_start_ssh}
-fi
-unset profile_d_start_ssh
-
-bin_start_ssh='/usr/bin/start-ssh'
-if [[ ! -f ${bin_start_ssh} ]] ; then
-  sudo tee -a ${bin_start_ssh} > /dev/null <<EOT
-sudo /usr/bin/start-ssh
-EOT
-  sudo chmod 700 ${bin_start_ssh}
-  sudo chown root.root ${bin_start_ssh}
-fi
-unset bin_start_ssh
-
 
 # Setup .dotfiles and run rcup to link configuration files.
 [[ -d $HOME/.dotfiles/ ]] || git clone https://github.com/jfishe/dotfiles.git \
@@ -88,6 +62,37 @@ popd
 env RCRC=$HOME/.dotfiles/rcrc rcup # to copy/link dotfiles as specified in rcrc
 env RCRC=$HOME/.dotfiles/rcrc rcup # to link dotfiles symlinked to dotfiles
 
+
+# Start sshd automatically using scripts developed by Pengwin.
+pushd $HOME/.dotfiles
+
+function cp_mod_own () {
+  # $1: full path to destination, e.g. /etc/profile.d/start-ssh.sh
+  # ${1:1}: relative path to source, e.g., etc/profile.d/start-ssh.sh
+  # $2: permissions for $1
+  sudo cp ${1:1} $1
+  sudo chmod $2 $1
+  sudo chown root.root $1
+}
+
+profile_d_start_ssh='/etc/profile.d/start-ssh.sh'
+if [[ ! -f ${profile_d_start_ssh} ]] ; then
+  cp_mod_own ${profile_d_start_ssh} 644
+fi
+unset profile_d_start_ssh
+
+bin_start_ssh='/usr/bin/start-ssh'
+if [[ ! -f ${bin_start_ssh} ]] ; then
+  cp_mod_own ${bin_start_ssh} 700
+fi
+unset bin_start_ssh
+
+sudoer_start_ssh='/etc/sudoers.d/start-ssh'
+if [[ ! -f ${sudoer_start_ssh} ]] ; then
+  visudo -c -q -f ${sudoer_start_ssh:1} && cp_mod_own ${sudoer_start_ssh} 0440
+fi
+
+popd
 
 # Update font cache
 fc-cache -vf $HOME/.local/share/fonts
