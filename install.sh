@@ -45,6 +45,34 @@ else
   echo 'Then Re-run install.sh' 1>&2
 fi
 
+
+# Start sshd automatically using scripts developed by Pengwin.
+profile_d_start_ssh='/etc/profile.d/start-ssh.sh'
+if [[ ! -f ${profile_d_start_ssh} ]] ; then
+  sudo tee -a ${profile_d_start_ssh} > /dev/null <<EOT
+#!/bin/bash
+
+sshd_status=\$(service ssh status)
+if [[ \${sshd_status} = *"is not running"* ]]; then
+  service ssh --full-restart > /dev/null 2>&1
+fi
+EOT
+  sudo chmod 644 ${profile_d_start_ssh}
+  sudo chown root.root ${profile_d_start_ssh}
+fi
+unset profile_d_start_ssh
+
+bin_start_ssh='/usr/bin/start-ssh'
+if [[ ! -f ${bin_start_ssh} ]] ; then
+  sudo tee -a ${bin_start_ssh} > /dev/null <<EOT
+sudo /usr/bin/start-ssh
+EOT
+  sudo chmod 700 ${bin_start_ssh}
+  sudo chown root.root ${bin_start_ssh}
+fi
+unset bin_start_ssh
+
+
 # Setup .dotfiles and run rcup to link configuration files.
 [[ -d $HOME/.dotfiles/ ]] || git clone https://github.com/jfishe/dotfiles.git \
   $HOME/.dotfiles
@@ -57,9 +85,11 @@ popd
 env RCRC=$HOME/.dotfiles/rcrc rcup # to copy/link dotfiles as specified in rcrc
 env RCRC=$HOME/.dotfiles/rcrc rcup # to link dotfiles symlinked to dotfiles
 
+
 # Update font cache
 fc-cache -vf $HOME/.local/share/fonts
 
+# Reset environment
 set +o xtrace
 PS4="$oldPS4"
 unset oldPS4
