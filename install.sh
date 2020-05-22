@@ -6,6 +6,16 @@ export PS4=$'+\e[33m $BASH_SOURCE:${BASH_LINENO[0]} \e[0m+  '
 
 set -o xtrace
 
+# Configuration support for the following WSL Distros and SSH ports.
+# Exit for unknown distro.
+declare -A wsl_distro_port=( ['Ubuntu']=2200 ['WLinux']=2201 )
+
+if [[ ! ${wsl_distro_port[$WSL_DISTRO_NAME]+_} ]] ; then
+  errmsg="$WSL_DISTRO_NAME does not have a port assigned.\n Edit install.sh"
+  echo -e "\033[0;31m$errmsg" 1>&2
+  exit 126
+fi
+
 # Avoid broken symlinks for removed files when running git pull on ~/.dotfiles.
 [[ -e $HOME/.rcrc ]] && rcdn # Remove dotfiles managed by rcm
 
@@ -44,7 +54,7 @@ if [[ ! -z "${USERPROFILE}" ]]; then
     )
 else
 
-  errmsg='Add USERPROFILE/p to the WSLENV Windows Environment Variable.\nThen Re-run install.sh' 1>&2
+  errmsg='Add USERPROFILE/p to the WSLENV Windows Environment Variable.\nThen Re-run install.sh'
   echo -e "\033[0;31m$errmsg" 1>&2
 fi
 
@@ -79,19 +89,26 @@ profile_d_start_ssh='/etc/profile.d/start-ssh.sh'
 if [[ ! -f ${profile_d_start_ssh} ]] ; then
   cp_mod_own ${profile_d_start_ssh} 644
 fi
-unset profile_d_start_ssh
 
 bin_start_ssh='/usr/bin/start-ssh'
 if [[ ! -f ${bin_start_ssh} ]] ; then
   cp_mod_own ${bin_start_ssh} 700
 fi
-unset bin_start_ssh
 
 sudoer_start_ssh='/etc/sudoers.d/start-ssh'
 if [[ ! -f ${sudoer_start_ssh} ]] ; then
   visudo -c -q -f ${sudoer_start_ssh:1} && cp_mod_own ${sudoer_start_ssh} 0440
 fi
 
+ssh_config_d="/etc/ssh/sshd_config.d/${USER}.conf"
+if [[ ! -f ${ssh_config_d} ]] ; then
+  sudo sed -e "s/AllowUsers fishe/AllowUsers ${USER}/g" \
+    -e "s/Port 2200/Port  ${wsl_distro_port[$WSL_DISTRO_NAME]}/g" \
+    etc/ssh/sshd_config.d/fishe.conf > ${ssh_config_d}
+  sudo chmod ${ssh_config_d} 644
+  sudo chown root.root ${ssh_config_d}
+  sudo service ssh --full-restart
+fi
 popd
 
 # Update font cache
