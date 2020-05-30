@@ -215,6 +215,16 @@ prompt_virtualenv() {
   fi
 }
 
+# conda env: current anaconda env
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+prompt_condaenv() {
+  if [[ -n $CONDA_PROMPT_MODIFIER ]]; then
+    color=green
+    prompt_segment $color $PRIMARY_FG
+    print -Pn " $(basename $CONDA_PROMPT_MODIFIER) "
+  fi
+}
+
 # Status:
 # - was there an error
 # - am I root
@@ -247,6 +257,7 @@ build_prompt() {
   RETVAL=$?
   prompt_status
   prompt_virtualenv
+  prompt_condaenv
   prompt_aws
   prompt_context
   prompt_dir
