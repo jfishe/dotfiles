@@ -64,9 +64,9 @@ prompt_segment() {
   [[ -n $1 ]] && bg="%K{$1}" || bg="%k"
   [[ -n $2 ]] && fg="%F{$2}" || fg="%f"
   if [[ $CURRENT_BG != 'NONE' && $1 != $CURRENT_BG ]]; then
-    echo -n " %{$bg%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR%{$fg%} "
+    echo -n "%{$bg%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR%{$fg%}"
   else
-    echo -n "%{$bg%}%{$fg%} "
+    echo -n "%{$bg%}%{$fg%}"
   fi
   CURRENT_BG=$1
   [[ -n $3 ]] && echo -n $3
@@ -207,21 +207,19 @@ prompt_dir() {
   prompt_segment blue $CURRENT_BG '%~'
 }
 
-# Virtualenv: current working virtualenv
+# Display current virtual environment
+# If a python virtual environment exists, use that.
+# Otherwise, use Conda if available.
 prompt_virtualenv() {
-  local virtualenv_path="$VIRTUAL_ENV"
-  if [[ -n $virtualenv_path && -n $VIRTUAL_ENV_DISABLE_PROMPT ]]; then
-    prompt_segment blue black "(`basename $virtualenv_path`)"
+  if [[ -n $VIRTUAL_ENV ]]; then
+    env=$VIRTUAL_ENV
+  elif [[ -n $CONDA_DEFAULT_ENV ]]; then
+    env=$CONDA_DEFAULT_ENV
   fi
-}
 
-# conda env: current anaconda env
-export VIRTUAL_ENV_DISABLE_PROMPT=1
-prompt_condaenv() {
-  if [[ -n $CONDA_PROMPT_MODIFIER ]]; then
-    color=green
-    prompt_segment $color $PRIMARY_FG
-    print -Pn " $(basename $CONDA_PROMPT_MODIFIER) "
+  if [[ -n $env ]]; then
+    prompt_segment cyan black
+    print -Pn "$(basename $env)"
   fi
 }
 
@@ -257,7 +255,6 @@ build_prompt() {
   RETVAL=$?
   prompt_status
   prompt_virtualenv
-  prompt_condaenv
   prompt_aws
   prompt_context
   prompt_dir
