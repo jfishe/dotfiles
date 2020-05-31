@@ -75,11 +75,11 @@ prompt_segment() {
 # End the prompt, closing any open segments
 prompt_end() {
   if [[ -n $CURRENT_BG ]]; then
-    echo -n " %{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
+    echo -n "%{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
   else
     echo -n "%{%k%}"
   fi
-  echo -n "%{%f%}"
+  echo  "%{%f%}\n»"
   CURRENT_BG=''
 }
 
@@ -204,7 +204,7 @@ prompt_hg() {
 
 # Dir: current working directory
 prompt_dir() {
-  prompt_segment blue $CURRENT_BG '%~'
+  prompt_segment magenta black '%~'
 }
 
 # Display current virtual environment
@@ -250,13 +250,22 @@ prompt_aws() {
   esac
 }
 
+# WSL_DISTRO_NAME
+prompt_wsl() {
+  if [[ -n "$WSL_DISTRO_NAME" ]]; then
+    prompt_segment blue black
+    print -Pn "$WSL_DISTRO_NAME"
+  fi
+}
+
 ## Main prompt
 build_prompt() {
   RETVAL=$?
   prompt_status
+  prompt_context
+  prompt_wsl
   prompt_virtualenv
   prompt_aws
-  prompt_context
   prompt_dir
   prompt_git
   prompt_bzr
