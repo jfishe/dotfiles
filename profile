@@ -60,4 +60,3 @@ function is_bin_in_path {
     builtin type -P "$1" &> /dev/null
   fi
 }
-# is_bin_in_path conda && conda activate base > /dev/null 2>&1 || :
