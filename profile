@@ -34,9 +34,9 @@ fi
 export EDITOR=vim
 
 # Enable ssh authentication using Windows OpenSSH ssh-agent.
-if [ ! -f /tmp/ssh-agent-pipe ]; then
+if [[ ! -S /tmp/ssh-agent-pipe ]]; then
   socat UNIX-LISTEN:/tmp/ssh-agent-pipe,fork,group=fishe,umask=007 \
-    EXEC:"npiperelay.exe -ep -s //./pipe/openssh-ssh-agent",nofork &
+    EXEC:"npiperelay.exe -ep -s //./pipe/openssh-ssh-agent",fork &
   export SSH_AUTH_SOCK=/tmp/ssh-agent-pipe
 fi
 
@@ -60,4 +60,4 @@ function is_bin_in_path {
     builtin type -P "$1" &> /dev/null
   fi
 }
-is_bin_in_path conda && conda activate base > /dev/null 2>&1 || :
+# is_bin_in_path conda && conda activate base > /dev/null 2>&1 || :
