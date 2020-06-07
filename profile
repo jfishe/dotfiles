@@ -35,8 +35,8 @@ export EDITOR=vim
 
 # Enable ssh authentication using Windows OpenSSH ssh-agent.
 if [[ ! -S /tmp/ssh-agent-pipe ]]; then
-  socat UNIX-LISTEN:/tmp/ssh-agent-pipe,fork,group=fishe,umask=007 \
-    EXEC:"npiperelay.exe -ep -s //./pipe/openssh-ssh-agent",fork &
+  (socat UNIX-LISTEN:/tmp/ssh-agent-pipe,fork,group=fishe,umask=007 \
+      EXEC:"npiperelay.exe -ep -s //./pipe/openssh-ssh-agent",nofork &)
   export SSH_AUTH_SOCK=/tmp/ssh-agent-pipe
 fi
 
