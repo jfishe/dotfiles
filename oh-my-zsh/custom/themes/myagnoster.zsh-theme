@@ -31,7 +31,6 @@ typeset -aHg AGNOSTER_PROMPT_SEGMENTS=(
     prompt_virtualenv
     prompt_dir
     prompt_git
-    prompt_end
     prompt_newline
 )
 
@@ -51,7 +50,7 @@ DETACHED="\u27a6"
 CROSS="\u2718"
 LIGHTNING="\u26a1"
 GEAR="\u2699"
-PROMPT_TERMINATOR="\u00bb"
+NEWLINE_SEPARATOR="\u00bb"
 VIRTUALENV_SEPARATOR="\ue606"
 
 # Begin a segment
@@ -103,18 +102,18 @@ prompt_git() {
   if [[ -n "$ref" ]]; then
     if is_dirty; then
       color=yellow
-      ref="${ref} $PLUSMINUS"
+      ref="${ref}$PLUSMINUS"
     else
       color=green
-      ref="${ref} "
+      ref="${ref}"
     fi
     if [[ "${ref/.../}" == "$ref" ]]; then
-      ref="$BRANCH $ref"
+      ref="$BRANCH$ref"
     else
-      ref="$DETACHED ${ref/.../}"
+      ref="$DETACHED${ref/.../}"
     fi
     prompt_segment $color $PRIMARY_FG
-    print -n " $ref"
+    print -n "$ref"
   fi
 }
 
@@ -139,13 +138,13 @@ prompt_status() {
 
 prompt_newline() {
   if [[ -n $CURRENT_BG ]]; then
-    echo -n "%{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR
-%{%k%F{$CURRENT_BG}%}$PROMPT_TERMINATOR"
+    print -n "%{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR
+%{%k%F{$CURRENT_BG}%}$NEWLINE_SEPARATOR"
   else
-    echo -n "%{%k%}"
+    print -n "%{%k%}"
   fi
 
-  echo -n "%{%f%}"
+  print -n "%{%f%}"
   CURRENT_BG=''
 }
 
