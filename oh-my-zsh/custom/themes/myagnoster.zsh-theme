@@ -119,7 +119,7 @@ prompt_git() {
 
 # Dir: current working directory
 prompt_dir() {
-  prompt_segment magenta $PRIMARY_FG '%~'
+  prompt_segment 013 $PRIMARY_FG '%~'
 }
 
 # Status:
