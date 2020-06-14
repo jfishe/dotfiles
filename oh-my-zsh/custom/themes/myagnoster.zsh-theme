@@ -168,7 +168,7 @@ prompt_virtualenv() {
 # WSL_DISTRO_NAME
 prompt_wsl() {
   if [[ -n "$WSL_DISTRO_NAME" ]]; then
-    prompt_segment blue black
+    prompt_segment blue $PRIMARY_FG
     print -Pn "$WSL_DISTRO_NAME"
   fi
 }
