@@ -28,7 +28,7 @@ hash git-lfs || sudo apt-get install git-lfs
 hash rcup || sudo apt-get install rcm
 
 # Used by Vim
-hash ctags || sudo apt install exuberant-ctags # Used by Gutentags in Vim
+hash ctags || sudo apt install universal-ctags # Used by Gutentags in Vim
 hash rg || sudo apt-get install ripgrep
 hash gvim || sudo apt-get install vim-gtk3 # GUI Vim with python3
 
