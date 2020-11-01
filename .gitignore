@@ -1,3 +1,7 @@
 # fc-cache font files
 .uuid
 web/
+
+# Ctags
+tags
+tags.lock
