@@ -115,6 +115,13 @@ popd
 # Update font cache
 fc-cache -vf $HOME/.local/share/fonts
 
+# Miniconda
+if [[ ! -d "$HOME/miniconda3" ]]; then
+  wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $TMP/miniconda.sh;
+  bash miniconda.sh -b
+  rm $TMP/miniconda.sh
+fi
+
 # Reset environment
 set +o xtrace
 PS4="$oldPS4"
