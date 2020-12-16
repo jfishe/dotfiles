@@ -66,11 +66,13 @@ fi
   $HOME/.dotfiles
 
 pushd $HOME/.dotfiles
+
+env RCRC=$HOME/.dotfiles/rcrc rcup # to copy/link dotfiles as specified in rcrc
+
 git pull
 git submodule update --init --recursive --remote
 popd
 
-env RCRC=$HOME/.dotfiles/rcrc rcup # to copy/link dotfiles as specified in rcrc
 env RCRC=$HOME/.dotfiles/rcrc rcup # to link dotfiles symlinked to dotfiles
 
 
@@ -117,9 +119,11 @@ fc-cache -vf $HOME/.local/share/fonts
 
 # Miniconda
 if [[ ! -d "$HOME/miniconda3" ]]; then
-  wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $TMP/miniconda.sh;
-  bash miniconda.sh -b
+  wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $TMP/miniconda.sh;
+  bash $TMP/miniconda.sh -b
   rm $TMP/miniconda.sh
+  $HOME/miniconda3/bin/conda init
+  $HOME/miniconda3/bin/conda init zsh
 fi
 
 # Reset environment

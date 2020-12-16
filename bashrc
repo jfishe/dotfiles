@@ -122,25 +122,17 @@ fi
 
 set -o vi
 
-# Initialize conda
-declare -a arr=(
-  "$HOME/anaconda3"
-  "$HOME/miniconda3")
-for i in "${arr[@]}"; do
-  if [[ -d "$i" ]]; then
-    __conda_setup="$('$i/bin/conda' shell.bash hook 2> /dev/null)"
-    if [ $? -eq 0 ]; then
-      eval "$__conda_setup"
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/fishe/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/fishe/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/fishe/miniconda3/etc/profile.d/conda.sh"
     else
-      if [ -f "$i/etc/profile.d/conda.sh" ]; then
-        . "$i/etc/profile.d/conda.sh"
-      else
-        export PATH="$i/bin:$PATH"
-      fi
+        export PATH="/home/fishe/miniconda3/bin:$PATH"
     fi
-    if [[ "$CONDA_SHLVL" -eq "0" ]] ; then
-      conda activate base
-    fi
-  fi
-done
-unset __conda_setup arr i
+fi
+unset __conda_setup
+# <<< conda initialize <<<
