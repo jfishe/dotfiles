@@ -1,23 +1,27 @@
 # dotfiles
 
 Setup Windows Subsystem for Linux to use the Windows vimfiles, git and
-dircolors-solarized.
+dircolors-solarized. Complete the Windows setup first per instrucitons at
+[jfishe / vimfiles](https://github.com/jfishe/vimfiles)
+instructions.
 
 To install download and source the following or perform the steps described
 below.
 
-``` bash
-. ./install.sh
-```
-
-## Setup Ubuntu Bash
-
-For a new installation of Ubuntu Bash, which does not include git by default,
-open Ubuntu Bash console:
+In Windows, set the user environment variable `WSLENV`, for use by
+`install.sh`.
 
 ```bash
-sudo apt-get update         # Update package database
-sudo apt-get install git
+WSLENV='WT_SESSION:USERPROFILE/p:APPDATA/p:LOCALAPPDATA/p:TMP/p:WT_PROFILE_ID'
+```
+
+See [Share environment variables between Windows and WSL](https://docs.microsoft.com/en-us/windows/wsl/interop#share-environment-variables-between-windows-and-wsl)
+for additional information.
+
+Download and source `install.sh`.
+
+``` bash
+. ./install.sh
 ```
 
 ## Setup dotfiles
@@ -37,7 +41,7 @@ env RCRC=~/.dotfiles/rcrc lsrc # to list dotfiles that would be changed
 env RCRC=~/.dotfiles/rcrc rcup # to copy/link dotfiles as specified in rcrc
 ```
 
- `env RCRC=~/.dotfiles/rcrc` is not needed after `rcup` above because it will be
+`env RCRC=~/.dotfiles/rcrc` is not needed after `rcup` above because it will be
 linked to `~/.rcrc`.
 
 ### User Bash Completion
@@ -103,30 +107,20 @@ included as a `git submodule` in `~/.dotfiles/.dircolors-solarized/`, which
 
 ## Anaconda3 and Vim
 
-Install Anaconda3 before starting Vim. WSL Ubuntu defaults python to v2.7
-instead of python3. Vim-conda uses python -c which will fail if python3 is
-aliased to in vim-conda. The vimrc and gvimrc assumed to be in vimfiles.
+Install Anaconda3 before starting Vim.
 
-> TODO:  <26-01-19, JD Fisher> > Sharing the backup directory with Windows vim
-> may be causing Gutentags to fail. Needs triage.
+Universal-ctags is needed by Gutentags. Wslpath converts Windows paths to their
+mount point under WSL.
 
-Ctags is needed by Gutentags. Wslpath converts Windows paths to their mount
-point under WSL.
-
-Vim 8 and Silver Searcher are not required but Ag is much faster. VWS will use
-Ag if installed. `TeXLive` is needed for pandoc.
+Vim 8 and ripgrep are not required but rg is much faster. VimwikiSearch will
+use Rg if installed. `TeXLive` is needed for pandoc.
 
 ```bash
 sudo apt-get install ripgrep
 sudo apt install vim-gtk3
-sudo apt install exuberant-ctags
+sudo apt install universal-ctags
 sudo apt-get install texlive-full # will take a long time
 sudo apt-get golang
-
->  TODO:  <26-01-19, JD Fisher> > Refactor. Links are created in
->  `~/.dotfiles/host-xxx`. Unfortunately it's host and user specific since rcm
->  doesn't appear to be able to create links after `~/userprofile` is linked.
->  The links would be host independent then. Create a shell script?
 
 USERPROFILE=$(wslpath `cmd.exe /c echo %USERPROFILE%`)
 ln -s $USERPROFILE/vimfiles/ ~/.vim

@@ -28,14 +28,14 @@ if [ -d "$USERPROFILE/bin" ] ; then
 fi
 
 if [ -d "$HOME/go" ] ; then
-  PATH="$PATH:/home/fishe/go/bin"
+  PATH="$PATH:$HOME/go/bin"
 fi
 
 export EDITOR=vim
 
 # Enable ssh authentication using Windows OpenSSH ssh-agent.
 if [[ ! -S /tmp/ssh-agent-pipe ]]; then
-  (socat UNIX-LISTEN:/tmp/ssh-agent-pipe,fork,group=fishe,umask=007 \
+  (socat UNIX-LISTEN:/tmp/ssh-agent-pipe,fork,group=$USER,umask=007 \
       EXEC:"npiperelay.exe -ep -s //./pipe/openssh-ssh-agent",nofork &)
   export SSH_AUTH_SOCK=/tmp/ssh-agent-pipe
 fi
