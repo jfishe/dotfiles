@@ -6,6 +6,14 @@ export PS4=$'+\e[33m $BASH_SOURCE:${BASH_LINENO[0]} \e[0m+  '
 
 set -o xtrace
 
+# Confirm that WSLENV is set correctly.
+wslenv = 'WT_SESSION:USERPROFILE/p:APPDATA/p:LOCALAPPDATA/p:TMP/p:WT_PROFILE_ID'
+if [[ "$WSLENV"  == "$wslenv" ]]; then
+  errmsg="WSLENV not set correctly: Set WSLENV = $wslenv in Windows environment variables."
+  echo -e "\033[0;31m$errmsg" 1>&2
+  exit 126
+fi
+
 # Configuration support for the following WSL Distros and SSH ports.
 # Exit for unknown distro.
 declare -A wsl_distro_port=( ['Ubuntu']=2200 ['WLinux']=2201 )
@@ -15,9 +23,6 @@ if [[ ! ${wsl_distro_port[$WSL_DISTRO_NAME]+_} ]] ; then
   echo -e "\033[0;31m$errmsg" 1>&2
   exit 126
 fi
-
-# Avoid broken symlinks for removed files when running git pull on ~/.dotfiles.
-[[ -e $HOME/.rcrc ]] && rcdn # Remove dotfiles managed by rcm
 
 sudo apt-get update         # Update package database
 
@@ -31,8 +36,12 @@ hash rcup || sudo apt-get install rcm
 hash ctags || sudo apt install universal-ctags # Used by Gutentags in Vim
 hash rg || sudo apt-get install ripgrep
 hash gvim || sudo apt-get install vim-gtk3 # GUI Vim with python3
+hash node || sudo apt-get install nodejs # Used by Coc.nvim
+hash npm || sudo apt-get install npm # Used by Coc.nvim
 
-hash tex || sudo apt-get install texlive-full
+hash tex || sudo apt-get install texlive-extra texlive-latex-extra texlive-xetex pandoc
+
+[[ -f /usr/share/dict/american-english-huge ]] || sudo apt-get install wamerican-huge
 
 # Used by shfmt and npiperelay
 hash go || sudo apt-get install golang
@@ -59,7 +68,8 @@ else
   echo -e "\033[0;31m$errmsg" 1>&2
 fi
 
-
+# Avoid broken symlinks for removed files when running git pull on ~/.dotfiles.
+[[ -e $HOME/.rcrc ]] && rcdn # Remove dotfiles managed by rcm
 
 # Setup .dotfiles and run rcup to link configuration files.
 [[ -d $HOME/.dotfiles/ ]] || git clone https://github.com/jfishe/dotfiles.git \
@@ -73,6 +83,21 @@ git pull
 git submodule update --init --recursive --remote
 popd
 
+# Setup symlink to $USERPROFILE for a new hostname.
+# Most symlinks point to $USERPROFILE but some point to userprofile/Documents,
+# which may break when Documents is not located on the Windows C:\ drive. Rcm
+# ignores broken symlinks.
+hostrcrc="host-`hostname`"
+if [[ -d $HOME/.dotfiles/$hostrcrc ]]; then
+  pushd $HOME/.dotfiles
+  cp -r host-JOHN-AUD9AR3 $hostrcrc
+  cd $hostrcrc
+  rm userprofile
+  ln -s $USERPROFILE userprofile
+  popd
+fi
+
+env RCRC=$HOME/.dotfiles/rcrc rcup # to copy/link dotfiles as specified in rcrc
 env RCRC=$HOME/.dotfiles/rcrc rcup # to link dotfiles symlinked to dotfiles
 
 
