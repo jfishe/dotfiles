@@ -147,9 +147,9 @@ if [[ ! -d "$HOME/miniconda3" ]]; then
   wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $TMP/miniconda.sh;
   bash $TMP/miniconda.sh -b
   rm $TMP/miniconda.sh
-  $HOME/miniconda3/bin/conda init
-  $HOME/miniconda3/bin/conda init zsh
 fi
+$HOME/miniconda3/bin/conda init
+$HOME/miniconda3/bin/conda init zsh
 
 # Reset environment
 set +o xtrace
