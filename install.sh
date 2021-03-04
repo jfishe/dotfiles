@@ -35,9 +35,14 @@ hash rcup || sudo apt-get install rcm
 # Used by Vim
 hash ctags || sudo apt install universal-ctags # Used by Gutentags in Vim
 hash rg || sudo apt-get install ripgrep
+hash pandoc || sudo apt-get install pandoc
 hash gvim || sudo apt-get install vim-gtk3 # GUI Vim with python3
 hash node || sudo apt-get install nodejs # Used by Coc.nvim
 hash npm || sudo apt-get install npm # Used by Coc.nvim
+
+# Used by Vimwiki
+# https://github.com/tools-life/taskwiki
+hash task || sudo apt-get install taskwarrior python3-tasklib tasksh
 
 hash tex || sudo apt-get install texlive-extra texlive-latex-extra texlive-xetex pandoc
 
