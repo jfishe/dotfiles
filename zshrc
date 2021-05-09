@@ -1,3 +1,18 @@
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/fishe/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/fishe/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/fishe/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/fishe/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
 unsetopt BEEP
 
 # If you come from bash you might have to change your $PATH.
@@ -70,7 +85,14 @@ ZSH_THEME="myagnoster"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git vi-mode colored-man-pages
-  zsh-dircolors-solarized zsh-syntax-highlighting)
+  zsh-dircolors-solarized zsh-syntax-highlighting
+  conda-zsh-completion)
+
+# https://github.com/esc/conda-zsh-completion/blob/cf2046a58d3d0b8eeb18a2ef55cd0a4bac13d968/_conda#L34
+# To activate the completion cache for packages, add the following to your
+zstyle ':completion::complete:*' use-cache 1
+# To display subcommand completion in groups, please add the following to your
+zstyle ":conda_zsh_completion:*" use-groups true
 
 source $ZSH/oh-my-zsh.sh
 
@@ -109,17 +131,3 @@ export GDK_SCALE=0.5
 umask 022
 # set -o vi
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/fishe/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/fishe/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/fishe/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/fishe/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
