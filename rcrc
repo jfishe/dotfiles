@@ -2,7 +2,8 @@ EXCLUDES="*.md environment.yml install.sh usr etc"
 SYMLINK_DIRS="bash_completion.d git_template jupyter userprofile vim
     vimwiki vimwiki_html
     vimwiki_home vimwiki_home_html
-    zsh-dircolors-solarized zsh-syntax-highlighting fonts"
+    zsh-dircolors-solarized zsh-syntax-highlighting fonts
+    conda-zsh-completion"
 UNDOTTED="userprofile
     vimwiki vimwiki_html
     vimwiki_home vimwiki_home_html"
