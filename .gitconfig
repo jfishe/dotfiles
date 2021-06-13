@@ -1,2 +1,7 @@
 [credential]
-helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-wincred.exe
+	helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-wincred.exe
+[diff "msword"]
+	textconv = run-mailcap --action=cat
+  wordRegex = "\\w+"
+[diff "astextplain"]
+	textconv = run-mailcap --action=cat

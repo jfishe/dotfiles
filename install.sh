@@ -29,6 +29,14 @@ sudo apt-get update         # Update package database
 hash git || sudo apt-get install git
 hash git-lfs || sudo apt-get install git-lfs
 
+# Msysgit /etc/gitattributes sets astextplain as an executable.
+# .dotfiles/.gitconfig includes [diff "astextplain"]
+# run-mailcap --action=cat <file>
+# https://github.com/msysgit/msysgit/blob/master/bin/astextplain
+hash docx2txt || sudo apt-get install docx2txt
+hash antiword || sudo apt-get install antiword
+hash pdftotext || sudo apt-get install poppler-utils
+
 # rc (dotfiles) management
 hash rcup || sudo apt-get install rcm
 
