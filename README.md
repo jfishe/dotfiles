@@ -20,7 +20,7 @@ for additional information.
 
 Download and source `install.sh`.
 
-``` bash
+```bash
 . ./install.sh
 ```
 
@@ -188,7 +188,7 @@ install `vim-gtk3`. If the clipboard does not appear to be sharing, copy from
 and X client and paste into a Windows application. Then it should work both
 ways.
 
-``` {contenteditable="true" spellcheck="false" caption="bash" .bash}
+```{contenteditable="true" spellcheck="false" caption="bash" .bash}
 sudo apt-get install vim-gtk3
 ```
 
@@ -218,11 +218,22 @@ not work on Windows gvim. See
 [Windows 10 doesn't register it as monospace type? #4](https://github.com/JetBrains/JetBrainsMono/issues/4)
 for details.
 
+### Caskaydia Cove Regular Nerd Font
+
+Caskaydia Cove patches Cascadia-Code with powerline and nerd font glyphs. The
+WSL compatible font, included in the respository, and the Windows compatible
+font are:
+
+- [Caskaydia Cove Regular Nerd Font Complete.otf](https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/CascadiaCode/Regular/complete/Caskaydia%20Cove%20Regular%20Nerd%20Font%20Complete.otf)
+- [Caskaydia Cove Regular Nerd Font Complete Windows](https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/CascadiaCode/Regular/complete/Caskaydia%20Cove%20Regular%20Nerd%20Font%20Complete%20Windows%20Compatible.otf)
+
+Theses are the defaults for gVim in [https://github.com/jfishe/vimfiles](https://github.com/jfishe/vimfiles).
+
 ### Font Installation
 
 Download selected fonts to the directory below and update the font cache. WSL
 should use Windows Compatible fonts.
 
-``` {contenteditable="true" spellcheck="false" caption="bash" .bash}
+```{contenteditable="true" spellcheck="false" caption="bash" .bash}
 fc-cache -vf ~/.local/share/fonts
 ```
