@@ -101,7 +101,7 @@ popd
 # which may break when Documents is not located on the Windows C:\ drive. Rcm
 # ignores broken symlinks.
 hostrcrc="host-`hostname`"
-if [[ -d $HOME/.dotfiles/$hostrcrc ]]; then
+if [[ ! -d $HOME/.dotfiles/$hostrcrc ]]; then
   pushd $HOME/.dotfiles
   cp -r host-JOHN-AUD9AR3 $hostrcrc
   cd $hostrcrc
