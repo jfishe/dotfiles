@@ -34,6 +34,7 @@ fi
 export EDITOR=vim
 
 # Enable ssh authentication using Windows OpenSSH ssh-agent.
+# Requires enabling Windows OpenSSH in KeeAgent.
 if [[ ! -S /tmp/ssh-agent-pipe ]]; then
   (socat UNIX-LISTEN:/tmp/ssh-agent-pipe,fork,group=$USER,umask=007 \
       EXEC:"npiperelay.exe -ep -s //./pipe/openssh-ssh-agent",nofork &)
@@ -49,7 +50,9 @@ fi
 # fi
 
 # Enable Google Chrome
-export BROWSER=/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe
+# Vim et al. misbehave if there are spaces in $BROWSER, so symlink instead.
+# ln -s '/mnt/c/Program Files (x86)/Google/Chrome/Application/chrome.exe' $HOME/.local/chrome
+export BROWSER=$HOME/.local/bin/chrome
 
 # True if $1 is an executable in $PATH
 # Works in both {ba,z}sh
