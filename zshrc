@@ -69,9 +69,15 @@ ZSH_THEME="myagnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode colored-man-pages
-  zsh-dircolors-solarized zsh-syntax-highlighting
-  conda-zsh-completion)
+plugins=(
+  git vi-mode colored-man-pages
+  zsh-syntax-highlighting
+  zsh-dircolors-solarized
+  vim-interaction
+  conda-zsh-completion
+  pip
+  gitignore
+)
 
 source $ZSH/oh-my-zsh.sh
 
