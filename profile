@@ -40,13 +40,13 @@ if [[ ! -S /tmp/ssh-agent-pipe ]]; then
   export SSH_AUTH_SOCK=/tmp/ssh-agent-pipe
 fi
 
-if [[ ! -z "$WSL_INTEROP" ]] ; then
-  # For WSL2, determine the IP address of the Hyper-V VM.
-  export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
-else
-  # Otherwise localhost should work.
-  export DISPLAY=:0
-fi
+# if [[ ! -z "$WSL_INTEROP" ]] ; then
+#   # For WSL2, determine the IP address of the Hyper-V VM.
+#   export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
+# else
+#   # Otherwise localhost should work.
+#   export DISPLAY=:0
+# fi
 
 # Enable Google Chrome
 export BROWSER=/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe
