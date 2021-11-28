@@ -155,6 +155,12 @@ popd
 # Update font cache
 fc-cache -vf $HOME/.local/share/fonts
 
+# Install zsh and oh-my-zsh
+hash zsh || sudo apt-get install zsh
+hash omz || sh -c "$(
+  curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+  )"
+
 # Miniconda
 if [[ ! -d "$HOME/miniconda3" ]]; then
   wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $TMP/miniconda.sh;
