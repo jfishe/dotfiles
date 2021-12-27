@@ -73,6 +73,7 @@ plugins=(
   git vi-mode colored-man-pages
   zsh-syntax-highlighting
   zsh-dircolors-solarized
+  colorize
   vim-interaction
   conda-zsh-completion
   pip
