@@ -1,15 +1,20 @@
-name: python38
 channels:
-- defaults
-- conda-forge
+  - conda-forge
+  - defaults
 dependencies:
-- black
-- pandoc
-- mypy
-- nodejs
-- panflute
-- pydocstyle
-- pip
-- pip:
-  - MarkdownPP
-  - vim-vint
+  - argcomplete # Added by conda-export
+  - conda-export
+  - nodejs
+  - pandoc
+  - panflute
+  - pypandoc
+  - python[version='<3.10']
+  - tzlocal # Added by conda-export
+  - userpath # Added by conda-export
+  - pip
+  - pip:
+    - condax
+    - pipx
+    - tasklib
+    - git+https://github.com/jfishe/panvimwiki.git
+name: base
