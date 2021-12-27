@@ -15,7 +15,7 @@ unsetopt BEEP
 # ZSH_THEME="robbyrussell"
 # ZSH_THEME="solarized-powerline"
 # ZSH_THEME="sunrise"
-ZSH_THEME="myagnoster"
+# ZSH_THEME="myagnoster"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -138,3 +138,4 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+eval "$(starship init zsh)"
