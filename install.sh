@@ -52,7 +52,10 @@ hash npm || sudo apt-get install npm # Used by Coc.nvim
 # https://github.com/tools-life/taskwiki
 hash task || sudo apt-get install taskwarrior python3-tasklib tasksh
 
-hash tex || sudo apt-get install texlive-extra texlive-latex-extra texlive-xetex pandoc
+# Try Ubuntu first and then Debian
+# https://wiki.debian.org/Latex
+# https://tug.org/texlive/debian.html
+hash tex || sudo apt-get install texlive texlive-latex-extra texlive-xetex
 
 [[ -f /usr/share/dict/american-english-huge ]] || sudo apt-get install wamerican-huge
 
