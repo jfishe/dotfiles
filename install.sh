@@ -176,6 +176,12 @@ fi
 $HOME/miniconda3/bin/conda init
 $HOME/miniconda3/bin/conda init zsh
 
+# pipx installation
+$HOME/miniconda3/bin/conda activate --name base
+pipx list || pipx reinstall-all
+hash putup || pipx install 'pyscaffold[all]'
+hash pls || pipx install pls
+
 # Reset environment
 set +o xtrace
 PS4="$oldPS4"

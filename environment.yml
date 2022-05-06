@@ -2,19 +2,14 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - argcomplete # Added by conda-export
   - conda-export
   - nodejs
-  - pandoc
   - panflute
+  - pipx
   - pypandoc
   - python[version='<3.10']
-  - tzlocal # Added by conda-export
-  - userpath # Added by conda-export
-  - pip
+  - tzlocal
   - pip:
-    - condax
-    - pipx
     - tasklib
     - git+https://github.com/jfishe/panvimwiki.git
 name: base
