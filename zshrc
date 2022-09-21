@@ -137,6 +137,7 @@ else
     fi
 fi
 unset __conda_setup
+conda activate vim-python
 # <<< conda initialize <<<
 
 eval "$(starship init zsh)"
