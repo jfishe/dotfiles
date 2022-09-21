@@ -3,7 +3,7 @@
     url = https://github.com/seebi/dircolors-solarized.git
 [submodule "oh-my-zsh/custom/plugins/zsh-dircolors-solarized"]
     path = oh-my-zsh/custom/plugins/zsh-dircolors-solarized
-    url = git://github.com/joel-porquet/zsh-dircolors-solarized
+    url = https://github.com/joel-porquet/zsh-dircolors-solarized
     ignore = dirty
 [submodule "oh-my-zsh/custom/plugins/zsh-syntax-highlighting"]
 	path = oh-my-zsh/custom/plugins/zsh-syntax-highlighting
