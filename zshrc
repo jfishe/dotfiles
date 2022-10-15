@@ -70,14 +70,17 @@ unsetopt BEEP
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git vi-mode colored-man-pages
+  colored-man-pages
+  colorize
+  conda-zsh-completion
+  git
+  gitignore
+  pip
+  taskwarrior
+  vi-mode
+  vim-interaction
   zsh-syntax-highlighting
   zsh-dircolors-solarized
-  colorize
-  vim-interaction
-  conda-zsh-completion
-  pip
-  gitignore
 )
 
 source $ZSH/oh-my-zsh.sh
