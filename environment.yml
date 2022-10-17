@@ -3,13 +3,14 @@ channels:
   - defaults
 dependencies:
   - conda-export
+  - condax
   - nodejs
   - panflute
   - pipx
   - pypandoc
   - python[version='<3.10']
-  - tzlocal
-  - pip:
-    - tasklib
-    - git+https://github.com/jfishe/panvimwiki.git
-name: base
+  # - tzlocal
+  # - pip:
+  #   - tasklib
+    # - git+https://github.com/jfishe/panvimwiki.git
+name: vim-python

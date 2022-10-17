@@ -144,4 +144,4 @@ conda activate vim-python
 # <<< conda initialize <<<
 
 eval "$(starship init zsh)"
-eval "$(register-python-argcomplete pipx)"
+eval "$(register-python-argcomplete3 pipx)"

@@ -43,10 +43,7 @@ hash rcup || sudo apt-get install rcm
 # Used by Vim
 hash ctags || sudo apt install universal-ctags # Used by Gutentags in Vim
 hash rg || sudo apt-get install ripgrep
-hash pandoc || sudo apt-get install pandoc
 hash gvim || sudo apt-get install vim-gtk3 # GUI Vim with python3
-hash node || sudo apt-get install nodejs # Used by Coc.nvim
-hash npm || sudo apt-get install npm # Used by Coc.nvim
 
 # Used by Vimwiki
 # https://github.com/tools-life/taskwiki
@@ -177,10 +174,12 @@ $HOME/miniconda3/bin/conda init
 $HOME/miniconda3/bin/conda init zsh
 
 # pipx installation
-$HOME/miniconda3/bin/conda activate --name base
+hash register-python-argcomplete3 || sudo apt install python-argcomplete
+hash pipx || sudo apt install pipx
 pipx list || pipx reinstall-all
-hash putup || pipx install 'pyscaffold[all]'
 hash pls || pipx install pls
+hash putup || pipx install 'pyscaffold[all]'
+hash rich-cli || pipx install rich-cli
 
 # Reset environment
 set +o xtrace
