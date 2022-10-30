@@ -6,11 +6,13 @@ dependencies:
   - condax
   - nodejs
   - panflute
+  - pip
   - pipx
   - pypandoc
   - python[version='<3.10']
-  # - tzlocal
-  # - pip:
-  #   - tasklib
-    # - git+https://github.com/jfishe/panvimwiki.git
+  - pytz
+  - tzlocal
+  - pip:
+    - tasklib
+    - panvimwiki
 name: vim-python
