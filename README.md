@@ -224,10 +224,8 @@ Caskaydia Cove patches Cascadia-Code with powerline and nerd font glyphs. The
 WSL compatible font, included in the respository, and the Windows compatible
 font are:
 
-- [Caskaydia Cove Regular Nerd Font Complete.otf](https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/CascadiaCode/Regular/complete/Caskaydia%20Cove%20Regular%20Nerd%20Font%20Complete.otf)
-- [Caskaydia Cove Regular Nerd Font Complete Windows](https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/CascadiaCode/Regular/complete/Caskaydia%20Cove%20Regular%20Nerd%20Font%20Complete%20Windows%20Compatible.otf)
-
-Theses are the defaults for gVim in [https://github.com/jfishe/vimfiles](https://github.com/jfishe/vimfiles).
+[Caskaydia Cove Regular Nerd Font Complete.otf](https://github.com/ryanoasis/nerd-fonts/)
+is the defaults for gVim in [https://github.com/jfishe/vimfiles](https://github.com/jfishe/vimfiles).
 
 ### Font Installation
 
