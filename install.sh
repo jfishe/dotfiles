@@ -161,14 +161,12 @@ hash omz || sh -c "$(
   curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh
   )"
 
-# Install Starship https://github.com/starship/starship
-hash starship || sh -c "$(curl -fsSL https://starship.rs/install.sh)" -- --bin-dir $HOME/.local/bin
-
 # Miniconda
 if [[ ! -d "$HOME/miniconda3" ]]; then
+  TMP=$(mktemp -d)
   wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $TMP/miniconda.sh;
   bash $TMP/miniconda.sh -b
-  rm $TMP/miniconda.sh
+  rm -rf $TMP
 fi
 $HOME/miniconda3/bin/conda init
 $HOME/miniconda3/bin/conda init zsh
