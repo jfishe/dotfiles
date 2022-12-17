@@ -105,14 +105,15 @@ helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-winc
 included as a `git submodule` in `~/.dotfiles/.dircolors-solarized/`, which
 `~/.dircolors` links to.
 
-## Anaconda3 and Vim
+## Miniconda and Vim
 
-Install Anaconda3 before starting Vim.
+Install Miniconda before starting Vim. [Conda](https://docs.conda.io/projects/continuumio-conda/)
+provides [RPM and Debian Repositories for Miniconda](https://docs.conda.io/projects/continuumio-conda/en/latest/user-guide/install/rpm-debian.html#rpm-and-debian-repositories-for-miniconda)
 
 Universal-ctags is needed by Gutentags. Wslpath converts Windows paths to their
 mount point under WSL.
 
-Vim 8 and ripgrep are not required but rg is much faster. VimwikiSearch will
+Vim 8 and ripgrep are not required, but rg is much faster. VimwikiSearch will
 use Rg if installed. `TeXLive` is needed for pandoc.
 
 ```bash
