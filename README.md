@@ -211,17 +211,10 @@ Awesome, Devicons, Octicons, and others.
 [Microsoft Cascadia Code Powerline font](https://github.com/microsoft/cascadia-code/releases)
 works well in WSL and Windows.
 
-### JetBrainsMono
-
-[JetBrainsMono](https://www.jetbrains.com/lp/mono/) has font ligatures but does
-not work on Windows gvim. See
-[Windows 10 doesn't register it as monospace type? #4](https://github.com/JetBrains/JetBrainsMono/issues/4)
-for details.
-
 ### Caskaydia Cove Regular Nerd Font
 
 Caskaydia Cove patches Cascadia-Code with powerline and nerd font glyphs. The
-WSL compatible font, included in the respository, and the Windows compatible
+WSL compatible font, included in the repository, and the Windows compatible
 font are:
 
 [Caskaydia Cove Regular Nerd Font Complete.otf](https://github.com/ryanoasis/nerd-fonts/)
@@ -235,3 +228,8 @@ should use Windows Compatible fonts.
 ```{contenteditable="true" spellcheck="false" caption="bash" .bash}
 fc-cache -vf ~/.local/share/fonts
 ```
+
+Otherwise, install the fonts in Windows and share with WSL.
+Copy [etc/fonts/local.conf](`etc/fonts/local.conf`) to `/etc/fonts/local.conf`.
+[Sharing Windows fonts with WSL](https://x410.dev/cookbook/wsl/sharing-windows-fonts-with-wsl/)
+provides details.
