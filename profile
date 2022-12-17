@@ -35,7 +35,7 @@ export EDITOR=vim
 
 # Enable ssh authentication using Windows OpenSSH ssh-agent.
 # Requires enabling Windows OpenSSH in KeeAgent.
-if [[ ! -S /tmp/ssh-agent-pipe ]]; then
+if [ ! -S /tmp/ssh-agent-pipe ]; then
   (socat UNIX-LISTEN:/tmp/ssh-agent-pipe,fork,group=$USER,umask=007 \
       EXEC:"npiperelay.exe -ep -s //./pipe/openssh-ssh-agent",nofork &)
   export SSH_AUTH_SOCK=/tmp/ssh-agent-pipe
@@ -56,8 +56,8 @@ export BROWSER=$HOME/.local/bin/chrome
 
 # True if $1 is an executable in $PATH
 # Works in both {ba,z}sh
-function is_bin_in_path {
-  if [[ -n $ZSH_VERSION ]]; then
+is_bin_in_path () {
+  if [ -n $ZSH_VERSION ]; then
     builtin whence -p "$1" &> /dev/null
   else  # bash:
     builtin type -P "$1" &> /dev/null

@@ -178,7 +178,7 @@ fi
 popd
 
 # Update font cache
-fc-cache -vf "$HOME/.local/share/fonts"
+# fc-cache -vf "$HOME/.local/share/fonts"
 
 # Install zsh and oh-my-zsh
 hash zsh || sudo apt install zsh
@@ -212,6 +212,11 @@ if [[ ! -d "$HOME/miniconda3" ]] || [[ ! -f "/opt/conda/etc/profile.d/conda.sh" 
   source $HOME/miniconda3/etc/profile.d/conda.sh
   conda -V
   conda init zsh bash
+
+  echo 'eval "$(starship init zsh)"' >> "$HOME/zshrc"
+  echo 'eval "$(register-python-argcomplete3 pipx)"' >> "$HOME/zshrc"
+  mkrc -o "$HOME/zshrc"
+  mkrc -o "$HOME/bashrc"
 fi
 
 # pipx installation
