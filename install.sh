@@ -129,6 +129,8 @@ if [[ ! -d "$HOME/.dotfiles/$hostrcrc" ]]; then
   pushd "$HOME/.dotfiles"
   echo '*' > .gitignore
   cp -r host-JOHN-AUD9AR3 "$hostrcrc"
+  # Assumed by conda init.
+  cp bashrc zshrc "$hostrcrc"
   cd "$hostrcrc"
   rm userprofile
   ln -s "$USERPROFILE" userprofile
@@ -213,10 +215,8 @@ if [[ ! -d "$HOME/miniconda3" ]] || [[ ! -f "/opt/conda/etc/profile.d/conda.sh" 
   conda -V
   conda init zsh bash
 
-  echo 'eval "$(starship init zsh)"' >> "$HOME/zshrc"
-  echo 'eval "$(register-python-argcomplete3 pipx)"' >> "$HOME/zshrc"
-  mkrc -o "$HOME/zshrc"
-  mkrc -o "$HOME/bashrc"
+  echo 'eval "$(starship init zsh)"' >> "$HOME/.zshrc"
+  echo 'eval "$(register-python-argcomplete3 pipx)"' >> "$HOME/.zshrc"
 fi
 
 # pipx installation
