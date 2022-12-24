@@ -11,3 +11,6 @@
 [submodule "oh-my-zsh/custom/plugins/conda-zsh-completion"]
 	path = oh-my-zsh/custom/plugins/conda-zsh-completion
 	url = https://github.com/esc/conda-zsh-completion
+[submodule "config/vim"]
+	path = config/vim
+	url = https://github.com/jfishe/vimfiles.git
