@@ -114,7 +114,7 @@ fi
 
 pushd "$HOME/.dotfiles"
 
-env RCRC="$HOME/.dotfiles/rcrc" rcup # to copy/link dotfiles as specified in rcrc
+env RCRC="$HOME/.dotfiles/rcrc" rcup -v # to copy/link dotfiles as specified in rcrc
 
 git pull
 git submodule update --init --recursive --remote
@@ -126,20 +126,19 @@ popd
 # ignores broken symlinks.
 hostrcrc="host-$(hostname)"
 if [[ ! -d "$HOME/.dotfiles/$hostrcrc" ]]; then
+  rcdn
   pushd "$HOME/.dotfiles"
-  echo '*' > .gitignore
   cp -r host-JOHN-AUD9AR3 "$hostrcrc"
-  # Assumed by conda init.
   cp bashrc zshrc "$hostrcrc"
   cd "$hostrcrc"
   rm userprofile
   ln -s "$USERPROFILE" userprofile
+  echo '*' > .gitignore
   popd
 fi
 
-env RCRC="$HOME/.dotfiles/rcrc" rcup # to copy/link dotfiles as specified in rcrc
-env RCRC="$HOME/.dotfiles/rcrc" rcup # to link dotfiles symlinked to dotfiles
-
+env RCRC="$HOME/.dotfiles/rcrc" rcup -v # to copy/link dotfiles as specified in rcrc
+env RCRC="$HOME/.dotfiles/rcrc" rcup -v # to link dotfiles symlinked to dotfiles
 
 # Start sshd automatically using scripts developed by Pengwin.
 pushd "$HOME/.dotfiles"
