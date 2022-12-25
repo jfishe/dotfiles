@@ -1,7 +1,7 @@
 # dotfiles
 
 Setup Windows Subsystem for Linux to use the Windows vimfiles, git and
-dircolors-solarized. Complete the Windows setup first per instrucitons at
+dircolors-solarized. Complete the Windows setup first per instructions at
 [jfishe / vimfiles](https://github.com/jfishe/vimfiles)
 instructions.
 
@@ -214,12 +214,9 @@ works well in WSL and Windows.
 
 ### Caskaydia Cove Regular Nerd Font
 
-Caskaydia Cove patches Cascadia-Code with powerline and nerd font glyphs. The
-WSL compatible font, included in the repository, and the Windows compatible
-font are:
-
-[Caskaydia Cove Regular Nerd Font Complete.otf](https://github.com/ryanoasis/nerd-fonts/)
-is the defaults for gVim in [https://github.com/jfishe/vimfiles](https://github.com/jfishe/vimfiles).
+[Caskaydia Cove](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/CascadiaCode/Regular)
+patches Cascadia-Code with powerline and nerd font glyphs. It
+is the default for gVim in [https://github.com/jfishe/vimfiles](https://github.com/jfishe/vimfiles).
 
 ### Font Installation
 
@@ -231,6 +228,6 @@ fc-cache -vf ~/.local/share/fonts
 ```
 
 Otherwise, install the fonts in Windows and share with WSL.
-Copy [etc/fonts/local.conf](`etc/fonts/local.conf`) to `/etc/fonts/local.conf`.
+Copy [`etc/fonts/local.conf`](etc/fonts/local.conf) to `/etc/fonts/local.conf`.
 [Sharing Windows fonts with WSL](https://x410.dev/cookbook/wsl/sharing-windows-fonts-with-wsl/)
 provides details.
