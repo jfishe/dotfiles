@@ -15,4 +15,5 @@ dependencies:
   - pip:
     - tasklib
     - panvimwiki
+    - vimwiki-cli
 name: vim-python
