@@ -76,6 +76,7 @@ plugins=(
   git
   gitignore
   pip
+  starship
   taskwarrior
   vi-mode
   vim-interaction
@@ -125,3 +126,5 @@ export GDK_SCALE=0.5
 
 # umask 022
 # set -o vi
+
+eval "$(register-python-argcomplete3 pipx)"
