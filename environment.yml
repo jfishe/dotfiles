@@ -4,6 +4,7 @@ channels:
 dependencies:
   - conda-export
   - condax
+  - ghp-import
   - nodejs
   - panflute
   - pip
