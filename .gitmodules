@@ -1,16 +1,20 @@
 [submodule ".dircolors-solarized"]
-    path = .dircolors-solarized
-    url = https://github.com/seebi/dircolors-solarized.git
+	path = .dircolors-solarized
+	url = https://github.com/seebi/dircolors-solarized.git
+	ignore = dirty
 [submodule "oh-my-zsh/custom/plugins/zsh-dircolors-solarized"]
-    path = oh-my-zsh/custom/plugins/zsh-dircolors-solarized
-    url = https://github.com/joel-porquet/zsh-dircolors-solarized
-    ignore = dirty
+	path = oh-my-zsh/custom/plugins/zsh-dircolors-solarized
+	url = https://github.com/joel-porquet/zsh-dircolors-solarized
+	ignore = dirty
 [submodule "oh-my-zsh/custom/plugins/zsh-syntax-highlighting"]
 	path = oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+	ignore = dirty
 [submodule "oh-my-zsh/custom/plugins/conda-zsh-completion"]
 	path = oh-my-zsh/custom/plugins/conda-zsh-completion
 	url = https://github.com/esc/conda-zsh-completion
+	ignore = dirty
 [submodule "config/vim"]
 	path = config/vim
 	url = https://github.com/jfishe/vimfiles.git
+	ignore = dirty
