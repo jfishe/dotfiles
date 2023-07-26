@@ -230,4 +230,33 @@ fc-cache -vf ~/.local/share/fonts
 Otherwise, install the fonts in Windows and share with WSL.
 Copy [`etc/fonts/local.conf`](etc/fonts/local.conf) to `/etc/fonts/local.conf`.
 [Sharing Windows fonts with WSL](https://x410.dev/cookbook/wsl/sharing-windows-fonts-with-wsl/)
-provides details.
+provides details. You may need to install
+[`wslu`](https://wslutiliti.es/wslu/install.html) for `wslview`.
+
+
+```{contenteditable="true" spellcheck="false" caption="bash" .bash}
+# To install wslu on Ubuntu 22.04 or later
+sudo add-apt-repository ppa:wslutilities/wslu
+sudo apt update
+sudo apt install wslu
+
+# To download only the CaskaydiaCove fonts, shallow clone Nerd Fonts.
+git clone -n --depth=1 --filter=tree:0 https://github.com/ryanoasis/nerd-fonts.git
+cd nerd-fonts
+git sparse-checkout set --no-cone patched-fonts/CascadiaCode/Regular
+git checkout
+
+# Install in Windows
+cd patched-fonts/CascadiaCode/Regular
+wslview .
+# Virus scan, select ttf files and right-click install.
+
+# Update the font cache
+fc-cache -v
+```
+
+## Taskwarrior
+
+Vimwiki and taskwiki are configured to use the TASKRC and TASKDATA located in
+the Vimwiki root. Either set the environment or link to the appropriate
+locations to use `task` from the shell.

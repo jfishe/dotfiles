@@ -64,10 +64,10 @@ hash rcup || sudo apt install rcm
 # Used by Vim
 hash ctags || sudo apt install universal-ctags # Used by Gutentags in Vim
 hash rg || sudo apt install ripgrep
-hash pandoc || sudo apt install pandoc
+# hash pandoc || sudo apt install pandoc
 hash gvim || sudo apt install vim-gtk3 # GUI Vim with python3
-hash node || sudo apt install nodejs # Used by Coc.nvim
-hash npm || sudo apt install npm # Used by Coc.nvim
+# hash node || sudo apt install nodejs # Used by Coc.nvim
+# hash npm || sudo apt install npm # Used by Coc.nvim
 
 # Used by Vimwiki
 # https://github.com/tools-life/taskwiki
@@ -80,28 +80,18 @@ hash tex || sudo apt install texlive texlive-latex-extra texlive-xetex
 
 [[ -f /usr/share/dict/american-english-huge ]] || sudo apt install wamerican-huge
 
-# Used by shfmt and npiperelay
+# Used by shfmt
 hash go || sudo apt install golang
 
 # Used by ALE fixer for bash
-hash shfmt || GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
+hash shfmt || go install mvdan.cc/sh/v3/cmd/shfmt@latest
 
 # Used to access Windows OpenSSH's ssh-agent.
 hash socat || sudo apt install socat
 
-# Build and install npiperelay to use Windows OpenSSH's ssh-agent.
-if [[ ! -z "${USERPROFILE}" ]]; then
-  hash npiperelay.exe || \
-  sudo ln -s "$USERPROFILE/go/bin/npiperelay.exe" \
-      /usr/local/bin/npiperelay.exe || \
-  ( GOOS=windows go get -d github.com/jstarks/npiperelay && \
-    GOOS=windows go build -o "$USERPROFILE/go/bin/npiperelay.exe" \
-      github.com/jstarks/npiperelay && \
-    sudo ln -s "$USERPROFILE/go/bin/npiperelay.exe" \
-        /usr/local/bin/npiperelay.exe
-  )
-else
-  errmsg='Add USERPROFILE/p to the WSLENV Windows Environment Variable.\nThen Re-run install.sh'
+# Check instllation of npiperelay to use Windows OpenSSH's ssh-agent.
+if ! hash npiperelay.exe; then
+  errmsg='Install npiperelay.exe in Windows. E.g., winget install jstarks.npiperelay.\nThen Re-run install.sh'
   echo -e "\033[0;31m$errmsg" 1>&2
 fi
 
@@ -184,7 +174,7 @@ popd
 # Install zsh and oh-my-zsh
 hash zsh || sudo apt install zsh
 hash omz || sh -c "$(
-  curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   )"
 
 # Miniconda https://docs.conda.io/projects/continuumio-conda/en/latest/user-guide/install/rpm-debian.html#rpm-and-debian-repositories-for-miniconda
@@ -214,14 +204,7 @@ if [[ ! -d "$HOME/miniconda3" ]] || [[ ! -f "/opt/conda/etc/profile.d/conda.sh" 
   conda -V
   conda init zsh bash
 
-  echo 'eval "$(starship init zsh)"' >> "$HOME/.zshrc"
-  echo 'eval "$(register-python-argcomplete3 pipx)"' >> "$HOME/.zshrc"
+  # pipx installation
+  hash putup || pipx install 'pyscaffold[all]'
+  hash rich-cli || pipx install rich-cli
 fi
-
-# pipx installation
-hash register-python-argcomplete3 || sudo apt install python-argcomplete
-hash pipx || sudo apt install pipx
-pipx list || pipx reinstall-all
-hash pls || pipx install pls
-hash putup || pipx install 'pyscaffold[all]'
-hash rich-cli || pipx install rich-cli
