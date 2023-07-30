@@ -128,7 +128,7 @@ hostrcrc="host-$(hostname)"
 if [[ ! -d "$HOME/.dotfiles/$hostrcrc" ]]; then
   rcdn
   pushd "$HOME/.dotfiles"
-  cp -r host-JOHN-AUD9AR3 "$hostrcrc"
+  cp -r host-DEFAULT "$hostrcrc"
   cp bashrc zshrc "$hostrcrc"
   cd "$hostrcrc"
   rm userprofile
@@ -224,10 +224,13 @@ if [[ ! -d "$HOME/miniconda3" ]] && [[ ! -f "/opt/conda/etc/profile.d/conda.sh" 
   conda activate vim-python
 
   # pipx installation
-  hash vimwiki || pipx install vimwiki-cli
+  hash dvc || pipx install dvc
+  hash pip-upgrade || pipx install pip-upgrader
+  hash setuptools-py2cfg || pipx install setuptools-py2cfg
   hash putup || pipx install 'pyscaffold[all]'
   hash rich || pipx install rich-cli
   hash tox || pipx install tox && pipx inject tox tox-conda
+  hash vimwiki || pipx install vimwiki-cli
 
   # condax installation
   condax install starship
