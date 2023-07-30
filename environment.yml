@@ -2,7 +2,7 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - conda-export
+  # - conda-export  # Install in base environment when needed.
   - condax
   - ghp-import
   - nodejs

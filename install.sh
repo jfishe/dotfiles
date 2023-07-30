@@ -177,13 +177,13 @@ hash omz || sh -c "$(
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   )"
 
-# Miniconda https://docs.conda.io/projects/continuumio-conda/en/latest/user-guide/install/rpm-debian.html#rpm-and-debian-repositories-for-miniconda
 if [[ ! -d "$HOME/miniconda3" ]] || [[ ! -f "/opt/conda/etc/profile.d/conda.sh" ]]; then
   TMP=$(mktemp -d)
   wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $TMP/miniconda.sh;
   bash $TMP/miniconda.sh -b
   rm -rf $TMP
 
+  # Miniconda https://docs.conda.io/projects/continuumio-conda/en/latest/user-guide/install/rpm-debian.html#rpm-and-debian-repositories-for-miniconda
   # # Install our public GPG key to trusted store
   # curl https://repo.anaconda.com/pkgs/misc/gpgkeys/anaconda.asc | gpg --dearmor > "$TMP/conda.gpg"
   # sudo install -o root -g root -m 644 "$TMP/conda.gpg" /usr/share/keyrings/conda-archive-keyring.gpg
@@ -204,7 +204,13 @@ if [[ ! -d "$HOME/miniconda3" ]] || [[ ! -f "/opt/conda/etc/profile.d/conda.sh" 
   conda -V
   conda init zsh bash
 
+  # Create vim-python environment.
+  conda env create --file $HOME/.dotfiles/environment.yml
+
   # pipx installation
   hash putup || pipx install 'pyscaffold[all]'
   hash rich-cli || pipx install rich-cli
+
+  # condax installation
+  condax install starship
 fi
