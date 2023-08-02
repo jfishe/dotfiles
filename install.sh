@@ -160,9 +160,9 @@ fi
 hash sshd || sudo apt install openssh-server
 ssh_config_d="/etc/ssh/sshd_config.d/${USER}.conf"
 if [[ ! -f "${ssh_config_d}" ]] ; then
-  sudo sed -e "s/AllowUsers fishe/AllowUsers ${USER}/g" \
+  sed -e "s/AllowUsers fishe/AllowUsers ${USER}/g" \
     -e "s/Port 2200/Port  ${wsl_distro_port[$WSL_DISTRO_NAME]}/g" \
-    etc/ssh/sshd_config.d/fishe.conf > "${ssh_config_d}"
+    etc/ssh/sshd_config.d/fishe.conf | sudo tee -a "${ssh_config_d}"
   sudo chmod "${ssh_config_d}" 644
   sudo chown root.root "${ssh_config_d}"
   sudo service ssh --full-restart
