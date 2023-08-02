@@ -44,6 +44,23 @@ env RCRC=~/.dotfiles/rcrc rcup # to copy/link dotfiles as specified in rcrc
 `env RCRC=~/.dotfiles/rcrc` is not needed after `rcup` above because it will be
 linked to `~/.rcrc`.
 
+### SSL Error
+
+- [github: server certificate verification failed](https://stackoverflow.com/questions/35821245/github-server-certificate-verification-failed)
+  - `server certificate verification failed. CAfile: none CRLfile: none`
+  - `SSL certificate problem: unable to get local issuer certificate`
+- [How to fix ssl certificate problem unable to get local issuer certificate Git error](https://komodor.com/learn/how-to-fix-ssl-certificate-problem-unable-to-get-local-issuer-certificate-git-error/)
+
+```bash
+openssl s_client -showcerts -servername github.com -connect github.com:443 \
+  </dev/null 2>/dev/null |
+  sed -n -e '/BEGIN\ CERTIFICATE/,/END\ CERTIFICATE/ p'  > github-com.pem
+# On Linux
+cat github-com.pem | sudo tee -a /etc/ssl/certs/ca-certificates.crt
+# On windows C:\Program Files\Git\mingw64\ssl\certs\ or some variant.
+cat github-com.pem | tee -a /mingw64/ssl/certs/ca-bundle.crt
+```
+
 ### User Bash Completion
 
 Put bash completion files in `~/.bash_completion.d`, which is linked to

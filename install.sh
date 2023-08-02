@@ -18,7 +18,7 @@ set -o pipefail
 trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
 # echo an error message before exiting
 trap \
-  '{ echo "\"${last_command}\" command filed with exit code $?." ;
+  '{ echo "\"${last_command}\" command failed with exit code $?." ;
   /usr/bin/rm -r "${TMP}" ;
   # Reset environment
   set +x +e +o pipefail ;
@@ -157,6 +157,7 @@ if [[ ! -f "${sudoer_start_ssh}" ]] ; then
   visudo -c -q -f "${sudoer_start_ssh:1}" && cp_mod_own "${sudoer_start_ssh}" 0440
 fi
 
+hash sshd || sudo apt install openssh-server
 ssh_config_d="/etc/ssh/sshd_config.d/${USER}.conf"
 if [[ ! -f "${ssh_config_d}" ]] ; then
   sudo sed -e "s/AllowUsers fishe/AllowUsers ${USER}/g" \
