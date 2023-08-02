@@ -28,7 +28,7 @@ trap \
   SIGINT SIGTERM ERR EXIT
 
 # Confirm that WSLENV is set correctly.
-declare wslenv = 'WT_SESSION:USERPROFILE/p:APPDATA/p:LOCALAPPDATA/p:TMP/p:WT_PROFILE_ID'
+declare wslenv='WT_SESSION:USERPROFILE/p:APPDATA/p:LOCALAPPDATA/p:TMP/p:WT_PROFILE_ID'
 if [[ "$WSLENV"  == "$wslenv" ]]; then
   errmsg="WSLENV not set correctly: Set WSLENV = $wslenv in Windows environment variables."
   echo -e "\033[0;31m$errmsg" 1>&2
@@ -98,16 +98,23 @@ fi
 # Avoid broken symlinks for removed files when running git pull on ~/.dotfiles.
 [[ -e "$HOME/.rcrc" ]] && rcdn # Remove dotfiles managed by rcm
 
+# Install zsh and oh-my-zsh
+hash zsh || sudo apt install zsh
+# ~/.oh-my-zsh should not exist. Run rcdn if needed.
+if [[ ! -d "$ZSH" ]]; then
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
+fi
+
 # Setup .dotfiles and run rcup to link configuration files.
 [[ -d "$HOME/.dotfiles/" ]] || git clone https://github.com/jfishe/dotfiles.git \
   "$HOME/.dotfiles"
 
 pushd "$HOME/.dotfiles"
 
-env RCRC="$HOME/.dotfiles/rcrc" rcup -v # to copy/link dotfiles as specified in rcrc
+# env RCRC="$HOME/.dotfiles/rcrc" rcup -v # to copy/link dotfiles as specified in rcrc
 
 git pull
-git submodule update --init --recursive --remote
+git submodule update --init --recursive
 popd
 
 # Setup symlink to $USERPROFILE for a new hostname.
@@ -129,6 +136,16 @@ fi
 
 env RCRC="$HOME/.dotfiles/rcrc" rcup -v # to copy/link dotfiles as specified in rcrc
 env RCRC="$HOME/.dotfiles/rcrc" rcup -v # to link dotfiles symlinked to dotfiles
+
+# Git for Windows may be installed globally or locally.
+# Set credential.helper accordingly.
+cred_helper="$(git config --global credential.helper)"
+if [[ ! -f "$cred_helper" ]]; then
+  cred_helper="$LOCALAPPDATA/$(wslpath -u 'Programs\Git\mingw64\libexec\git-core\git-credential-wincred.exe')"
+  if [[ -f "$cred_helper" ]]; then
+    git config --global credential.helper "$cred_helper"
+  fi
+fi
 
 # Start sshd automatically using scripts developed by Pengwin.
 pushd "$HOME/.dotfiles"
@@ -172,13 +189,7 @@ popd
 # Update font cache
 # fc-cache -vf "$HOME/.local/share/fonts"
 
-# Install zsh and oh-my-zsh
-hash zsh || sudo apt install zsh
-hash omz || sh -c "$(
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  )"
-
-if [[ ! -d "$HOME/miniconda3" ]] || [[ ! -f "/opt/conda/etc/profile.d/conda.sh" ]]; then
+if [[ ! -d "$HOME/miniconda3" ]] && [[ ! -f "/opt/conda/etc/profile.d/conda.sh" ]]; then
   TMP=$(mktemp -d)
   wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $TMP/miniconda.sh;
   bash $TMP/miniconda.sh -b
@@ -207,10 +218,12 @@ if [[ ! -d "$HOME/miniconda3" ]] || [[ ! -f "/opt/conda/etc/profile.d/conda.sh" 
 
   # Create vim-python environment.
   conda env create --file $HOME/.dotfiles/environment.yml
+  conda activate vim-python
 
   # pipx installation
+  hash vimwiki || pipx install vimwiki-cli
   hash putup || pipx install 'pyscaffold[all]'
-  hash rich-cli || pipx install rich-cli
+  hash rich || pipx install rich-cli
 
   # condax installation
   condax install starship
