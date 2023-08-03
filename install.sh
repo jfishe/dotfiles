@@ -49,6 +49,7 @@ sudo apt update         # Update package database
 
 hash git || sudo apt install git
 hash git-lfs || sudo apt install git-lfs
+hash make || sudo apt install build-essential
 
 # Msysgit /etc/gitattributes sets astextplain as an executable.
 # .dotfiles/.gitconfig includes [diff "astextplain"]
@@ -224,6 +225,7 @@ if [[ ! -d "$HOME/miniconda3" ]] && [[ ! -f "/opt/conda/etc/profile.d/conda.sh" 
   hash vimwiki || pipx install vimwiki-cli
   hash putup || pipx install 'pyscaffold[all]'
   hash rich || pipx install rich-cli
+  hash tox || pipx install tox && pipx inject tox tox-conda
 
   # condax installation
   condax install starship
