@@ -73,6 +73,8 @@ hash gvim || sudo apt install vim-gtk3 # GUI Vim with python3
 # Used by Vimwiki
 # https://github.com/tools-life/taskwiki
 hash task || sudo apt install taskwarrior python3-tasklib tasksh
+# https://wslutiliti.es/wslu/install.html
+hash wslview || sudo apt install wslu
 
 # Try Ubuntu first and then Debian
 # https://wiki.debian.org/Latex
