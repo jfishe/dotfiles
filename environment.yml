@@ -12,9 +12,9 @@ dependencies:
   - pypandoc
   - python[version='<3.10']
   - pytz
+  - tasklib
   - tzlocal
   - pip:
-    - tasklib
     - panvimwiki
     - vimwiki-cli
 name: vim-python
