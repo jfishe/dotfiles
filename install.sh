@@ -229,7 +229,7 @@ if [[ ! -d "$HOME/miniconda3" ]] && [[ ! -f "/opt/conda/etc/profile.d/conda.sh" 
   hash setuptools-py2cfg || pipx install setuptools-py2cfg
   hash putup || pipx install 'pyscaffold[all]'
   hash rich || pipx install rich-cli
-  hash tox || pipx install tox && pipx inject tox tox-conda
+  hash tox || pipx install tox
   hash vimwiki || pipx install vimwiki-cli
 
   # condax installation
