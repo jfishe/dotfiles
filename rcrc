@@ -1,7 +1,7 @@
 EXCLUDES="*.md environment.yml install*.sh
     tags tags.lock
     usr etc"
-SYMLINK_DIRS="bash_completion.d git_template jupyter userprofile vim
+SYMLINK_DIRS="bash_completion.d git_template jupyter userprofile vim nvim
     vimwiki vimwiki_html
     vimwiki_home vimwiki_home_html
     zsh-dircolors-solarized zsh-syntax-highlighting fonts
