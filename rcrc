@@ -7,7 +7,10 @@ SYMLINK_DIRS="bash_completion.d git_template jupyter userprofile vim nvim
     zsh-dircolors-solarized zsh-syntax-highlighting fonts
     conda-zsh-completion
     task
+    zk
     "
 UNDOTTED="userprofile
     vimwiki vimwiki_html
-    vimwiki_home vimwiki_home_html"
+    vimwiki_home vimwiki_home_html
+    zk
+    "
