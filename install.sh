@@ -72,14 +72,25 @@ hash gvim || sudo apt install vim-gtk3 # GUI Vim with python3
 
 # Used by Vimwiki
 # https://github.com/tools-life/taskwiki
-hash task || sudo apt install taskwarrior python3-tasklib tasksh
+# PEP 668 /usr/share/doc/python3.11/README.venv EXTERNALLY-MANAGED
+# python3-full avoids conflict with Miniconda3 vim-python environment.
+hash task || sudo apt install taskwarrior python3-tasklib tasksh python3-full
 # https://wslutiliti.es/wslu/install.html
 hash wslview || sudo apt install wslu
+
+hash fzf || sudo apt install fzf
 
 # Try Ubuntu first and then Debian
 # https://wiki.debian.org/Latex
 # https://tug.org/texlive/debian.html
-hash tex || sudo apt install texlive texlive-latex-extra texlive-xetex
+# Required by Jupyter-Book
+# https://jupyterbook.org/en/stable/advanced/pdf.html#installation-and-setup
+# Bibtool required by fzf-bibtex
+hash tex || sudo apt install texlive-latex-extra \
+  texlive-fonts-extra \
+  texlive-xetex \
+  latexmk \
+  bibtool
 
 [[ -f /usr/share/dict/american-english-huge ]] || sudo apt install wamerican-huge
 
@@ -88,6 +99,11 @@ hash go || sudo apt install golang
 
 # Used by ALE fixer for bash
 hash shfmt || go install mvdan.cc/sh/v3/cmd/shfmt@latest
+
+# Used by vim-zettel and Vimwiki.
+hash bibtex-ls || go install github.com/msprev/fzf-bibtex/cmd/bibtex-ls
+hash bibtex-markdown || go install github.com/msprev/fzf-bibtex/cmd/bibtex-markdown
+hash bibtex-cite || go install github.com/msprev/fzf-bibtex/cmd/bibtex-cite
 
 # Used to access Windows OpenSSH's ssh-agent.
 hash socat || sudo apt install socat

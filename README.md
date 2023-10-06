@@ -2,8 +2,20 @@
 
 Setup Windows Subsystem for Linux to use the Windows vimfiles, git and
 dircolors-solarized. Complete the Windows setup first per instructions at
-[jfishe / vimfiles](https://github.com/jfishe/vimfiles)
-instructions.
+[jfishe / vimfiles](https://github.com/jfishe/vimfiles).
+
+- Shared with Windows:
+  - `.condarc`
+  - `.git_template` (if present)
+  - `.gitattributes_global`
+  - `.gitattributes_global`
+  - `.gitmessage.txt`
+  - `.gitmessage.txt`
+  - `.gutctags`
+  - `.jupyter`
+  - `.vimwiki` (if present)
+  - `.vimwiki_html` (if present)
+  - `.vimwiki_home`
 
 To install download and source the following or perform the steps described
 below.
@@ -69,13 +81,7 @@ Put bash completion files in `~/.bash_completion.d`, which is linked to
 
 ### Setup gitconfig
 
-> TODO: <26-01-19, JD Fisher> > Fedora doesn't have wslpath; determine whether
-> Milly's version works and rewrite this section. Add section on Windows
-> environment variables that should be shared with WSL. Add instructions for
-> creating/updating ~/.dotfiles/host-xxx, since the links are `%USERPROFILE%`
-> dependent.
-
-Path needs to reflect %USERPROFILE%, so we'll use an environment variable and
+Path needs to reflect `%USERPROFILE%`, so we'll use an environment variable and
 wslpath to figure it out, assuming System32 is in `PATH` per `.bashrc`.
 
 ```bash
@@ -99,7 +105,7 @@ if [ ! -d "$DIRECTORY" ]; then
 fi
 
 ln -s ~/Git/wslpath/wslpath ~/.local/bin/wslpath
-USERPROFILE=$(wslpath `cmd.exe /c echo %USERPROFILE%`)
+USERPROFILE=$(wslpath $(cmd.exe /c echo %USERPROFILE% 2> /dev/null))
 
 ln -s $USERPROFILE/.gitconfig ~/.gitconfig
 ln -s $USERPROFILE/.gitmessage.txt ~/.gitmessage.txt

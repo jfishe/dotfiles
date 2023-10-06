@@ -9,8 +9,9 @@ dependencies:
   - panflute
   - pip
   - pipx
+  - pynvim
   - pypandoc
-  - python[version='<3.10']
+  - python
   - pytz
   - tasklib
   - tzlocal
