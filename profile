@@ -54,7 +54,7 @@ fi
 # Enable Google Chrome
 # Vim et al. misbehave if there are spaces in $BROWSER, so symlink instead.
 # ln -s '/mnt/c/Program Files (x86)/Google/Chrome/Application/chrome.exe' $HOME/.local/chrome
-export BROWSER=$HOME/.local/bin/chrome
+export BROWSER=wslview
 
 # True if $1 is an executable in $PATH
 # Works in both {ba,z}sh
