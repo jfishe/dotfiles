@@ -242,12 +242,18 @@ if [[ ! -d "$HOME/miniconda3" ]] && [[ ! -f "/opt/conda/etc/profile.d/conda.sh" 
   # pipx installation
   hash dvc || pipx install dvc
   hash pip-upgrade || pipx install pip-upgrader
-  hash setuptools-py2cfg || pipx install setuptools-py2cfg
+  hash pre-commit || pipx install pre-commit
   hash putup || pipx install 'pyscaffold[all]'
   hash rich || pipx install rich-cli
+  hash setuptools-py2cfg || pipx install setuptools-py2cfg
   hash tox || pipx install tox
+  hash uv || pipx install uv
   hash vimwiki || pipx install vimwiki-cli
+  pipx inject tox tox-uv
 
   # condax installation
   condax install starship
+
+  # Astral/uv
+  uv pip install --requirement $HOME/.dotfiles/requirements.txt
 fi

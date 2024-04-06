@@ -1,13 +1,18 @@
+# To recreate:
+#   conda env export --file environment.yml --from-history
+# Uv and pip should use requirements.txt.
+# Select python<3.12 to match vim --version.
+name: vim-python
 channels:
   - conda-forge
   - defaults
 dependencies:
-  # - conda-export  # Install in base environment when needed.
+  - bat
   - condax
   - ghp-import
   - nodejs
+  - pandoc
   - panflute
-  - pip
   - pipx
   - pynvim
   - pypandoc
@@ -15,7 +20,3 @@ dependencies:
   - pytz
   - tasklib
   - tzlocal
-  - pip:
-    - panvimwiki
-    - vimwiki-cli
-name: vim-python
