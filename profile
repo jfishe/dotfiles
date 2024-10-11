@@ -30,6 +30,7 @@ fi
 if [ -d "$HOME/go" ] ; then
   PATH="$PATH:$HOME/go/bin"
 fi
+. "$HOME/.cargo/env"
 
 export EDITOR=vim
 export VIMWIKI_EDITOR=gvim

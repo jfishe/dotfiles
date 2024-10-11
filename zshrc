@@ -2,11 +2,25 @@ unsetopt BEEP
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+if [[ -d "$HOME/.local/bin" ]] ; then
+  PATH="$HOME/.local/bin:$PATH"
+fi
+if [[ -d "$HOME/bin" ]] ; then
+  PATH="$HOME/bin:$PATH"
+fi
+if [[ -d "$USERPROFILE/bin" ]] ; then
+  PATH="$PATH:$USERPROFILE/bin"
+fi
+
+if [[ -d "$HOME/go" ]] ; then
+  PATH="$PATH:$HOME/go/bin"
+fi
+. "$HOME/.cargo/env"
 
 # Path to your oh-my-zsh installation.
   export ZSH="$HOME/.oh-my-zsh"
 
-  export SOLARIZED_THEME="light"
+  # export SOLARIZED_THEME="light"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -73,15 +87,18 @@ plugins=(
   colored-man-pages
   colorize
   conda-zsh-completion
+  fzf
   git
   gitignore
   pip
+  pre-commit
   starship
   taskwarrior
+  uv-zsh-completion
   vi-mode
   vim-interaction
-  zsh-syntax-highlighting
   zsh-dircolors-solarized
+  zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
