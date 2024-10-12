@@ -142,7 +142,3 @@ export GDK_SCALE=0.5
 
 # umask 022
 # set -o vi
-
-# $(register-python-argcomplete pipx) > ~/.dotfiles/oh-my-zsh/custom/pipx.zsh
-# rm ~/.zcompdump*
-# rcup -v
