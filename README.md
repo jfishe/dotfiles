@@ -136,7 +136,7 @@ provides [RPM and Debian Repositories for Miniconda](https://docs.conda.io/proje
 Universal-ctags is needed by Gutentags. Wslpath converts Windows paths to their
 mount point under WSL.
 
-Vim 8 and ripgrep are not required, but rg is much faster. VimwikiSearch will
+Vim 9 and ripgrep are not required, but rg is much faster. VimwikiSearch will
 use Rg if installed. `TeXLive` is needed for pandoc.
 
 ```bash
@@ -192,18 +192,6 @@ ln -s $USERPROFILE/Documents/vimwiki ~/vimwiki
 ```
 
 [file system improvements to the windows subsystem for linux]: https://blogs.msdn.microsoft.com/wsl/2017/04/18/file-system-improvements-to-the-windows-subsystem-for-linux/
-
-## Running Windows gvim.exe from WSL
-
-Within the Windows file system (e.g., `/mnt/c`), the Windows version of gvim
-can be launched. The `gvim` function will exit quietly if on a WSL path.
-[lifthrasiir/gvim.sh](https://gist.github.com/lifthrasiir/29c34b879aad9d2e7f564e10c45c1e61)
-provides a gist, which has been modified for `Vim81`. Adjust the path to `gvim`
-as needed. See `~/.dotfiles/local/bin/gvim.sh` for details.
-
-```bash
-source ~/.dotfiles/local/bin/gvim.sh
-```
 
 ## Running gvim with X11
 
@@ -283,3 +271,7 @@ fc-cache -v
 Vimwiki and taskwiki are configured to use the TASKRC and TASKDATA located in
 the Vimwiki root. Either set the environment or link to the appropriate
 locations to use `task` from the shell.
+
+## Oh My Zsh Configuration
+
+[Oh My Zsh Custom](oh-my-zsh/custom/README) summarizes custom plugins and aliases.

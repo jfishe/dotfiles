@@ -94,7 +94,6 @@ plugins=(
   pre-commit
   starship
   taskwarrior
-  uv-zsh-completion
   vi-mode
   vim-interaction
   zsh-dircolors-solarized

@@ -239,17 +239,17 @@ if [[ ! -d "$HOME/miniconda3" ]] && [[ ! -f "/opt/conda/etc/profile.d/conda.sh" 
   conda env create --file $HOME/.dotfiles/environment.yml
   conda activate vim-python
 
-  # pipx installation
-  hash dvc || pipx install dvc
-  hash pip-upgrade || pipx install pip-upgrader
-  hash pre-commit || pipx install pre-commit
-  hash putup || pipx install 'pyscaffold[all]'
-  hash rich || pipx install rich-cli
-  hash setuptools-py2cfg || pipx install setuptools-py2cfg
-  hash tox || pipx install tox
-  hash uv || pipx install uv
-  hash vimwiki || pipx install vimwiki-cli
-  pipx inject tox tox-uv
+  # Astral uv installation
+  hash uv || curl -LsSf https://astral.sh/uv/install.sh | sh
+  uv tool install 'ini2toml[full]'
+  uv tool install 'pyscaffold[all]'
+  uv tool install dvc
+  uv tool install jupyter-book
+  uv tool install pls
+  uv tool install pre-commit --with pre-commit-uv
+  uv tool install rich-cli
+  uv tool install tox --with tox-uv # use uv to install
+  uv tool install vimwiki-cli
 
   # condax installation
   condax install starship
