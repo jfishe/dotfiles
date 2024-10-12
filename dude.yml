@@ -1,8 +1,4 @@
-# To recreate:
-#   conda env export --file environment.yml --from-history
-# Uv and pip should use requirements.txt.
-# Select python<3.12 to match vim --version.
-name: vim-python
+name: dude
 channels:
   - conda-forge
   - defaults

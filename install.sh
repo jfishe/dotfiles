@@ -64,7 +64,7 @@ hash rcup || sudo apt install rcm
 
 # Used by Vim
 hash ctags || sudo apt install universal-ctags # Used by Gutentags in Vim
-hash rg || sudo apt install ripgrep
+# hash rg || sudo apt install ripgrep
 # hash pandoc || sudo apt install pandoc
 hash gvim || sudo apt install vim-gtk3 # GUI Vim with python3
 # hash node || sudo apt install nodejs # Used by Coc.nvim
@@ -77,8 +77,6 @@ hash gvim || sudo apt install vim-gtk3 # GUI Vim with python3
 hash task || sudo apt install taskwarrior python3-tasklib tasksh python3-full
 # https://wslutiliti.es/wslu/install.html
 hash wslview || sudo apt install wslu
-
-hash fzf || sudo apt install fzf
 
 # Try Ubuntu first and then Debian
 # https://wiki.debian.org/Latex
@@ -245,13 +243,17 @@ if [[ ! -d "$HOME/miniconda3" ]] && [[ ! -f "/opt/conda/etc/profile.d/conda.sh" 
   uv tool install 'pyscaffold[all]'
   uv tool install dvc
   uv tool install jupyter-book
+  uv tool install mypy
   uv tool install pls
   uv tool install pre-commit --with pre-commit-uv
   uv tool install rich-cli
+  uv tool install ripgrep
+  uv tool install ruff
   uv tool install tox --with tox-uv # use uv to install
   uv tool install vimwiki-cli
 
   # condax installation
+  condax install fzf
   condax install starship
 
   # Astral/uv

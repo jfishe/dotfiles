@@ -1,0 +1,26 @@
+name: vim-python
+channels:
+  - conda-forge
+  - pypi
+dependencies:
+  - bat=0.24.0
+  - condax=0.2.4
+  - ghp-import=2.1.0
+  - importlib-metadata=8.5.0
+  - nodejs=22.9.0
+  - panvimwiki=0.9.0
+  - pynvim=0.5.0
+  - python=3.11.9
+  - pytz=2024.2
+  - tasklib=2.5.1
+  - tzlocal=5.2
+  - pip:
+      - conda-env-export==0.6.1
+      - importlib-resources==6.4.0
+      - jaraco.collections==5.1.0
+      - packaging==24.1
+      - platformdirs==4.2.2
+      - tomli==2.0.1
+      - wheel==0.43.0
+      - zstandard==0.23.0
+prefix: /home/jdfen/miniconda3/envs/vim-python
