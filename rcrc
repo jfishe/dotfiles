@@ -1,4 +1,5 @@
-EXCLUDES="*.md environment.yml install*.sh
+EXCLUDES="*.md install*.sh
+    environment.yml requirements.txt
     tags tags.lock
     usr etc"
 SYMLINK_DIRS="bash_completion.d git_template jupyter userprofile vim nvim
