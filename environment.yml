@@ -11,10 +11,10 @@ dependencies:
   - condax
   - ghp-import
   - nodejs
-  - panflute
+  - panflute [version='<2.1']
   - pynvim
   - pypandoc
-  - python[version='<3.12']
+  - python [version='<3.12']
   - pytz
   - tasklib
   - tzlocal
