@@ -204,6 +204,40 @@ ways.
 sudo apt-get install vim-gtk3
 ```
 
+### `X410` Configuration
+
+- If not disabled, `WSLg` reserves `DISPLAY=:0.0`.
+- [Using X410 with WSL2](https://x410.dev/cookbook/wsl/using-x410-with-wsl2)
+  may require adding your Windows user account to `Hyper-V Administrators`
+  and may not support the nameserver address in `/etc/resolv.conf` or default
+  IP route, without `VSOCK`. After updating `Hyper-V Administrators`, use the
+  IP route:
+
+  ```bash
+  export DISPLAY=$(ip route | grep default | awk '{print $3; exit;}'):0.0
+  ```
+
+  In `X410`, under `VSOCK`, check `WSL2`.
+
+  If `Hyper-V Administrators` is not desired, clear `VSOCK` and, under
+  `TCP (IPv4)`, select `WSL2`. `$DISPLAY` should match the IP address in
+  `X410`.
+- If `WSL2` `networkingMode` is mirrored, `DISPLAY=localhost:0` works with
+  `X410` and `DISPLAY=:0` works with `WSLg`.
+
+  `$env:USERPROFILE\.wslconfig`:
+
+  ```ini
+  [wsl2]
+  networkingMode=mirrored
+  ```
+
+  ```bash
+  export DISPLAY=localhost:0.0
+  ```
+
+  Remote Desktop should connect to `localhost:3395`.
+
 ## SSH Configuration
 
 [SSH on WSL](https://www.illuminiastudios.com/dev-diaries/ssh-on-windows-subsystem-for-linux/)
@@ -243,7 +277,6 @@ Copy [`etc/fonts/local.conf`](etc/fonts/local.conf) to `/etc/fonts/local.conf`.
 [Sharing Windows fonts with WSL](https://x410.dev/cookbook/wsl/sharing-windows-fonts-with-wsl/)
 provides details. You may need to install
 [`wslu`](https://wslutiliti.es/wslu/install.html) for `wslview`.
-
 
 ```{contenteditable="true" spellcheck="false" caption="bash" .bash}
 # To install wslu on Ubuntu 22.04 or later
