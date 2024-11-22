@@ -207,6 +207,10 @@ sudo apt-get install vim-gtk3
 ### `X410` Configuration
 
 - If not disabled, `WSLg` reserves `DISPLAY=:0.0`.
+- If you've configured your DISPLAY environment variable with the TCP
+  connection method for WSL2 or Hyper-V virtual machines, you may experience
+  [this problem after waking up from Windows sleep mode](https://github.com/microsoft/WSL/issues/4992).
+  - Use `VSOCK` per [X410 Known Issues and Workarounds](https://x410.dev/cookbook/x410-known-issues-and-workarounds/).
 - [Using X410 with WSL2](https://x410.dev/cookbook/wsl/using-x410-with-wsl2)
   may require adding your Windows user account to `Hyper-V Administrators`
   and may not support the nameserver address in `/etc/resolv.conf` or default
@@ -235,7 +239,7 @@ sudo apt-get install vim-gtk3
   ```bash
   export DISPLAY=localhost:0.0
   ```
-
+  
   Remote Desktop should connect to `localhost:3395`.
 
 ## SSH Configuration
