@@ -91,7 +91,6 @@ plugins=(
   git
   gitignore
   pip
-  pre-commit
   starship
   taskwarrior
   vi-mode
