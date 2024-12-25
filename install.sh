@@ -103,6 +103,14 @@ hash bibtex-ls || go install github.com/msprev/fzf-bibtex/cmd/bibtex-ls
 hash bibtex-markdown || go install github.com/msprev/fzf-bibtex/cmd/bibtex-markdown
 hash bibtex-cite || go install github.com/msprev/fzf-bibtex/cmd/bibtex-cite
 
+# Used by fzf-vim
+# https://github.com/junegunn/fzf
+# https://github.com/sharkdp/bat
+# https://github.com/dandavison/delta
+# https://github.com/BurntSushi/ripgrep
+# https://ctags.io/
+hash fdfind || sudo apt install fd-find
+
 # Used to access Windows OpenSSH's ssh-agent.
 hash socat || sudo apt install socat
 
@@ -253,7 +261,8 @@ if [[ ! -d "$HOME/miniconda3" ]] && [[ ! -f "/opt/conda/etc/profile.d/conda.sh" 
   uv tool install vimwiki-cli
 
   # condax installation
-  condax install fzf
+  # condax install fzf
+  condax install git-diff
   condax install starship
 
   # Astral/uv

@@ -1,3 +1,8 @@
+# - [[https://github.com/artempyanykh/marksman|Marksman]]
+#   - [[https://github.com/yaegassy/coc-marksman|:CocInstall @yaegassy/coc-marksman]]
+#   - `$HOME\\AppData\\Roaming\\marksman\\config.toml` Windows default
+#   - `.marksman.toml` Project or directory scope.
+#   - `$HOME/.config/marksman/config.toml` Linux default
 [core]
 # When set to true, level 1 headings will be treated as document titles
 # (this includes an assumption of having a single title in the document).

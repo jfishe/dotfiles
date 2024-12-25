@@ -17,6 +17,8 @@ dircolors-solarized. Complete the Windows setup first per instructions at
   - `.vimwiki_html` (if present)
   - `.vimwiki_home`
 
+## Installation
+
 To install download and source the following or perform the steps described
 below.
 
