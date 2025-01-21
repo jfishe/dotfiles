@@ -1,0 +1,1 @@
+--bind='ctrl-a:select-all,ctrl-d:deselect-all,ctrl-w:toggle-preview'
