@@ -33,7 +33,7 @@ fi
 . "$HOME/.cargo/env"
 
 export EDITOR=vim
-export VIMWIKI_EDITOR=gvim
+# export VIMWIKI_EDITOR=gvim
 # export VIMWIKI_COUNT=2
 
 # Enable ssh authentication using Windows OpenSSH ssh-agent.

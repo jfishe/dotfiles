@@ -249,6 +249,7 @@ if [[ ! -d "$HOME/miniconda3" ]] && [[ ! -f "/opt/conda/etc/profile.d/conda.sh" 
   hash uv || curl -LsSf https://astral.sh/uv/install.sh | sh
   uv tool install 'ini2toml[full]'
   uv tool install 'pyscaffold[all]'
+  uv tool install bat
   uv tool install dvc
   uv tool install jupyter-book
   uv tool install mypy
@@ -262,7 +263,7 @@ if [[ ! -d "$HOME/miniconda3" ]] && [[ ! -f "/opt/conda/etc/profile.d/conda.sh" 
 
   # condax installation
   # condax install fzf
-  condax install git-diff
+  condax install git-delta
   condax install starship
 
   # Astral/uv

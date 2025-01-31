@@ -5,16 +5,11 @@
 name: vim-python
 channels:
   - conda-forge
-  - defaults
 dependencies:
-  - bat
   - condax
-  - ghp-import
   - nodejs
   - panflute [version='<2.1']
   - pynvim
   - pypandoc
-  - python [version='<3.12']
-  - pytz
+  - python [version='<3.13']
   - tasklib
-  - tzlocal
