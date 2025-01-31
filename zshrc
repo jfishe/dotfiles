@@ -15,7 +15,9 @@ fi
 if [[ -d "$HOME/go" ]] ; then
   PATH="$PATH:$HOME/go/bin"
 fi
+if [[ -f "$HOME/.cargo/env" ]] ; then
 . "$HOME/.cargo/env"
+fi
 
 # Path to your oh-my-zsh installation.
   export ZSH="$HOME/.oh-my-zsh"
@@ -87,7 +89,6 @@ plugins=(
   colored-man-pages
   colorize
   conda-zsh-completion
-  fzf
   git
   gitignore
   pip

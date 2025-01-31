@@ -37,7 +37,7 @@ fi
 
 # Configuration support for the following WSL Distros and SSH ports.
 # Exit for unknown distro.
-declare -A wsl_distro_port=( ['Ubuntu']=2200 ['WLinux']=2201 )
+declare -A wsl_distro_port=( ['Ubuntu']=2200 ['WLinux']=2201 ['Ubuntu-24.04']=2202 )
 
 if [[ ! ${wsl_distro_port[$WSL_DISTRO_NAME]+_} ]] ; then
   errmsg="$WSL_DISTRO_NAME does not have a port assigned.\n Edit install.sh"
@@ -181,7 +181,7 @@ function cp_mod_own () {
   # $2: permissions for $1
   sudo cp "${1:1}" "$1"
   sudo chmod "$2" "$1"
-  sudo chown root.root "$1"
+  sudo chown root:root "$1"
 }
 
 profile_d_start_ssh='/etc/profile.d/start-ssh.sh'
@@ -205,8 +205,8 @@ if [[ ! -f "${ssh_config_d}" ]] ; then
   sed -e "s/AllowUsers fishe/AllowUsers ${USER}/g" \
     -e "s/Port 2200/Port  ${wsl_distro_port[$WSL_DISTRO_NAME]}/g" \
     etc/ssh/sshd_config.d/fishe.conf | sudo tee -a "${ssh_config_d}"
-  sudo chmod "${ssh_config_d}" 644
-  sudo chown root.root "${ssh_config_d}"
+  sudo chmod 644 "${ssh_config_d}"
+  sudo chown root:root "${ssh_config_d}"
   sudo service ssh --full-restart
 fi
 popd
