@@ -31,5 +31,11 @@ _vimwiki_completion() {
     fi
 }
 
-compdef _vimwiki_completion vimwiki;
+if [[ $zsh_eval_context[-1] == loadautofunc ]]; then
+    # autoload from fpath, call function directly
+    _vimwiki_completion "$@"
+else
+    # eval/source/. command, register function for later
+    compdef _vimwiki_completion vimwiki
+fi
 
