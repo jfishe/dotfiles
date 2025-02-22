@@ -8,8 +8,5 @@ channels:
 dependencies:
   - condax
   - nodejs
-  - panflute [version='<2.1']
-  - pynvim
-  - pypandoc
-  - python [version='<3.13']
-  - tasklib
+  - python # [version='<3.13']
+  - vim

@@ -1,3 +1,4 @@
 # Install from PyPI using pip or uv
 # Required by Vim plugin.
 panvimwiki
+tasklib

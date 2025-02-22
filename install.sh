@@ -241,6 +241,16 @@ if [[ ! -d "$HOME/miniconda3" ]] && [[ ! -f "/opt/conda/etc/profile.d/conda.sh" 
   conda -V
   conda init zsh bash
 
+  # Remove proprietary channels and add conda-forge.
+  conda config --system --remove channels defaults
+  conda config --system --remove channels 'https://repo.anaconda.com/pkgs/main'
+  conda config --system --remove channels 'https://repo.anaconda.com/pkgs/r'
+
+  conda config --system --add channels conda-forge
+  conda config --system --set channel_priority strict
+
+  conda config --show channels
+
   # Create vim-python environment.
   conda env create --file $HOME/.dotfiles/environment.yml
   conda activate vim-python
@@ -264,6 +274,7 @@ if [[ ! -d "$HOME/miniconda3" ]] && [[ ! -f "/opt/conda/etc/profile.d/conda.sh" 
   # condax installation
   # condax install fzf
   condax install git-delta
+  condax install pandoc
   condax install starship
 
   # Astral/uv
