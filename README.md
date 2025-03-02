@@ -108,14 +108,12 @@ ln -s $USERPROFILE/ ~/userprofile
 [`dircolors-solarized`] is included as a `git submodule` in
 `~/.dotfiles/.dircolors-solarized/`, which `~/.dircolors` links to.
 
-## Miniconda and Vim
+## Conda and Vim
 
-Install Miniconda before starting Vim. [Conda] provides
-[RPM and Debian Repositories for Miniconda]. [Universal-ctags] is needed by
-Gutentags.
-
-Vim 9 and ripgrep are not required, but rg is much faster. VimwikiSearch will
-use Rg if installed. `TeXLive` is needed for pandoc.
+Install [Conda] before starting Vim. Depending on licensing preferences,
+Anaconda, Miniconda or Miniforge will work. `Gutentags` needs [Universal-ctags].
+Vim 9 and `ripgrep` are not required, but `ripgrep` is much faster.
+`VimwikiSearch` will use `Rg` if installed. Pandoc relies on `TeXLive`.
 
 If the `Documents` folder is not located in `$USERPROFILE/Documents`, the
 actual location can be obtained from the Windows Registry.
@@ -275,13 +273,12 @@ locations to use `task` from the shell.
 [Oh My Zsh Custom] summarizes custom plugins and aliases.
 
 [Caskaydia Cove]: https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/CascadiaCode/Regular
-[Conda]: https://docs.conda.io/projects/continuumio-conda/
+[Conda]: https://docs.conda.io/projects/conda
 [How to fix ssl certificate problem unable to get local issuer certificate Git error]: https://komodor.com/learn/how-to-fix-ssl-certificate-problem-unable-to-get-local-issuer-certificate-git-error/
 [Microsoft Cascadia Code Powerline font]: https://github.com/microsoft/cascadia-code/releases
 [Microsoft]: https://blogs.msdn.microsoft.com/wsl/2017/04/18/file-system-improvements-to-the-windows-subsystem-for-linux/
 [Nerd Fonts]: https://github.com/buzzkillhardball/nerdfonts
 [Oh My Zsh Custom]: oh-my-zsh/custom/README.md
-[RPM and Debian Repositories for Miniconda]: https://docs.conda.io/projects/continuumio-conda/en/latest/user-guide/install/rpm-debian.html#rpm-and-debian-repositories-for-miniconda
 [SSH on WSL]: https://www.illuminiastudios.com/dev-diaries/ssh-on-windows-subsystem-for-linux/
 [Share environment variables between Windows and WSL]: https://docs.microsoft.com/en-us/windows/wsl/interop#share-environment-variables-between-windows-and-wsl
 [Sharing Windows fonts with WSL]: https://x410.dev/cookbook/wsl/sharing-windows-fonts-with-wsl/

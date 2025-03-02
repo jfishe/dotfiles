@@ -73,7 +73,7 @@ hash gvim || sudo apt install vim-gtk3 # GUI Vim with python3
 # Used by Vimwiki
 # https://github.com/tools-life/taskwiki
 # PEP 668 /usr/share/doc/python3.11/README.venv EXTERNALLY-MANAGED
-# python3-full avoids conflict with Miniconda3 vim-python environment.
+# python3-full avoids conflict with miniforge3 vim-python environment.
 hash task || sudo apt install taskwarrior python3-tasklib tasksh python3-full
 # https://wslutiliti.es/wslu/install.html
 hash wslview || sudo apt install wslu
@@ -214,40 +214,18 @@ popd
 # Update font cache
 # fc-cache -vf "$HOME/.local/share/fonts"
 
-if [[ ! -d "$HOME/miniconda3" ]] && [[ ! -f "/opt/conda/etc/profile.d/conda.sh" ]]; then
+if [[ ! -d "$HOME/miniforge3" ]]; then
   TMP=$(mktemp -d)
-  wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $TMP/miniconda.sh;
-  bash $TMP/miniconda.sh -b
+  wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O $TMP/miniforge.sh;
+  bash $TMP/miniforge.sh -b
   rm -rf $TMP
 
-  # Miniconda https://docs.conda.io/projects/continuumio-conda/en/latest/user-guide/install/rpm-debian.html#rpm-and-debian-repositories-for-miniconda
-  # # Install our public GPG key to trusted store
-  # curl https://repo.anaconda.com/pkgs/misc/gpgkeys/anaconda.asc | gpg --dearmor > "$TMP/conda.gpg"
-  # sudo install -o root -g root -m 644 "$TMP/conda.gpg" /usr/share/keyrings/conda-archive-keyring.gpg
-
-  # # Check whether fingerprint is correct (will output an error message otherwise)
-  # gpg --keyring /usr/share/keyrings/conda-archive-keyring.gpg --no-default-keyring --fingerprint 34161F5BF5EB1D4BFBBB8F0A8AEB4F8B29D82806
-
-  # # Add our Debian repo
-  # # echo "deb [arch=amd64 signed-by=/usr/share/keyrings/conda-archive-keyring.gpg] https://repo.anaconda.com/pkgs/misc/debrepo/conda stable main" > /etc/apt/sources.list.d/conda.list
-
-  # # **NB:** If you receive a Permission denied error when trying to run the above command (because `/etc/apt/sources.list.d/conda.list` is write protected), try using the following command instead:
-  # echo "deb [arch=amd64 signed-by=/usr/share/keyrings/conda-archive-keyring.gpg] https://repo.anaconda.com/pkgs/misc/debrepo/conda stable main" | sudo tee -a /etc/apt/sources.list.d/conda.list
-
-  # sudo apt update && sudo apt install conda
-
-  # source /opt/conda/etc/profile.d/conda.sh
-  source $HOME/miniconda3/etc/profile.d/conda.sh
+  source $HOME/miniforge3/etc/profile.d/conda.sh
   conda -V
   conda init zsh bash
 
-  # Remove proprietary channels and add conda-forge.
-  conda config --system --remove channels defaults
-  conda config --system --remove channels 'https://repo.anaconda.com/pkgs/main'
-  conda config --system --remove channels 'https://repo.anaconda.com/pkgs/r'
-
-  conda config --system --add channels conda-forge
-  conda config --system --set channel_priority strict
+  # conda config --system --add channels conda-forge
+  # conda config --system --set channel_priority strict
 
   conda config --show channels
 
@@ -258,7 +236,7 @@ if [[ ! -d "$HOME/miniconda3" ]] && [[ ! -f "/opt/conda/etc/profile.d/conda.sh" 
   # Astral uv installation
   hash uv || curl -LsSf https://astral.sh/uv/install.sh | sh
   uv tool install 'ini2toml[full]'
-  uv tool install 'pyscaffold[all]'
+  uv tool install 'pyscaffold[all]' --with pyscaffoldext-pre-commit-ruff
   uv tool install bat
   uv tool install dvc
   uv tool install jupyter-book

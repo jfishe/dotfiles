@@ -23,7 +23,7 @@ _VIMWIKI_COMPLETE=zsh_source vimwiki > "$ZSH_CUSTOM/vimwiki.zsh"
 
 ## Custom Plugins
 
-### Anaconda Conda Completion
+### Conda Completion
 
 - [conda-zsh-completion] does not describe installing as an Oh-My-Zsh custom
   plugin. The following was done and added to `rcrc`, but might be useful in a
