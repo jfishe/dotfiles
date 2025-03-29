@@ -34,6 +34,8 @@ if [ -f  "$HOME/.cargo/env" ] ; then
   . "$HOME/.cargo/env"
 fi
 
+export LESS="$LESS --ignore-case"
+export GDK_SCALE=0.5
 export EDITOR=vim
 # export VIMWIKI_EDITOR=gvim
 # export VIMWIKI_COUNT=2

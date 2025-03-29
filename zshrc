@@ -2,22 +2,6 @@ unsetopt BEEP
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-if [[ -d "$HOME/.local/bin" ]] ; then
-  PATH="$HOME/.local/bin:$PATH"
-fi
-if [[ -d "$HOME/bin" ]] ; then
-  PATH="$HOME/bin:$PATH"
-fi
-if [[ -d "$USERPROFILE/bin" ]] ; then
-  PATH="$PATH:$USERPROFILE/bin"
-fi
-
-if [[ -d "$HOME/go" ]] ; then
-  PATH="$PATH:$HOME/go/bin"
-fi
-if [[ -f "$HOME/.cargo/env" ]] ; then
-. "$HOME/.cargo/env"
-fi
 
 # Path to your oh-my-zsh installation.
   export ZSH="$HOME/.oh-my-zsh"
@@ -136,9 +120,4 @@ zstyle ":conda_zsh_completion:*" use-groups true
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-export LESS="$LESS --ignore-case"
-export GDK_SCALE=0.5
-
-# umask 022
-# set -o vi
+fpath+=~/.zfunc; autoload -Uz compinit; compinit
