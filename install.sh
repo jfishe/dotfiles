@@ -110,6 +110,7 @@ hash bibtex-cite || go install github.com/msprev/fzf-bibtex/cmd/bibtex-cite
 # https://github.com/BurntSushi/ripgrep
 # https://ctags.io/
 hash fdfind || sudo apt install fd-find
+hash batcat || sudo apt install bat
 
 # Used to access Windows OpenSSH's ssh-agent.
 hash socat || sudo apt install socat
@@ -237,7 +238,6 @@ if [[ ! -d "$HOME/miniforge3" ]]; then
   hash uv || curl -LsSf https://astral.sh/uv/install.sh | sh
   uv tool install 'ini2toml[full]'
   uv tool install 'pyscaffold[all]' --with pyscaffoldext-pre-commit-ruff
-  uv tool install bat
   uv tool install dvc
   uv tool install jupyter-book
   uv tool install mypy
@@ -250,10 +250,10 @@ if [[ ! -d "$HOME/miniforge3" ]]; then
   uv tool install vimwiki-cli
 
   # condax installation
-  # condax install fzf
-  condax install git-delta
-  condax install pandoc
-  condax install starship
+  # condax install fzf --channel 'conda-forge' --mamba
+  condax install git-delta --channel 'conda-forge' --mamba
+  condax install pandoc --channel 'conda-forge' --mamba
+  condax install starship --channel 'conda-forge' --mamba
 
   # Astral/uv
   uv pip install --requirement $HOME/.dotfiles/requirements.txt
