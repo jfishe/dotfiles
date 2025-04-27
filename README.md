@@ -245,11 +245,11 @@ Otherwise, install the fonts in Windows and share with WSL. Copy
 # To download only the CaskaydiaCove fonts, shallow clone Nerd Fonts.
 git clone -n --depth=1 --filter=tree:0 https://github.com/ryanoasis/nerd-fonts.git
 cd nerd-fonts
-git sparse-checkout set --no-cone patched-fonts/CascadiaCode/Regular
+git sparse-checkout set --no-cone nerd-fonts\patched-fonts\CascadiaCode
 git checkout
 
 # Install in Windows
-cd patched-fonts/CascadiaCode/Regular
+cd patched-fonts/CascadiaCode
 wslview .
 # Virus scan, select ttf files and right-click install.
 
