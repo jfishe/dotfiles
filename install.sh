@@ -239,6 +239,7 @@ if [[ ! -d "$HOME/miniforge3" ]]; then
   uv tool install 'ini2toml[full]'
   uv tool install 'pyscaffold[all]' --with pyscaffoldext-pre-commit-ruff
   uv tool install dvc
+  uv tool install ghp-import
   uv tool install jupyter-book
   uv tool install mypy
   uv tool install pls
