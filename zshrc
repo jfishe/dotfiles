@@ -2,6 +2,20 @@ unsetopt BEEP
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+# set PATH so it includes user's private bin directories
+if [[ -d "$HOME/.local/bin" ]] ; then
+  PATH="$HOME/.local/bin:$PATH"
+fi
+if [[ -d "$HOME/bin" ]] ; then
+  PATH="$HOME/bin:$PATH"
+fi
+if [[ -d "$USERPROFILE/bin" ]] ; then
+  PATH="$PATH:$USERPROFILE/bin"
+fi
+
+if [[ -d "$HOME/go" ]] ; then
+  PATH="$PATH:$HOME/go/bin"
+fi
 
 # Path to your oh-my-zsh installation.
   export ZSH="$HOME/.oh-my-zsh"
@@ -75,7 +89,6 @@ plugins=(
   conda-zsh-completion
   git
   gitignore
-  pip
   starship
   taskwarrior
   vi-mode
@@ -92,9 +105,23 @@ zstyle ':completion::complete:*' use-cache 1
 # To display subcommand completion in groups, please add the following to your
 zstyle ":conda_zsh_completion:*" use-groups true
 
+fpath+=~/.zfunc; autoload -Uz compinit; compinit
+
 # User configuration
 
+# vi-mode configuration
+VI_MODE_SET_CURSOR=true
+autoload -U select-quoted
+zle -N select-quoted
+for m in visual viopp; do
+    for c in {a,i}{\',\",\`}; do
+        bindkey -M $m $c select-quoted
+    done
+done
+
 # export MANPATH="/usr/local/man:$MANPATH"
+export LESS="$LESS --ignore-case"
+export GDK_SCALE=0.5
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -120,4 +147,3 @@ zstyle ":conda_zsh_completion:*" use-groups true
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-fpath+=~/.zfunc; autoload -Uz compinit; compinit
