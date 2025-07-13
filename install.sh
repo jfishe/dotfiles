@@ -217,11 +217,11 @@ popd
 
 if [[ ! -d "$HOME/miniforge3" ]]; then
   TMP=$(mktemp -d)
-  wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O $TMP/miniforge.sh;
-  bash $TMP/miniforge.sh -b
-  rm -rf $TMP
+  wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O "$TMP/miniforge.sh";
+  bash "$TMP/miniforge.sh" -b
+  rm -rf "$TMP"
 
-  source $HOME/miniforge3/etc/profile.d/conda.sh
+  source "$HOME/miniforge3/etc/profile.d/conda.sh"
   conda -V
   conda init zsh bash
 
@@ -231,7 +231,7 @@ if [[ ! -d "$HOME/miniforge3" ]]; then
   conda config --show channels
 
   # Create vim-python environment.
-  conda env create --file $HOME/.dotfiles/environment.yml
+  conda env create --file "$HOME/.dotfiles/environment.yml"
   conda activate vim-python
 
   # Astral uv installation
@@ -255,7 +255,8 @@ if [[ ! -d "$HOME/miniforge3" ]]; then
   condax install git-delta --channel 'conda-forge' --mamba
   condax install pandoc --channel 'conda-forge' --mamba
   condax install starship --channel 'conda-forge' --mamba
+  condax install universal-ctags --channel 'conda-forge' --mamba
 
   # Astral/uv
-  uv pip install --requirement $HOME/.dotfiles/requirements.txt
+  uv pip install --requirement "$HOME/.dotfiles/requirements.txt"
 fi
