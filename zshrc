@@ -3,22 +3,25 @@ unsetopt BEEP
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 # set PATH so it includes user's private bin directories
-if [[ -d "$HOME/.local/bin" ]] ; then
-  PATH="$HOME/.local/bin:$PATH"
-fi
-if [[ -d "$HOME/bin" ]] ; then
-  PATH="$HOME/bin:$PATH"
-fi
-if [[ -d "$USERPROFILE/bin" ]] ; then
-  PATH="$PATH:$USERPROFILE/bin"
-fi
-
-if [[ -d "$HOME/go" ]] ; then
-  PATH="$PATH:$HOME/go/bin"
-fi
+for new_path in "$HOME/.local/bin" "$HOME/bin" "$USERPROFILE/bin"
+do
+  if [[ ":$PATH:" != *":$new_path:"* ]]; then
+    if [[ -d "$new_path" ]] ; then
+      PATH="$new_path:$PATH"
+    fi
+  fi
+done
+for new_path in "$HOME/go/bin"
+do
+  if [[ ":$PATH:" != *":$new_path:"* ]]; then
+    if [[ -d "$new_path" ]] ; then
+      PATH="$PATH:$new_path"
+    fi
+  fi
+done
 
 # Path to your oh-my-zsh installation.
-  export ZSH="$HOME/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
   # export SOLARIZED_THEME="light"
 

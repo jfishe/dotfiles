@@ -17,19 +17,23 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 
 # set PATH so it includes user's private bin directories
-if [ -d "$HOME/.local/bin" ] ; then
-  PATH="$HOME/.local/bin:$PATH"
-fi
-if [ -d "$HOME/bin" ] ; then
-  PATH="$HOME/bin:$PATH"
-fi
-if [ -d "$USERPROFILE/bin" ] ; then
-  PATH="$PATH:$USERPROFILE/bin"
-fi
+for new_path in "$HOME/.local/bin" "$HOME/bin" "$USERPROFILE/bin"
+do
+  if [[ ":$PATH:" != *":$new_path:"* ]]; then
+    if [[ -d "$new_path" ]] ; then
+      PATH="$new_path:$PATH"
+    fi
+  fi
+done
+for new_path in "$HOME/go/bin"
+do
+  if [[ ":$PATH:" != *":$new_path:"* ]]; then
+    if [[ -d "$new_path" ]] ; then
+      PATH="$PATH:$new_path"
+    fi
+  fi
+done
 
-if [ -d "$HOME/go" ] ; then
-  PATH="$PATH:$HOME/go/bin"
-fi
 if [ -f  "$HOME/.cargo/env" ] ; then
   . "$HOME/.cargo/env"
 fi
@@ -39,6 +43,11 @@ export GDK_SCALE=0.5
 export EDITOR=vim
 # export VIMWIKI_EDITOR=gvim
 # export VIMWIKI_COUNT=2
+
+# export REQUESTS_CA_BUNDLE="$HOME/userprofile/.certificates/all-certificates/self-signed_CA.pem"
+# export NODE_EXTRA_CA_CERTS="$HOME/userprofile/.certificates/all-certificates/self-signed_CA.pem"
+# https://github.com/astral-sh/uv/issues/13481 WSL1
+# export UV_CONCURRENT_INSTALLS=1
 
 # Enable ssh authentication using Windows OpenSSH ssh-agent.
 # Requires enabling Windows OpenSSH in KeeAgent.
