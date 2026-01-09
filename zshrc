@@ -81,6 +81,14 @@ export ZSH="$HOME/.oh-my-zsh"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+# eza plugin configuration
+zstyle ':omz:plugins:eza' 'dirs-first' yes
+zstyle ':omz:plugins:eza' 'git-status' yes
+zstyle ':omz:plugins:eza' 'header' yes
+zstyle ':omz:plugins:eza' 'icons' yes
+zstyle ':omz:plugins:eza' 'time-style' iso
+zstyle ':omz:plugins:eza' 'hyperlink' yes
+
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -90,11 +98,13 @@ plugins=(
   colored-man-pages
   colorize
   conda-zsh-completion
+  eza
   git
   gitignore
   starship
   taskwarrior
   vi-mode
+  uv
   vim-interaction
   zsh-dircolors-solarized
   zsh-syntax-highlighting
@@ -123,7 +133,7 @@ for m in visual viopp; do
 done
 
 # export MANPATH="/usr/local/man:$MANPATH"
-export LESS="$LESS --ignore-case"
+# export LESS="$LESS --ignore-case"
 export GDK_SCALE=0.5
 
 # You may need to manually set your language environment
