@@ -3,7 +3,7 @@ unsetopt BEEP
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 # set PATH so it includes user's private bin directories
-for new_path in "$HOME/.local/bin" "$HOME/bin" "$USERPROFILE/bin"
+for new_path in "$HOME/.local/bin" "$HOME/bin" "$USERPROFILE/bin" "$HOME/.pixi/bin"
 do
   if [[ ":$PATH:" != *":$new_path:"* ]]; then
     if [[ -d "$new_path" ]] ; then

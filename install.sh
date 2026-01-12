@@ -174,43 +174,43 @@ if [[ ! -f "$cred_helper" ]]; then
 fi
 
 # Start sshd automatically using scripts developed by Pengwin.
-pushd "$HOME/.dotfiles"
+# pushd "$HOME/.dotfiles"
 
-function cp_mod_own () {
-  # $1: full path to destination, e.g. /etc/profile.d/start-ssh.sh
-  # ${1:1}: relative path to source, e.g., etc/profile.d/start-ssh.sh
-  # $2: permissions for $1
-  sudo cp "${1:1}" "$1"
-  sudo chmod "$2" "$1"
-  sudo chown root:root "$1"
-}
+# function cp_mod_own () {
+#   # $1: full path to destination, e.g. /etc/profile.d/start-ssh.sh
+#   # ${1:1}: relative path to source, e.g., etc/profile.d/start-ssh.sh
+#   # $2: permissions for $1
+#   sudo cp "${1:1}" "$1"
+#   sudo chmod "$2" "$1"
+#   sudo chown root:root "$1"
+# }
 
-profile_d_start_ssh='/etc/profile.d/start-ssh.sh'
-if [[ ! -f "${profile_d_start_ssh}" ]] ; then
-  cp_mod_own "${profile_d_start_ssh}" 644
-fi
+# profile_d_start_ssh='/etc/profile.d/start-ssh.sh'
+# if [[ ! -f "${profile_d_start_ssh}" ]] ; then
+#   cp_mod_own "${profile_d_start_ssh}" 644
+# fi
 
-bin_start_ssh='/usr/bin/start-ssh'
-if [[ ! -f "${bin_start_ssh}" ]] ; then
-  cp_mod_own "${bin_start_ssh}" 700
-fi
+# bin_start_ssh='/usr/bin/start-ssh'
+# if [[ ! -f "${bin_start_ssh}" ]] ; then
+#   cp_mod_own "${bin_start_ssh}" 700
+# fi
 
-sudoer_start_ssh='/etc/sudoers.d/start-ssh'
-if [[ ! -f "${sudoer_start_ssh}" ]] ; then
-  visudo -c -q -f "${sudoer_start_ssh:1}" && cp_mod_own "${sudoer_start_ssh}" 0440
-fi
+# sudoer_start_ssh='/etc/sudoers.d/start-ssh'
+# if [[ ! -f "${sudoer_start_ssh}" ]] ; then
+#   visudo -c -q -f "${sudoer_start_ssh:1}" && cp_mod_own "${sudoer_start_ssh}" 0440
+# fi
 
-hash sshd || sudo apt install openssh-server
-ssh_config_d="/etc/ssh/sshd_config.d/${USER}.conf"
-if [[ ! -f "${ssh_config_d}" ]] ; then
-  sed -e "s/AllowUsers fishe/AllowUsers ${USER}/g" \
-    -e "s/Port 2200/Port  ${wsl_distro_port[$WSL_DISTRO_NAME]}/g" \
-    etc/ssh/sshd_config.d/fishe.conf | sudo tee -a "${ssh_config_d}"
-  sudo chmod 644 "${ssh_config_d}"
-  sudo chown root:root "${ssh_config_d}"
-  sudo service ssh --full-restart
-fi
-popd
+# hash sshd || sudo apt install openssh-server
+# ssh_config_d="/etc/ssh/sshd_config.d/${USER}.conf"
+# if [[ ! -f "${ssh_config_d}" ]] ; then
+#   sed -e "s/AllowUsers fishe/AllowUsers ${USER}/g" \
+#     -e "s/Port 2200/Port  ${wsl_distro_port[$WSL_DISTRO_NAME]}/g" \
+#     etc/ssh/sshd_config.d/fishe.conf | sudo tee -a "${ssh_config_d}"
+#   sudo chmod 644 "${ssh_config_d}"
+#   sudo chown root:root "${ssh_config_d}"
+#   sudo service ssh --full-restart
+# fi
+# popd
 
 # Update font cache
 # fc-cache -vf "$HOME/.local/share/fonts"
@@ -230,32 +230,34 @@ if [[ ! -d "$HOME/miniforge3" ]]; then
 
   conda config --show channels
 
-  # Create vim-python environment.
-  conda env create --file "$HOME/.dotfiles/environment.yml"
-  conda activate vim-python
-
   # Astral uv installation
   hash uv || curl -LsSf https://astral.sh/uv/install.sh | sh
-  uv tool install 'ini2toml[full]'
-  uv tool install 'pyscaffold[all]' --with pyscaffoldext-pre-commit-ruff
-  uv tool install dvc
-  uv tool install ghp-import
-  uv tool install jupyter-book
-  uv tool install mypy
-  uv tool install pls
-  uv tool install pre-commit --with pre-commit-uv
-  uv tool install rich-cli
+  PATH="$HOME/.local/bin:$PATH"
+  # uv tool install 'ini2toml[full]'
+  # uv tool install 'pyscaffold[all]' --with pyscaffoldext-pre-commit-ruff
+  # uv tool install dvc
+  # uv tool install ghp-import
+  # uv tool install jupyter-book
+  # uv tool install mypy
+  uv tool install prek
+  # uv tool install rich-cli
   uv tool install ripgrep
   uv tool install ruff
   uv tool install tox --with tox-uv # use uv to install
   uv tool install vimwiki-cli
 
-  # condax installation
-  # condax install fzf --channel 'conda-forge' --mamba
-  condax install git-delta --channel 'conda-forge' --mamba
-  condax install pandoc --channel 'conda-forge' --mamba
-  condax install starship --channel 'conda-forge' --mamba
-  condax install universal-ctags --channel 'conda-forge' --mamba
+  # pixi global installation
+  curl -fsSL https://pixi.sh/install.sh | bash
+  # pixi global install fzf --channel 'conda-forge' --mamba
+  pixi global install git-delta
+  pixi global install nodejs
+  pixi global install pandoc
+  pixi global install starship
+  pixi global install universal-ctags
+
+  # Create vim-python environment.
+  conda env create --file "$HOME/.dotfiles/environment.yml"
+  conda activate vim-python
 
   # Astral/uv
   uv pip install --requirement "$HOME/.dotfiles/requirements.txt"
