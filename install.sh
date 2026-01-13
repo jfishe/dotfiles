@@ -248,17 +248,15 @@ if [[ ! -d "$HOME/miniforge3" ]]; then
 
   # pixi global installation
   curl -fsSL https://pixi.sh/install.sh | bash
-  # pixi global install fzf --channel 'conda-forge' --mamba
-  pixi global install git-delta
-  pixi global install nodejs
-  pixi global install pandoc
-  pixi global install starship
-  pixi global install universal-ctags
+  # pixi global install fzf
+  pixi global install git-delta nodejs pandoc starship universal-ctags
 
   # Create vim-python environment.
-  conda env create --file "$HOME/.dotfiles/environment.yml"
-  conda activate vim-python
+  # conda env create --file "$HOME/.dotfiles/environment.yml"
+  # conda activate vim-python
 
   # Astral/uv
-  uv pip install --requirement "$HOME/.dotfiles/requirements.txt"
+  uv venv --system-site-packages "$HOME/.venv"
+  source "$HOME/.venv"
+  uv pip install --requirements "$HOME/.dotfiles/requirements.txt"
 fi

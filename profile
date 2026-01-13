@@ -79,3 +79,9 @@ is_bin_in_path () {
     builtin type -P "$1" &> /dev/null
   fi
 }
+
+# uv venv --system-site-packages ~/.venv
+# source ~/.venv/bin/activate
+# uv pip install ~/.dotfiles/requirements.txt
+source ~/.venv/bin/activate
+
