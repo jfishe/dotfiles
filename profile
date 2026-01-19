@@ -10,31 +10,29 @@ umask 022
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
-    fi
+  # include .bashrc if it exists
+  if [ -f "$HOME/.bashrc" ]; then
+    . "$HOME/.bashrc"
+  fi
 fi
 
 # set PATH so it includes user's private bin directories
-for new_path in "$HOME/.local/bin" "$HOME/bin" "$USERPROFILE/bin"
-do
+for new_path in "$HOME/.local/bin" "$HOME/bin" "$USERPROFILE/bin"; do
   if [[ ":$PATH:" != *":$new_path:"* ]]; then
-    if [[ -d "$new_path" ]] ; then
+    if [[ -d "$new_path" ]]; then
       PATH="$new_path:$PATH"
     fi
   fi
 done
-for new_path in "$HOME/go/bin"
-do
+for new_path in "$HOME/go/bin"; do
   if [[ ":$PATH:" != *":$new_path:"* ]]; then
-    if [[ -d "$new_path" ]] ; then
+    if [[ -d "$new_path" ]]; then
       PATH="$PATH:$new_path"
     fi
   fi
 done
 
-if [ -f  "$HOME/.cargo/env" ] ; then
+if [ -f "$HOME/.cargo/env" ]; then
   . "$HOME/.cargo/env"
 fi
 
@@ -44,22 +42,18 @@ export EDITOR=vim
 # export VIMWIKI_EDITOR=gvim
 # export VIMWIKI_COUNT=2
 
-# export REQUESTS_CA_BUNDLE="$HOME/userprofile/.certificates/all-certificates/self-signed_CA.pem"
-# export NODE_EXTRA_CA_CERTS="$HOME/userprofile/.certificates/all-certificates/self-signed_CA.pem"
-# https://github.com/astral-sh/uv/issues/13481 WSL1
-# export UV_CONCURRENT_INSTALLS=1
-
 # Enable ssh authentication using Windows OpenSSH ssh-agent.
 # Requires enabling Windows OpenSSH in KeeAgent.
 if [ ! -S /tmp/ssh-agent-pipe ]; then
-  (socat UNIX-LISTEN:/tmp/ssh-agent-pipe,fork,group=$USER,umask=007 \
-      EXEC:"npiperelay.exe -ep -s //./pipe/openssh-ssh-agent",nofork &)
+  (socat UNIX-LISTEN:/tmp/ssh-agent-pipe,fork,group="$USER",umask=007 \
+    EXEC:"npiperelay.exe -ep -s //./pipe/openssh-ssh-agent",nofork &)
   export SSH_AUTH_SOCK=/tmp/ssh-agent-pipe
 fi
 
 # if [[ ! -z "$WSL_INTEROP" ]] ; then
 #   # For WSL2, determine the IP address of the Hyper-V VM.
-#   export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
+#   export DISPLAY=$(ip route | grep default | awk '{print $3; exit;}'):0.0
+#   # export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 # else
 #   # Otherwise localhost should work.
 #   export DISPLAY=:0
@@ -72,16 +66,18 @@ fi
 
 # True if $1 is an executable in $PATH
 # Works in both {ba,z}sh
-is_bin_in_path () {
-  if [ -n $ZSH_VERSION ]; then
-    builtin whence -p "$1" &> /dev/null
-  else  # bash:
-    builtin type -P "$1" &> /dev/null
+is_bin_in_path() {
+  if [[ -n $ZSH_VERSION ]]; then
+    builtin whence -p "$1" &>/dev/null
+  else # bash:
+    builtin type -P "$1" &>/dev/null
   fi
 }
 
 # uv venv --system-site-packages ~/.venv
 # source ~/.venv/bin/activate
 # uv pip install ~/.dotfiles/requirements.txt
-source ~/.venv/bin/activate
-
+if [[ -f "$HOME/.venv/bin/activate" ]]; then
+  pushd "$HOME" && source ".venv/bin/activate"
+  popd || exit
+fi

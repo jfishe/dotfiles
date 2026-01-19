@@ -1,0 +1,1 @@
+eval "$(_VIMWIKI_COMPLETE=zsh_source vimwiki)"

@@ -103,8 +103,8 @@ plugins=(
   gitignore
   starship
   taskwarrior
-  vi-mode
   uv
+  vi-mode
   vim-interaction
   zsh-dircolors-solarized
   zsh-syntax-highlighting
@@ -133,8 +133,6 @@ for m in visual viopp; do
 done
 
 # export MANPATH="/usr/local/man:$MANPATH"
-# export LESS="$LESS --ignore-case"
-export GDK_SCALE=0.5
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
