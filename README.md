@@ -1,34 +1,38 @@
 # dotfiles
 
-Setup Windows Subsystem for Linux to use the Windows vimfiles, git and
-dircolors-solarized. Complete the Windows setup first per instructions at
-[jfishe / vimfiles].
+Setup Windows Subsystem for Linux to use the Windows vimfiles,
+git and dircolors-solarized.
+Complete the Windows setup first per instructions at [jfishe / vimfiles].
 
 - Shared with Windows:
-  - `.condarc`
-  - `.git_template` (if present)
-  - `.gitattributes_global`
-  - `.gitmessage.txt`
-  - `.gutctags`
-  - `.jupyter`
-  - `.vimwiki` (if present)
-  - `.vimwiki_html` (if present)
-  - `.vimwiki_home`
+  - .userprofile -> `$USERPROFILE`
+  - .jupyter -> userprofile/.jupyter
+  - .task -> vimwiki/.task
+  - .vimwiki -> userprofile/Documents/vimwiki
+  - .vimwiki_home -> userprofile/Documents/vimwiki_home
+  - .vimwiki_html -> userprofile/Documents/vimwiki_html
+  - .zk -> userprofile/Documents/zk
+  - .condarc -> userprofile/.condarc
+  - .gitattributes_global -> userprofile/.gitattributes_global
+  - .gitconfig
+  - .gitmessage.txt -> userprofile/.gitmessage.txt
+  - .gutctags -> userprofile/.gutctags
+  - .taskrc -> vimwiki/.taskrc
 
 ## Installation
 
-To install download and source the following or perform the steps described
-below.
+To install download and source the following or
+perform the steps described below.
 
-In Windows, set the user environment variable `WSLENV`, for use by
-[install.sh].
+In Windows, set the user environment variable `WSLENV`,
+for use by [install.sh].
 
 ```bash
 WSLENV='WT_SESSION:USERPROFILE/p:APPDATA/p:LOCALAPPDATA/p:TMP/p:WT_PROFILE_ID'
 ```
 
-See [Share environment variables between Windows and WSL] for additional
-information.
+See [Share environment variables between Windows and WSL]
+for additional information.
 
 Download and source [install.sh].
 
@@ -68,7 +72,7 @@ linked to `~/.rcrc`.
 ```bash
 openssl s_client -showcerts -servername github.com -connect github.com:443 \
   </dev/null 2>/dev/null |
-  sed -n -e '/BEGIN\ CERTIFICATE/,/END\ CERTIFICATE/ p'  > github-com.pem
+  sed -n -e '/BEGIN\ CERTIFICATE/,/END\ CERTIFICATE/ p' >github-com.pem
 # On Linux
 cat github-com.pem | sudo tee -a /etc/ssl/certs/ca-certificates.crt
 # On windows C:\Program Files\Git\mingw64\ssl\certs\ or some variant.
@@ -80,6 +84,8 @@ cat github-com.pem | tee -a /mingw64/ssl/certs/ca-bundle.crt
 Put bash completion files in `~/.bash_completion.d`, which is linked to
 `~/.dotfiles`. `/usr/share/bash_completion/bash_completion` sources
 `~/.bash_completion` which sources all files in the `.d` directory.
+
+Refer to [Oh My Zsh Custom] for `zsh` completions.
 
 ### Setup gitconfig
 
@@ -107,6 +113,15 @@ ln -s $USERPROFILE/ ~/userprofile
 
 [`dircolors-solarized`] is included as a `git submodule` in
 `~/.dotfiles/.dircolors-solarized/`, which `~/.dircolors` links to.
+
+## Astral-uv, System Python 3 and Vim Gtk-3
+
+```bash
+cd $HOME
+uv venv --system-site-packages --python-preference=system
+source .venv/bin/activate
+uv pip install --requirements $HOME/.dotfiles/requirements.txt
+```
 
 ## Conda and Vim
 
@@ -140,7 +155,7 @@ sudo mount -t drvfs U: /mnt/u
 cat /proc/mounts
 
 # Update based on preceding info.
-sudo echo 'U: /mnt/u drvfs rw,relatime 0 0' >> /etc/fstab
+sudo echo 'U: /mnt/u drvfs rw,relatime 0 0' >>/etc/fstab
 ```
 
 ```text
@@ -154,10 +169,13 @@ vimwiki_html -> userprofile/Documents/vimwiki_html
 
 ## Running gvim with X11
 
-To install gvim with clipboard support, run an X11 server, e.g., X410 and
-install `vim-gtk3`. If the clipboard does not appear to be sharing, copy from
-and X client and paste into a Windows application. Then it should work both
-ways.
+To install gvim with clipboard support,
+use `WLS2` with Wayland `WSLg` or
+run an X11 server, e.g., X410, and
+install `vim-gtk3`.
+If the clipboard does not appear to be sharing,
+copy from an X client and paste into a Windows application.
+Then it should work both ways.
 
 ```{.bash contenteditable="true" spellcheck="false" caption="bash"}
 sudo apt-get install vim-gtk3
@@ -272,25 +290,25 @@ locations to use `task` from the shell.
 
 [Oh My Zsh Custom] summarizes custom plugins and aliases.
 
-[Caskaydia Cove]: https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/CascadiaCode/Regular
-[Conda]: https://docs.conda.io/projects/conda
-[How to fix ssl certificate problem unable to get local issuer certificate Git error]: https://komodor.com/learn/how-to-fix-ssl-certificate-problem-unable-to-get-local-issuer-certificate-git-error/
-[Microsoft Cascadia Code Powerline font]: https://github.com/microsoft/cascadia-code/releases
-[Microsoft]: https://blogs.msdn.microsoft.com/wsl/2017/04/18/file-system-improvements-to-the-windows-subsystem-for-linux/
-[Nerd Fonts]: https://github.com/buzzkillhardball/nerdfonts
-[Oh My Zsh Custom]: oh-my-zsh/custom/README.md
-[SSH on WSL]: https://www.illuminiastudios.com/dev-diaries/ssh-on-windows-subsystem-for-linux/
-[Share environment variables between Windows and WSL]: https://docs.microsoft.com/en-us/windows/wsl/interop#share-environment-variables-between-windows-and-wsl
-[Sharing Windows fonts with WSL]: https://x410.dev/cookbook/wsl/sharing-windows-fonts-with-wsl/
-[Universal-ctags]: https://ctags.io/
-[Using X410 with WSL2]: https://x410.dev/cookbook/wsl/using-x410-with-wsl2
-[X410 Known Issues and Workarounds]: https://x410.dev/cookbook/x410-known-issues-and-workarounds/
+[caskaydia cove]: https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/CascadiaCode/Regular
+[conda]: https://docs.conda.io/projects/conda
+[github: server certificate verification failed]: https://stackoverflow.com/questions/35821245/github-server-certificate-verification-failed
+[how to fix ssl certificate problem unable to get local issuer certificate git error]: https://komodor.com/learn/how-to-fix-ssl-certificate-problem-unable-to-get-local-issuer-certificate-git-error/
+[install.sh]: install.sh
+[jfishe / vimfiles]: https://github.com/jfishe/vimfiles
+[microsoft]: https://blogs.msdn.microsoft.com/wsl/2017/04/18/file-system-improvements-to-the-windows-subsystem-for-linux/
+[microsoft cascadia code powerline font]: https://github.com/microsoft/cascadia-code/releases
+[nerd fonts]: https://github.com/buzzkillhardball/nerdfonts
+[oh my zsh custom]: oh-my-zsh/custom/README.md
+[rc file (dotfile) management]: https://github.com/thoughtbot/rcm
+[rcm --- dotfile management]: http://thoughtbot.github.io/rcm/rcm.7.html
+[share environment variables between windows and wsl]: https://docs.microsoft.com/en-us/windows/wsl/interop#share-environment-variables-between-windows-and-wsl
+[sharing windows fonts with wsl]: https://x410.dev/cookbook/wsl/sharing-windows-fonts-with-wsl/
+[ssh on wsl]: https://www.illuminiastudios.com/dev-diaries/ssh-on-windows-subsystem-for-linux/
+[this problem after waking up from windows sleep mode]: https://github.com/microsoft/WSL/issues/4992
+[universal-ctags]: https://ctags.io/
+[using x410 with wsl2]: https://x410.dev/cookbook/wsl/using-x410-with-wsl2
+[x410 known issues and workarounds]: https://x410.dev/cookbook/x410-known-issues-and-workarounds/
 [`dircolors-solarized`]: https://github.com/seebi/dircolors-solarized.git
 [`etc/fonts/local.conf`]: etc/fonts/local.conf
 [`wslu`]: https://wslutiliti.es/wslu/install.html
-[github: server certificate verification failed]: https://stackoverflow.com/questions/35821245/github-server-certificate-verification-failed
-[install.sh]: install.sh
-[jfishe / vimfiles]: https://github.com/jfishe/vimfiles
-[rc file (dotfile) management]: https://github.com/thoughtbot/rcm
-[rcm --- dotfile management]: http://thoughtbot.github.io/rcm/rcm.7.html
-[this problem after waking up from Windows sleep mode]: https://github.com/microsoft/WSL/issues/4992

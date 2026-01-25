@@ -2,24 +2,34 @@
 
 ## Custom Aliases
 
-`aliases.zsh`
+[`$ZSH_CUSTOM/aliases.zsh`](aliases.zsh)
 
-### Custom Astral uv Completion
+## Custom Completions Autoloaded Files
 
-- [Install uv]
-- Update zsh completion.
+[A Users' Guide to the Z-Shell](https://zsh.sourceforge.io/Guide/zshguide06.html#l183 "6.9.1: Loading completion functions: compdef")
+explains completion functions in
+[`$ZSH_CUSTOM/completions`](completions/)
 
-```bash
-uv generate-shell-completion zsh > "$ZSH_CUSTOM/uv.zsh"
-```
+1. Remove `$HOME/.zcompdump*`, so `compinit` updates completions.
 
-### Custom Vimwiki-Cli Completion
+2. Add completion scripts or script generators to
+   `$ZSH_CUSTOM/completions/`.
 
-[Vimwiki Command-Line Interface] provides Shell Completion via [Click].
+3. Name the files after the command,
+   preceded by an underscore.
 
-```bash
-_VIMWIKI_COMPLETE=zsh_source vimwiki > "$ZSH_CUSTOM/vimwiki.zsh"
-```
+4. If not already present, add `#compdef command` to the top of the file.
+
+   E.g., for [Vimwiki Command-Line Interface],
+   `$ZSH_CUSTOM/completions/_vimwiki` contains the following:
+
+   ```bash
+   #compdef vimwiki
+
+   eval "$(_VIMWIKI_COMPLETE=zsh_source vimwiki)"
+   ```
+
+5. `compinit` rebuilds completions at the next login.
 
 ## Custom Plugins
 
@@ -43,9 +53,7 @@ git submodule add https://github.com/esc/conda-zsh-completion \
 
 [zsh-dircolors-solarized]
 
-[Install uv]: https://docs.astral.sh/uv/getting-started/installation/
-[Vimwiki Command-Line Interface]: https://github.com/sstallion/vimwiki-cli
-[Click]: https://click.palletsprojects.com/en/stable/shell-completion/
 [conda-zsh-completion]: https://github.com/esc/conda-zsh-completion
-[zsh-syntax-highlighting]: https://github.com/zsh-users/zsh-syntax-highlighting
+[vimwiki command-line interface]: https://github.com/sstallion/vimwiki-cli
 [zsh-dircolors-solarized]: https://github.com/joel-porquet/zsh-dircolors-solarized
+[zsh-syntax-highlighting]: https://github.com/zsh-users/zsh-syntax-highlighting
