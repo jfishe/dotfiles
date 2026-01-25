@@ -74,10 +74,17 @@ is_bin_in_path() {
   fi
 }
 
+__wt_osc9_9 () {
+    _win_path="$(wslpath -m $(pwd))"
+    printf "\033]9;9;%s\033\\" "$_win_path"
+}
+[ -n "$BASH_VERSION" ] && [ -n "$WT_SESSION" ] && PROMPT_COMMAND="__wt_osc9_9"
+[ -n "$ZSH_VERSION"  ] && [ -n "$WT_SESSION" ] && precmd_functions+=(__wt_osc9_9)
+
 # uv venv --system-site-packages ~/.venv
 # source ~/.venv/bin/activate
 # uv pip install ~/.dotfiles/requirements.txt
-if [[ -f "$HOME/.venv/bin/activate" ]]; then
-  pushd "$HOME" && source ".venv/bin/activate"
-  popd || exit
+if [ -f "$HOME/.venv/bin/activate" ]; then
+  pushd "$HOME" >/dev/null 2>&1 && source ".venv/bin/activate"
+  popd >/dev/null 2>&1 || true
 fi
