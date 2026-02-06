@@ -24,13 +24,13 @@ for new_path in "$HOME/.local/bin" "$HOME/bin" "$USERPROFILE/bin"; do
     fi
   fi
 done
-for new_path in "$HOME/go/bin"; do
-  if [[ ":$PATH:" != *":$new_path:"* ]]; then
-    if [[ -d "$new_path" ]]; then
-      PATH="$PATH:$new_path"
-    fi
+new_path="$HOME/go/bin"
+if [[ ":$PATH:" != *":$new_path:"* ]]; then
+  if [[ -d "$new_path" ]]; then
+    PATH="$PATH:$new_path"
   fi
-done
+fi
+unset new_path
 
 if [ -f "$HOME/.cargo/env" ]; then
   . "$HOME/.cargo/env"
@@ -67,19 +67,19 @@ fi
 # True if $1 is an executable in $PATH
 # Works in both {ba,z}sh
 is_bin_in_path() {
-  if [[ -n $ZSH_VERSION ]]; then
+  if [ -n "$ZSH_VERSION" ]; then
     builtin whence -p "$1" &>/dev/null
   else # bash:
     builtin type -P "$1" &>/dev/null
   fi
 }
 
-__wt_osc9_9 () {
-    _win_path="$(wslpath -m $(pwd))"
-    printf "\033]9;9;%s\033\\" "$_win_path"
+__wt_osc9_9() {
+  _win_path="$(wslpath -m "$(pwd)")"
+  printf "\033]9;9;%s\033\\" "$_win_path"
 }
 [ -n "$BASH_VERSION" ] && [ -n "$WT_SESSION" ] && PROMPT_COMMAND="__wt_osc9_9"
-[ -n "$ZSH_VERSION"  ] && [ -n "$WT_SESSION" ] && precmd_functions+=(__wt_osc9_9)
+[ -n "$ZSH_VERSION" ] && [ -n "$WT_SESSION" ] && precmd_functions+=(__wt_osc9_9)
 
 # uv venv --system-site-packages ~/.venv
 # source ~/.venv/bin/activate
