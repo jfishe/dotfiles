@@ -1,8 +1,0 @@
-# Install from PyPI using pip or uv
-# Required by Vim plugin.
-mdformat-pyproject
-mdformat-ruff
-mdformat-shfmt
-# packaging
-panvimwiki
-# tasklib

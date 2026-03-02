@@ -17,7 +17,8 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 
 # set PATH so it includes user's private bin directories
-for new_path in "$HOME/.local/bin" "$HOME/bin" "$USERPROFILE/bin"; do
+for new_path in "$HOME/.local/bin" "$HOME/bin" "$USERPROFILE/bin" "$HOME/.pixi/bin"
+do
   if [[ ":$PATH:" != *":$new_path:"* ]]; then
     if [[ -d "$new_path" ]]; then
       PATH="$new_path:$PATH"
@@ -84,7 +85,7 @@ __wt_osc9_9() {
 # uv venv --system-site-packages ~/.venv
 # source ~/.venv/bin/activate
 # uv pip install ~/.dotfiles/requirements.txt
-if [ -f "$HOME/.venv/bin/activate" ]; then
-  pushd "$HOME" >/dev/null 2>&1 && source ".venv/bin/activate"
+if [ -f "$HOME/.vim/.venv/bin/activate" ]; then
+  pushd "$HOME/.vim" >/dev/null 2>&1 && source ".venv/bin/activate"
   popd >/dev/null 2>&1 || true
 fi

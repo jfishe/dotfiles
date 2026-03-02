@@ -25,7 +25,7 @@ if vim.g.vscode == nil then
     })
 
   vim.g.python3_host_prog = vim.fn.expand(
-    '~/miniforge3/envs/vim-python/bin/python'
+    '~/.vim/.venv/bin/python'
     )
   vim.cmd('source ~/.vim/vimrc')
 end

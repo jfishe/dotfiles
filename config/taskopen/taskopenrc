@@ -1,0 +1,29 @@
+[General]
+EDITOR=vim
+taskbin=task
+taskargs="-DELETED"
+no_annotation_hook="addnote $ID"
+task_attributes="priority,project,tags,description"
+--sort:"urgency-,annot"
+--active-tasks:"+PENDING"
+# path_ext=/usr/local/share/taskopen/scripts
+path_ext=/home/jdfen/.local/share/taskopen/scripts
+
+[Actions]
+files.target=annotations
+files.labelregex="^(?!wiki).*"
+files.regex="^[\\.\\/~]+.*\\.(.*)"
+files.command="xdg-open $FILE"
+files.modes="batch,any,normal"
+
+wiki.target=annotations
+wiki.labelregex="^(wiki)"
+wiki.regex="^[\\.\\/~]+.*\\.(.*)"
+wiki.command="xdg-open-cli $FILE"
+wiki.modes="batch,any,normal"
+
+shortpath.target=annotations
+shortpath.labelregex="^(wiki)"
+shortpath.regex="/(mnt/|)c/Users/(?i:jdfen)/OneDrive/Documents/(.*)"
+shortpath.command="""shortpath "$LABEL: $FILE" $LABEL': ~/'$LAST_MATCH"""
+shortpath.modes="batch,any,normal"

@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# This script is supposed to be used with an archive action such as the following:
+#   shortpath.target=annotations
+#   shortpath.labelregex="^(wiki)"
+#   shortpath.regex="${LONGPATH}(.*)"
+#   shortpath.command="""shortpath "wiki: $FILE" 'wiki: ~/'$LAST_MATCH"""
+
+# Export LONGPATH to match the base directory path, e.g., "/mnt/c/Users/UID/OneDrive/Documents/".
+
+if [ $# -lt 1 ]; then
+  echo "Usage: $0 <srcpath> <dstpath>"
+  exit 1
+fi
+
+# only test if path is ready to be archived
+SRCFILE="$1"
+
+# taskwarrior does not support search patterns with '/'s
+# as a workaround, we replace the '/'s by a regex '.'
+SEARCH="/${SRCFILE//\//.}/"
+
+if [ $# -eq 1 ]; then
+  res=$(task "${SEARCH}" _uuids | wc -l)
+  if [ "$res" -eq 1 ]; then
+    echo "okay"
+    exit 0
+  else
+    echo "Not archivable"
+    exit 1
+  fi
+else
+  DSTFILE="$2"
+
+  ids=$(task "${SEARCH}" _unique uuid uuids)
+
+  if [[ -z "${ids// }" ]]; then
+    exit 0
+  fi
+  # rcoveride='rc.confirmation:0 rc.recurrence.confirmation:no rc.bulk:0'
+  rcoveride='rc.recurrence.confirmation:no rc.bulk:0'
+
+  task $rcoveride $ids denotate -- "${SRCFILE}" && task $rcoveride $ids annotate -- "${DSTFILE}"
+fi

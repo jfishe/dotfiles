@@ -215,48 +215,35 @@ fi
 # Update font cache
 # fc-cache -vf "$HOME/.local/share/fonts"
 
-if [[ ! -d "$HOME/miniforge3" ]]; then
-  TMP=$(mktemp -d)
-  wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O "$TMP/miniforge.sh";
-  bash "$TMP/miniforge.sh" -b
-  rm -rf "$TMP"
+# Astral uv installation
+hash uv || curl -LsSf https://astral.sh/uv/install.sh | sh
 
-  source "$HOME/miniforge3/etc/profile.d/conda.sh"
-  conda -V
-  conda init zsh bash
+# uv tool install 'ini2toml[full]'
+# uv tool install 'pyscaffold[all]' --with pyscaffoldext-pre-commit-ruff
+# uv tool install dvc
+# uv tool install ghp-import
+# uv tool install jupyter-book
+# uv tool install mypy
+uv tool install prek
+# uv tool install rich-cli
+uv tool install ripgrep
+uv tool install ruff
+uv tool install tox --with tox-uv # use uv to install
+uv tool install vimwiki-cli
 
-  # conda config --system --add channels conda-forge
-  # conda config --system --set channel_priority strict
+# pixi global installation
+curl -fsSL https://pixi.sh/install.sh | bash
 
-  conda config --show channels
+# pixi global install fzf
+pixi global install git-delta nodejs pandoc starship universal-ctags
 
-  # Astral uv installation
-  hash uv || curl -LsSf https://astral.sh/uv/install.sh | sh
-  PATH="$HOME/.local/bin:$PATH"
-  # uv tool install 'ini2toml[full]'
-  # uv tool install 'pyscaffold[all]' --with pyscaffoldext-pre-commit-ruff
-  # uv tool install dvc
-  # uv tool install ghp-import
-  # uv tool install jupyter-book
-  # uv tool install mypy
-  uv tool install prek
-  # uv tool install rich-cli
-  uv tool install ripgrep
-  uv tool install ruff
-  uv tool install tox --with tox-uv # use uv to install
-  uv tool install vimwiki-cli
+# Create vim-python environment.
+# conda env create --file "$HOME/.dotfiles/environment.yml"
+# conda activate vim-python
 
-  # pixi global installation
-  curl -fsSL https://pixi.sh/install.sh | bash
-  # pixi global install fzf
-  pixi global install git-delta nodejs pandoc starship universal-ctags
-
-  # Create vim-python environment.
-  # conda env create --file "$HOME/.dotfiles/environment.yml"
-  # conda activate vim-python
-
-  # Astral/uv
-  uv venv --system-site-packages "$HOME/.venv"
-  source "$HOME/.venv"
-  uv pip install --requirements "$HOME/.dotfiles/requirements.txt"
+# Astral/uv
+pushd $HOME/.vim
+if [[ ! -d .venv ]]; then
+  uv venv --system-site-packages ".venv"
+  uv sync
 fi
