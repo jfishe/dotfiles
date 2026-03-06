@@ -277,13 +277,15 @@ fc-cache -v
 
 ## Taskwarrior
 
-Vimwiki and taskwiki are configured to use the TASKRC and TASKDATA located in
-the Vimwiki root. Either set the environment or link to the appropriate
+Vimwiki and taskwiki are configured to use the TASKRC and TASKDATA
+located in the Vimwiki root.
+Either set the environment or link to the appropriate
 locations to use `task` from the shell.
 
 ```text
 .task -> vimwiki/.task
 .taskrc -> vimwiki/.taskrc
+$XDG_CONFIG_HOME/taskopen/taskopenrc -> vimwiki/.taskopenrc
 ```
 
 ## Oh My Zsh Configuration

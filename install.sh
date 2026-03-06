@@ -75,6 +75,21 @@ hash gvim || sudo apt install vim-gtk3 # GUI Vim with python3
 # PEP 668 /usr/share/doc/python3.11/README.venv EXTERNALLY-MANAGED
 # python3-full avoids conflict with miniforge3 vim-python environment.
 hash task || sudo apt install taskwarrior python3-tasklib tasksh python3-full
+
+function install_taskopen () {
+  hash pixi || return 1
+  pushd "$TMP"
+  git clone https://github.com/jschlatow/taskopen.git
+  pixi global install nim
+  sudo apt install xdg-utils
+  cd taskopen
+  make OPEN='xdg-open-cli' PREFIX="$XDG_DATA_HOME/taskopen/scripts:/usr/local" all manpages
+  sudo make install
+  popd
+}
+
+hash taskopen || install_taskopen
+
 # https://wslutiliti.es/wslu/install.html
 hash wslview || sudo apt install wslu
 
@@ -232,7 +247,7 @@ uv tool install tox --with tox-uv # use uv to install
 uv tool install vimwiki-cli
 
 # pixi global installation
-curl -fsSL https://pixi.sh/install.sh | bash
+hash pixi || curl -fsSL https://pixi.sh/install.sh | bash
 
 # pixi global install fzf
 pixi global install git-delta nodejs pandoc starship universal-ctags
