@@ -248,13 +248,7 @@ uv tool install vimwiki-cli
 
 # pixi global installation
 hash pixi || curl -fsSL https://pixi.sh/install.sh | bash
-
-# pixi global install fzf
-pixi global install git-delta nodejs pandoc starship universal-ctags
-
-# Create vim-python environment.
-# conda env create --file "$HOME/.dotfiles/environment.yml"
-# conda activate vim-python
+pixi global install fzf git-delta nodejs pandoc starship universal-ctags
 
 # Astral/uv
 pushd $HOME/.vim
@@ -262,3 +256,4 @@ if [[ ! -d .venv ]]; then
   uv venv --system-site-packages ".venv"
   uv sync
 fi
+popd
