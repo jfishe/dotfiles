@@ -18,7 +18,7 @@ files.modes="batch,any,normal"
 wiki.target=annotations
 wiki.labelregex="^(wiki)"
 wiki.regex="^[\\.\\/~]+.*\\.(.*)"
-wiki.command="xdg-open-cli $FILE"
+wiki.command="""$EDITOR -c 'call search(expand("$TASK_DESCRIPTION"))' $FILE"""
 wiki.modes="batch,any,normal"
 
 shortpath.target=annotations
