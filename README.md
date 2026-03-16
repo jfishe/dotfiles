@@ -12,7 +12,6 @@ Complete the Windows setup first per instructions at [jfishe / vimfiles].
   - .vimwiki_home -> userprofile/Documents/vimwiki_home
   - .vimwiki_html -> userprofile/Documents/vimwiki_html
   - .zk -> userprofile/Documents/zk
-  - .condarc -> userprofile/.condarc
   - .gitattributes_global -> userprofile/.gitattributes_global
   - .gitconfig
   - .gitmessage.txt -> userprofile/.gitmessage.txt
@@ -117,54 +116,9 @@ ln -s $USERPROFILE/ ~/userprofile
 ## Astral-uv, System Python 3 and Vim Gtk-3
 
 ```bash
-cd $HOME
+pushd $HOME/.vim
 uv venv --system-site-packages --python-preference=system
-source .venv/bin/activate
-uv pip install --requirements $HOME/.dotfiles/requirements.txt
-```
-
-## Conda and Vim
-
-Install [Conda] before starting Vim. Depending on licensing preferences,
-Anaconda, Miniconda or Miniforge will work. `Gutentags` needs [Universal-ctags].
-Vim 9 and `ripgrep` are not required, but `ripgrep` is much faster.
-`VimwikiSearch` will use `Rg` if installed. Pandoc relies on `TeXLive`.
-
-If the `Documents` folder is not located in `$USERPROFILE/Documents`, the
-actual location can be obtained from the Windows Registry.
-
-<!-- markdownlint-disable MD013 -->
-
-```powershell
-$registryPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders"
-(Get-ItemProperty -Path $registryPath -Name "Personal").Personal
-```
-
-<!-- markdownlint-enable MD013 -->
-
-If a network share is involved, [Microsoft] provides guidance for mounting the
-URI. Limitations in WSL may prevent auto-mounting network shares. After
-mounting the network share the first time, copy the `/proc/mounts` entry into
-`/etc/fstab`. If automount doesn't succeed after logout/login,
-`sudo mount /mnt/u` will restore the mount point.
-
-```bash
-sudo mkdir -p /mnt/u
-
-sudo mount -t drvfs U: /mnt/u
-cat /proc/mounts
-
-# Update based on preceding info.
-sudo echo 'U: /mnt/u drvfs rw,relatime 0 0' >>/etc/fstab
-```
-
-```text
-.condarc -> userprofile/.condarc
-.gutctags -> userprofile/.gutctags
-.jupyter -> userprofile/.jupyter
-vimwiki -> userprofile/Documents/vimwiki
-vimwiki_home -> userprofile/Documents/vimwiki_home
-vimwiki_html -> userprofile/Documents/vimwiki_html
+uv sync
 ```
 
 ## Running gvim with X11
@@ -178,7 +132,7 @@ copy from an X client and paste into a Windows application.
 Then it should work both ways.
 
 ```{.bash contenteditable="true" spellcheck="false" caption="bash"}
-sudo apt-get install vim-gtk3
+sudo apt install vim-gtk3
 ```
 
 ### `X410` Configuration
@@ -188,7 +142,6 @@ sudo apt-get install vim-gtk3
 - If you've configured your DISPLAY environment variable with the TCP
   connection method for WSL2 or Hyper-V virtual machines, you may experience
   [this problem after waking up from Windows sleep mode].
-
   - Use `VSOCK` per [X410 Known Issues and Workarounds].
 
 - [Using X410 with WSL2]
@@ -293,12 +246,10 @@ $XDG_CONFIG_HOME/taskopen/taskopenrc -> vimwiki/.taskopenrc
 [Oh My Zsh Custom] summarizes custom plugins and aliases.
 
 [caskaydia cove]: https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/CascadiaCode/Regular
-[conda]: https://docs.conda.io/projects/conda
 [github: server certificate verification failed]: https://stackoverflow.com/questions/35821245/github-server-certificate-verification-failed
 [how to fix ssl certificate problem unable to get local issuer certificate git error]: https://komodor.com/learn/how-to-fix-ssl-certificate-problem-unable-to-get-local-issuer-certificate-git-error/
 [install.sh]: install.sh
 [jfishe / vimfiles]: https://github.com/jfishe/vimfiles
-[microsoft]: https://blogs.msdn.microsoft.com/wsl/2017/04/18/file-system-improvements-to-the-windows-subsystem-for-linux/
 [microsoft cascadia code powerline font]: https://github.com/microsoft/cascadia-code/releases
 [nerd fonts]: https://github.com/buzzkillhardball/nerdfonts
 [oh my zsh custom]: oh-my-zsh/custom/README.md
@@ -308,7 +259,6 @@ $XDG_CONFIG_HOME/taskopen/taskopenrc -> vimwiki/.taskopenrc
 [sharing windows fonts with wsl]: https://x410.dev/cookbook/wsl/sharing-windows-fonts-with-wsl/
 [ssh on wsl]: https://www.illuminiastudios.com/dev-diaries/ssh-on-windows-subsystem-for-linux/
 [this problem after waking up from windows sleep mode]: https://github.com/microsoft/WSL/issues/4992
-[universal-ctags]: https://ctags.io/
 [using x410 with wsl2]: https://x410.dev/cookbook/wsl/using-x410-with-wsl2
 [x410 known issues and workarounds]: https://x410.dev/cookbook/x410-known-issues-and-workarounds/
 [`dircolors-solarized`]: https://github.com/seebi/dircolors-solarized.git

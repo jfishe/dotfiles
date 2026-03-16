@@ -47,6 +47,11 @@ fi
 
 sudo apt update         # Update package database
 
+function command_exists() {
+    # 'command -v' returns 0 if found, non-zero otherwise
+    command -v "$1" >/dev/null 2>&1
+}
+
 hash git || sudo apt install git
 hash git-lfs || sudo apt install git-lfs
 hash make || sudo apt install build-essential
@@ -247,8 +252,14 @@ uv tool install tox --with tox-uv # use uv to install
 uv tool install vimwiki-cli
 
 # pixi global installation
-hash pixi || curl -fsSL https://pixi.sh/install.sh | bash
-pixi global install fzf git-delta nodejs pandoc starship universal-ctags
+if command_exists pixi; then
+  pixi global install fzf git-delta nodejs pandoc starship universal-ctags
+else
+  curl -fsSL https://pixi.sh/install.sh | bash
+  source $HOME/.profile
+  errmsg='Pixi not found; installing. Re-run install.sh for globals.'
+  echo -e "\033[0;31m$errmsg" 1>&2
+fi
 
 # Astral/uv
 pushd $HOME/.vim
