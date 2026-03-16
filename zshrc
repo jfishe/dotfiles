@@ -97,7 +97,6 @@ zstyle ':omz:plugins:eza' 'hyperlink' yes
 plugins=(
   colored-man-pages
   colorize
-  conda-zsh-completion
   eza
   git
   gitignore

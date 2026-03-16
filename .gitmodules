@@ -10,10 +10,6 @@
 	path = oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
 	ignore = dirty
-[submodule "oh-my-zsh/custom/plugins/conda-zsh-completion"]
-	path = oh-my-zsh/custom/plugins/conda-zsh-completion
-	url = https://github.com/esc/conda-zsh-completion
-	ignore = dirty
 [submodule "config/vim"]
 	path = config/vim
 	url = https://github.com/jfishe/vimfiles.git
