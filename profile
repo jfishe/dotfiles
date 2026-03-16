@@ -25,17 +25,21 @@ do
     fi
   fi
 done
-new_path="$HOME/go/bin"
-if [[ ":$PATH:" != *":$new_path:"* ]]; then
-  if [[ -d "$new_path" ]]; then
-    PATH="$PATH:$new_path"
+for new_path in "$HOME/go/bin"; do
+  if [[ ":$PATH:" != *":$new_path:"* ]]; then
+    if [[ -d "$new_path" ]]; then
+      PATH="$PATH:$new_path"
+    fi
   fi
-fi
-unset new_path
+done
 
 if [ -f "$HOME/.cargo/env" ]; then
   . "$HOME/.cargo/env"
 fi
+
+# Node.js and Astral-uv behind GlobalProtect proxy
+# export SSL_CERT_DIR=/etc/ssl/certs
+# export NODE_USE_SYSTEM_CA=1
 
 export LESS="$LESS --ignore-case"
 export GDK_SCALE=0.5
@@ -82,9 +86,6 @@ __wt_osc9_9() {
 [ -n "$BASH_VERSION" ] && [ -n "$WT_SESSION" ] && PROMPT_COMMAND="__wt_osc9_9"
 [ -n "$ZSH_VERSION" ] && [ -n "$WT_SESSION" ] && precmd_functions+=(__wt_osc9_9)
 
-# uv venv --system-site-packages ~/.venv
-# source ~/.venv/bin/activate
-# uv pip install ~/.dotfiles/requirements.txt
 if [ -f "$HOME/.vim/.venv/bin/activate" ]; then
   pushd "$HOME/.vim" >/dev/null 2>&1 && source ".venv/bin/activate"
   popd >/dev/null 2>&1 || true
