@@ -246,14 +246,13 @@ hash uv || curl -LsSf https://astral.sh/uv/install.sh | sh
 # uv tool install mypy
 uv tool install prek
 # uv tool install rich-cli
-uv tool install ripgrep
 uv tool install ruff
 uv tool install tox --with tox-uv # use uv to install
 uv tool install vimwiki-cli
 
 # pixi global installation
 if command_exists pixi; then
-  pixi global install fzf git-delta nodejs pandoc starship universal-ctags
+  pixi global install fzf git-delta nodejs pandoc ripgrep starship universal-ctags
 else
   curl -fsSL https://pixi.sh/install.sh | bash
   source $HOME/.profile
