@@ -88,6 +88,14 @@ function install_taskopen () {
   pixi global install nim
   sudo apt install xdg-utils
   cd taskopen
+  if [ -z "${XDG_DATA_HOME}" ]; then
+    export XDG_DATA_HOME="${HOME}/.local/share"
+  fi
+  mkdir -p "${XDG_DATA_HOME}"
+  if [ -z "${XDG_CONFIG_HOME}" ]; then
+    export XDG_CONFIG_HOME="${HOME}/.config"
+  fi
+  mkdir -p "${XDG_CONFIG_HOME}"
   make OPEN='xdg-open-cli' PREFIX="$XDG_DATA_HOME/taskopen/scripts:/usr/local" all manpages
   sudo make install
   popd
@@ -255,13 +263,13 @@ if command_exists pixi; then
   hash bibtex-cite || go install github.com/msprev/fzf-bibtex/cmd/bibtex-cite
 else
   curl -fsSL https://pixi.sh/install.sh | bash
-  source $HOME/.profile
+  source "$HOME/.profile"
   errmsg='Pixi not found; installing. Re-run install.sh for globals.'
   echo -e "\033[0;31m$errmsg" 1>&2
 fi
 
 # Astral/uv
-pushd $HOME/.vim
+pushd "$HOME/.vim"
 if [[ ! -d .venv ]]; then
   uv venv --system-site-packages
   uv sync
