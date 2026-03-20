@@ -29,7 +29,7 @@ trap \
 
 # Confirm that WSLENV is set correctly.
 declare wslenv='WT_SESSION:USERPROFILE/p:APPDATA/p:LOCALAPPDATA/p:TMP/p:WT_PROFILE_ID'
-if [[ "$WSLENV"  == "$wslenv" ]]; then
+if [[ "$WSLENV"  != "$wslenv" ]]; then
   errmsg="WSLENV not set correctly: Set WSLENV = $wslenv in Windows environment variables."
   echo -e "\033[0;31m$errmsg" 1>&2
   exit 126
@@ -79,7 +79,7 @@ hash gvim || sudo apt install vim-gtk3 # GUI Vim with python3
 # https://github.com/tools-life/taskwiki
 # PEP 668 /usr/share/doc/python3.11/README.venv EXTERNALLY-MANAGED
 # python3-full avoids conflict with miniforge3 vim-python environment.
-hash task || sudo apt install taskwarrior python3-tasklib tasksh python3-full
+hash task || sudo apt install taskwarrior python3-tasklib tasksh python3-full python3-packaging
 
 function install_taskopen () {
   hash pixi || return 1
@@ -111,17 +111,6 @@ hash tex || sudo apt install texlive-latex-extra \
   bibtool
 
 [[ -f /usr/share/dict/american-english-huge ]] || sudo apt install wamerican-huge
-
-# Used by shfmt
-hash go || sudo apt install golang
-
-# Used by ALE fixer for bash
-hash shfmt || go install mvdan.cc/sh/v3/cmd/shfmt@latest
-
-# Used by vim-zettel and Vimwiki.
-hash bibtex-ls || go install github.com/msprev/fzf-bibtex/cmd/bibtex-ls
-hash bibtex-markdown || go install github.com/msprev/fzf-bibtex/cmd/bibtex-markdown
-hash bibtex-cite || go install github.com/msprev/fzf-bibtex/cmd/bibtex-cite
 
 # Used by fzf-vim
 # https://github.com/junegunn/fzf
@@ -252,7 +241,18 @@ uv tool install vimwiki-cli
 
 # pixi global installation
 if command_exists pixi; then
-  pixi global install fzf git-delta nodejs pandoc ripgrep starship universal-ctags
+  # To work behind a proxy/firewall:
+  #   pixi global install --tls-root-certs=native
+  pixi global install eza fzf go git-delta nodejs pandoc ripgrep starship \
+    universal-ctags
+
+  # Used by ALE fixer for bash
+  hash shfmt || go install mvdan.cc/sh/v3/cmd/shfmt@latest
+
+  # Used by vim-zettel and Vimwiki.
+  hash bibtex-ls || go install github.com/msprev/fzf-bibtex/cmd/bibtex-ls
+  hash bibtex-markdown || go install github.com/msprev/fzf-bibtex/cmd/bibtex-markdown
+  hash bibtex-cite || go install github.com/msprev/fzf-bibtex/cmd/bibtex-cite
 else
   curl -fsSL https://pixi.sh/install.sh | bash
   source $HOME/.profile
@@ -263,7 +263,7 @@ fi
 # Astral/uv
 pushd $HOME/.vim
 if [[ ! -d .venv ]]; then
-  uv venv --system-site-packages ".venv"
+  uv venv --system-site-packages
   uv sync
 fi
 popd
