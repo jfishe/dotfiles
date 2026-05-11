@@ -1,2 +1,2 @@
 alias pip='uv pip'
-alias cat='batcat'
+alias bat='batcat'
