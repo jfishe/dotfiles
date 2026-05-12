@@ -251,8 +251,11 @@ uv tool install vimwiki-cli
 if command_exists pixi; then
   # To work behind a proxy/firewall:
   #   pixi global install --tls-root-certs=native
-  pixi global install eza fzf go git-delta nodejs pandoc ripgrep starship \
+  pixi global install eza fzf git-delta nodejs pandoc ripgrep starship \
     universal-ctags
+  # https://github.com/checkmake/checkmake requires a C compiler.
+  pixi global install go --with gcc_linux-64 --with gxx_linux-64 \
+    --with sysroot_linux-64
 
   # Used by ALE fixer for bash
   hash shfmt || go install mvdan.cc/sh/v3/cmd/shfmt@latest
