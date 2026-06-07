@@ -97,6 +97,7 @@ zstyle ':omz:plugins:eza' 'hyperlink' yes
 plugins=(
   colored-man-pages
   colorize
+  direnv
   eza
   git
   gitignore

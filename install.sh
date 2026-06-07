@@ -251,8 +251,20 @@ uv tool install vimwiki-cli
 if command_exists pixi; then
   # To work behind a proxy/firewall:
   #   pixi global install --tls-root-certs=native
-  pixi global install eza fzf git-delta nodejs pandoc ripgrep starship \
-    universal-ctags
+  pixi_packages=(
+    "direnv"
+    "eza"
+    "fzf"
+    "git-delta"
+    "nodejs"
+    "pandoc"
+    "ripgrep"
+    "starship"
+    "universal-ctags"
+  )
+  pixi global install "${pixi_packages[@]}"
+  unset pixi_packages
+
   # https://github.com/checkmake/checkmake requires a C compiler.
   pixi global install go --with gcc_linux-64 --with gxx_linux-64 \
     --with sysroot_linux-64
