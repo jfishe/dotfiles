@@ -17,20 +17,25 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 
 # set PATH so it includes user's private bin directories
-for new_path in "$HOME/.local/bin" "$HOME/bin" "$USERPROFILE/bin" "$HOME/.pixi/bin"
-do
-  if [[ ":$PATH:" != *":$new_path:"* ]]; then
-    if [[ -d "$new_path" ]]; then
+for new_path in "$HOME/.local/bin" "$HOME/bin" "$USERPROFILE/bin" "$HOME/.pixi/bin"; do
+  case ":$PATH:" in
+  *":$new_path:"*) : ;; # already in PATH
+  *)
+    if [ -d "$new_path" ]; then
       PATH="$new_path:$PATH"
     fi
-  fi
+    ;;
+  esac
 done
 for new_path in "$HOME/go/bin"; do
-  if [[ ":$PATH:" != *":$new_path:"* ]]; then
-    if [[ -d "$new_path" ]]; then
+  case ":$PATH:" in
+  *":$new_path:"*) : ;;
+  *)
+    if [ -d "$new_path" ]; then
       PATH="$PATH:$new_path"
     fi
-  fi
+    ;;
+  esac
 done
 
 if [ -f "$HOME/.cargo/env" ]; then
@@ -84,4 +89,3 @@ __wt_osc9_9() {
   printf "\033]9;9;%s\033\\" "$_win_path"
 }
 [ -n "$BASH_VERSION" ] && [ -n "$WT_SESSION" ] && PROMPT_COMMAND="__wt_osc9_9"
-[ -n "$ZSH_VERSION" ] && [ -n "$WT_SESSION" ] && precmd_functions+=(__wt_osc9_9)
