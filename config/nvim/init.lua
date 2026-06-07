@@ -12,6 +12,9 @@ if vim.g.vscode == nil then
   }
 
   vim.g.polyglot_disabled = { 'markdown', 'ps1' }
+  vim.g.loaded_node_provider = 0
+  vim.g.loaded_perl_provider = 0
+  vim.g.loaded_ruby_provider = 0
 
   local myguicursor = vim.api.nvim_create_augroup(
     'myguicursor',
