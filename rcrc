@@ -2,15 +2,25 @@ EXCLUDES="*.md install*.sh
     environment.yml requirements.txt
     tags tags.lock
     usr etc"
-SYMLINK_DIRS="bash_completion.d git_template jupyter userprofile vim nvim
-    vimwiki vimwiki_html
-    vimwiki_home vimwiki_home_html
-    zsh-dircolors-solarized zsh-syntax-highlighting fonts
-    conda-zsh-completion
-    uv-zsh-completion
-    task
-    zk
-    "
+SYMLINK_DIRS="bash_completion.d
+  conda-zsh-completion
+  ctags
+  fonts
+  git_template
+  jupyter
+  nvim
+  task
+  userprofile
+  uv-zsh-completion
+  vim
+  vimwiki
+  vimwiki_home
+  vimwiki_home_html
+  vimwiki_html
+  zk
+  zsh-dircolors-solarized
+  zsh-syntax-highlighting
+"
 UNDOTTED="userprofile
     vimwiki vimwiki_html
     vimwiki_home vimwiki_home_html

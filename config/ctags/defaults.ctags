@@ -1,0 +1,36 @@
+# ~/.config/ctags/defaults.ctags
+#
+# Keep tag generation quiet and avoid giant/noisy tagfiles.
+
+--recurse=yes
+--sort=yes
+--tag-relative=yes
+
+# Keep fields modest: line numbers + kind are usually enough.
+# (Add more only if you actually use them in your editor integrations.)
+# ctags won't recognize
+--fields=+nK
+
+# Not compatible with Gutentags or re-running ctags without deleting tags file first.
+# Avoid extra tag classes unless you want them.
+# (extras add additional entries like prototypes, file tags, etc.)
+# --extras=
+
+# --exclude=.git
+# --exclude=.hg
+# --exclude=.svn
+# --exclude=.cvs
+# --exclude=.idea
+# --exclude=.vscode
+# --exclude=build
+# --exclude=dist
+# --exclude=out
+# --exclude=target
+# --exclude=bazel-*
+# --exclude=.tox
+# --exclude=.venv
+# --exclude=venv
+# --exclude=node_modules
+# --exclude=vendor
+# --exclude=.cache
+# --exclude=__pycache__
