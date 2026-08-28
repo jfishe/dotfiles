@@ -87,7 +87,8 @@ zstyle ':omz:plugins:eza' 'git-status' yes
 zstyle ':omz:plugins:eza' 'header' yes
 zstyle ':omz:plugins:eza' 'icons' yes
 zstyle ':omz:plugins:eza' 'time-style' iso
-zstyle ':omz:plugins:eza' 'hyperlink' yes
+# https://github.com/eza-community/eza/issues/1879
+# zstyle ':omz:plugins:eza' 'hyperlink' yes
 
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
