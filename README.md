@@ -113,13 +113,16 @@ ln -s $USERPROFILE/ ~/userprofile
 [`dircolors-solarized`] is included as a `git submodule` in
 `~/.dotfiles/.dircolors-solarized/`, which `~/.dircolors` links to.
 
-## Astral-uv, System Python 3 and Vim Gtk-3
+## Astral-uv, System Python 3 and Vim GTK-3
 
 ```bash
 pushd $HOME/.vim
 uv venv --system-site-packages --python-preference=system
 uv sync
 ```
+
+[Python Developer Tooling Handbook] recommends letting updates cool
+for a week by setting `$XDG_CONFIG_HOME/uv/uv.toml`.
 
 ## Running gvim with X11
 
@@ -264,3 +267,4 @@ $XDG_CONFIG_HOME/taskopen/taskopenrc -> vimwiki/.taskopenrc
 [`dircolors-solarized`]: https://github.com/seebi/dircolors-solarized.git
 [`etc/fonts/local.conf`]: etc/fonts/local.conf
 [`wslu`]: https://wslutiliti.es/wslu/install.html
+[python developer tooling handbook]: https://pydevtools.com/handbook/how-to/how-to-protect-against-python-supply-chain-attacks-with-uv/
