@@ -113,6 +113,13 @@ ln -s $USERPROFILE/ ~/userprofile
 [`dircolors-solarized`] is included as a `git submodule` in
 `~/.dotfiles/.dircolors-solarized/`, which `~/.dircolors` links to.
 
+## Claude Code Configuration
+
+- `claude/CLAUDE.md` is auto-generated from
+  [Python Developer Tooling Handbook] template.
+- Fetch the current upstream template
+  `curl https://pydevtools.com/configs/CLAUDE.md`
+
 ## Astral-uv, System Python 3 and Vim GTK-3
 
 ```bash
