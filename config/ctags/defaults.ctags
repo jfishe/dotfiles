@@ -41,6 +41,13 @@
 # --exclude=vim??
 --exclude=vimfiles
 
+# --- Go ---------------------------------------------------------------
+# $GOPATH/pkg/mod is the module download cache (third-party dependency
+# source), same category as node_modules. Needs the */ prefix: a bare
+# "pkg/mod" pattern (no wildcard) only matches an exact top-level path
+# and silently fails to match at any real depth — verified empirically.
+--exclude=*/pkg/mod
+
 # --- Python ---------------------------------------------------------------
 --exclude=.venv
 # --exclude=venv
@@ -67,18 +74,28 @@
 # --- Build output / tool caches -------------------------------------------
 --exclude=.cache
 --exclude=.cargo
+--exclude=.choosenim
 --exclude=.claude
 --exclude=.config
 --exclude=.cookiecutter_replay
 --exclude=.cookiecutters
 --exclude=.copilot
 --exclude=.docker
+--exclude=.java
 --exclude=.jupyter
 --exclude=.local/share
 --exclude=.matplotlib
+--exclude=.npm
+--exclude=.rustup
 --exclude=Zotero
+# Case-sensitive match: the real profile data lives in a separate,
+# lowercase ~/.zotero — "Zotero" above never matched it.
+--exclude=.zotero
 --exclude=_build
 --exclude=build
+# Generated static output from vimwiki, not source (also catches the two
+# per-host copies under .dotfiles/host-*/vimwiki_html).
+--exclude=vimwiki_html
 
 # --- Recycle bin / temp ----------------------------------------------------
 --exclude=$RECYCLE.BIN
@@ -133,6 +150,12 @@
 # Add more only if something you use actually needs them (e.g. +z for
 # scope — but check your ctags build supports it before relying on it).
 --fields=+nK
+
+# These parsers tag every key/array-value as a pseudo-symbol rather than
+# a real definition (a large JSON config or .properties file dumps
+# thousands of entries with nothing to jump to). On a whole-$HOME scan
+# these three alone accounted for over half of all tags generated.
+--languages=-JSON,-JavaProperties,-Iniconf
 
 # --extras= intentionally left unset: extra tag classes (file tags,
 # pseudo-tags, etc.) aren't compatible with Gutentags, and re-running
