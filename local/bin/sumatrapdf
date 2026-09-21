@@ -25,4 +25,4 @@ for arg ($@) {
   }
 }
 
-$(SumatraPDF-64.exe $new_arg)
+$LOCALAPPDATA/SumatraPDF/SumatraPDF.exe $new_arg
