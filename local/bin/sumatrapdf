@@ -8,21 +8,36 @@ new_arg=()                 # ceate arguments array
 declare -i idxMntOccur=0
 
 for arg ($@) {
-  if [[ "$arg" == /mnt* ]] {
+  if [[ "$arg" == /* ]] {
     # convert to windows style path
     idxMntOccur=idxMntOccur+1
-    winPath=$(wslpath -m $arg)
+    winPath=$(wslpath -am $arg)
     new_arg+=$winPath
 
     if (($idxMntOccur == 1)) {
-      # convert the path in .syntex to windows style
-      # run only "/mnt/d" like path is detected
+      # convert the paths in .synctex.gz to windows style using wslpath,
+      # so it works regardless of the WSL mount point (e.g. /mnt/c vs /c)
+      # run only once, when the first absolute path arg is detected
       find ${PWD} -maxdepth 1 -name "*.synctex.gz" -execdir \
-        bash -c 'cat "{}" | gunzip | sed --expression="s@/mnt/\(.\)/@\1:/@g" | gzip > "{}.tmp" && mv "{}.tmp" "{}"' \;
+        bash -c '
+          cat "{}" | gunzip | while IFS= read -r line; do
+            case "$line" in
+              Input:*)
+                rest=${line#Input:}
+                tag=${rest%%:*}
+                path=${rest#*:}
+                printf "Input:%s:%s\n" "$tag" "$(wslpath -am "$path")"
+                ;;
+              *)
+                printf "%s\n" "$line"
+                ;;
+            esac
+          done | gzip > "{}.tmp" && mv "{}.tmp" "{}"
+        ' \;
     }
   } else {
     new_arg+=$arg
   }
 }
 
-$LOCALAPPDATA/SumatraPDF/SumatraPDF.exe $new_arg
+$LOCALAPPDATA/SumatraPDF/SumatraPDF.exe $new_arg &
