@@ -88,4 +88,19 @@ __wt_osc9_9() {
   _win_path="$(wslpath -m "$(pwd)")"
   printf "\033]9;9;%s\033\\" "$_win_path"
 }
-[ -n "$BASH_VERSION" ] && [ -n "$WT_SESSION" ] && PROMPT_COMMAND="__wt_osc9_9"
+# Windows Terminal shell integration (FTCS marks), see
+# https://learn.microsoft.com/en-us/windows/terminal/tutorials/shell-integration
+if [ -n "$BASH_VERSION" ] && [ -n "$WT_SESSION" ]; then
+  __wt_prompt_command() {
+    __wt_status=$?
+    # Skip D before the first prompt (no command has run yet)
+    if [ -n "$__wt_started" ]; then
+      printf '\033]133;D;%s\033\\' "$__wt_status"
+    fi
+    __wt_started=1
+    __wt_osc9_9
+  }
+  PROMPT_COMMAND="__wt_prompt_command"
+  PS1='\[\033]133;A\033\\\]'"$PS1"'\[\033]133;B\033\\\]'
+  PS0='\033]133;C\033\\'
+fi

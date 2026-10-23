@@ -186,6 +186,24 @@ sudo apt install vim-gtk3
 
   Remote Desktop should connect to `localhost:3395`.
 
+## Windows Terminal Shell Integration
+
+`profile` (bash) and `zlogin` (zsh) emit the escape sequences for
+[Windows Terminal shell integration] when `$WT_SESSION` is set,
+which requires `WT_SESSION` in `WSLENV` (see [Installation](#installation)):
+
+- `OSC 9;9` reports the working directory, so new tabs and panes open there.
+- `OSC 133;A`/`B` wrap the prompt, `OSC 133;C` marks command output, and
+  `OSC 133;D;<exit status>` marks command completion.
+
+In zsh, `zlogin` wraps the Starship `PROMPT` after `zshrc` has initialized it.
+Enable the marks in the Windows Terminal profile (`settings.json`):
+
+```json
+"autoMarkPrompts": true,
+"showMarksOnScrollbar": true
+```
+
 ## SSH Configuration
 
 [SSH on WSL]
@@ -270,6 +288,7 @@ $XDG_CONFIG_HOME/taskopen/taskopenrc -> vimwiki/.taskopenrc
 [ssh on wsl]: https://www.illuminiastudios.com/dev-diaries/ssh-on-windows-subsystem-for-linux/
 [this problem after waking up from windows sleep mode]: https://github.com/microsoft/WSL/issues/4992
 [using x410 with wsl2]: https://x410.dev/cookbook/wsl/using-x410-with-wsl2
+[windows terminal shell integration]: https://learn.microsoft.com/en-us/windows/terminal/tutorials/shell-integration
 [x410 known issues and workarounds]: https://x410.dev/cookbook/x410-known-issues-and-workarounds/
 [`dircolors-solarized`]: https://github.com/seebi/dircolors-solarized.git
 [`etc/fonts/local.conf`]: etc/fonts/local.conf
