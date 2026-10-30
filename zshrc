@@ -107,9 +107,24 @@ plugins=(
   uv
   vi-mode
   vim-interaction
-  zsh-dircolors-solarized
   zsh-syntax-highlighting
 )
+
+# tinted-dircolors: LS_COLORS from ~/.dircolors (copied there by the tinty hook)
+_tinty_dircolors() {
+  local f=~/.dircolors
+  [[ -r $f ]] || return
+  eval "$(dircolors -b "$f")"
+  zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+}
+_tinty_dircolors
+tinty() {
+  command tinty "$@"
+  local r=$?
+  [[ $1 == (apply|cycle|init) ]] && _tinty_dircolors
+  return $r
+}
+tinty init
 
 source $ZSH/oh-my-zsh.sh
 
