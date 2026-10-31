@@ -124,7 +124,8 @@ tinty() {
   [[ $1 == (apply|cycle|init) ]] && _tinty_dircolors
   return $r
 }
-tinty init
+# Vim/Neovim :terminal answers tinted-shell's OSC 10/11, which echoes as garbage.
+[[ -n $VIM_TERMINAL || -n $NVIM ]] || tinty init
 
 source $ZSH/oh-my-zsh.sh
 
