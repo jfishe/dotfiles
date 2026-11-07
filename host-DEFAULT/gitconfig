@@ -1,4 +1,4 @@
 [include]
 	path = ~/userprofile/.gitconfig
 [credential]
-	helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-wincred.exe
+	helper = $LOCALAPPDATA/Programs/Git/ucrt64/bin/git-credential-manager.exe
