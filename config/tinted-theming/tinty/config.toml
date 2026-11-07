@@ -43,7 +43,7 @@ themes-dir = "scripts"
 name = "tinted-dircolors"
 path = "https://github.com/jfishe/tinted-dircolors"
 themes-dir = "dircolors"
-hook = "cp -f %f \"$HOME/.dircolors\" && { [ -z \"$USERPROFILE\" ] || cp -f %f \"$USERPROFILE/.dircolors\"; }"
+hook = "for d in \"$HOME\" ${USERPROFILE:+\"$USERPROFILE\"}; do cp -f %f \"$d/.dircolors\"; done"
 supported-systems = ["base16", "base24", "tinted8"]
 
 [[items]]
@@ -57,5 +57,12 @@ supported-systems = ["base16", "base24", "tinted8"]
 name = "tinted-psreadline"
 path = "https://github.com/jfishe/tinted-psreadline"
 themes-dir = "psreadline"
-hook = "[ -z \"$USERPROFILE\" ] || { mkdir -p \"$USERPROFILE/.config/tinted-theming\" && cp -f %f \"$USERPROFILE/.config/tinted-theming/Profile.Tinty.ps1\"; }"
+hook = "for d in ${USERPROFILE:+\"$USERPROFILE/.config/tinted-theming\"}; do mkdir -p \"$d\" && cp -f %f \"$d/Profile.Tinty.ps1\"; done"
+supported-systems = ["base16", "base24", "tinted8"]
+
+[[items]]
+name = "tinted-delta"
+path = "https://github.com/jfishe/tinted-delta"
+themes-dir = "delta"
+hook = "python3 -I ~/.local/share/tinted-theming/tinty/repos/tinted-delta/apply-delta.py %f ~/.config/delta/tinty.gitconfig ${USERPROFILE:+\"$USERPROFILE/.config/delta/tinty.gitconfig\"}"
 supported-systems = ["base16", "base24", "tinted8"]
