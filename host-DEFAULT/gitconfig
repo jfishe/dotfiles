@@ -1,4 +1,4 @@
 [include]
 	path = ~/userprofile/.gitconfig
 [credential]
-	helper = $LOCALAPPDATA/Programs/Git/ucrt64/bin/git-credential-manager.exe
+; git config --global credential.helper "$LOCALAPPDATA/Programs/Git/ucrt64/bin/git-credential-manager.exe"

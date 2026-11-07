@@ -184,7 +184,7 @@ env RCRC="$HOME/.dotfiles/rcrc" rcup -v # to link dotfiles symlinked to dotfiles
 # Set credential.helper accordingly.
 cred_helper="$(git config --global credential.helper)"
 if [[ ! -f "$cred_helper" ]]; then
-  cred_helper="$LOCALAPPDATA/$(wslpath -u 'Programs\Git\mingw64\libexec\git-core\git-credential-wincred.exe')"
+  cred_helper="$LOCALAPPDATA/Programs/Git/ucrt64/bin/git-credential-manager.exe"
   if [[ -f "$cred_helper" ]]; then
     git config --global credential.helper "$cred_helper"
   fi
