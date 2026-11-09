@@ -125,7 +125,13 @@ tinty() {
   return $r
 }
 # Vim/Neovim :terminal answers tinted-shell's OSC 10/11, which echoes as garbage.
-[[ -n $VIM_TERMINAL || -n $NVIM ]] || tinty init
+# Source the applied tinted-shell script instead of `tinty init`, which re-renders
+# extras schemes and re-runs every hook (~0.45 s). `tinty apply` rebuilds it.
+[[ -n $VIM_TERMINAL || -n $NVIM ]] || {
+  f=~/.local/share/tinted-theming/tinty/tinted-shell-scripts-file.sh
+  [[ -r $f ]] && source $f
+  unset f
+}
 
 source $ZSH/oh-my-zsh.sh
 
